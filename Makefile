@@ -1,12 +1,17 @@
-##### Compile proto files for go #####
-proto: clean go-grpc
+all: clean go-grpc tests
 
+##### Compile proto files for go #####
 go-grpc:
 	buf generate
 	mv -f api/temporal/api/cloud/* api && rm -rf api/temporal
 	find api -type f -name '*.go' -exec sed -i '' 's/api\/temporal\/api\/cloud/api/g' {} +
 	find api -type f -name '*.go' -exec sed -i '' 's/go.temporal.io\/cloud-sdk\/api\/temporal\/api/go.temporal.io\/api/g' {} +
 	find api -type f -name '*.go' -exec sed -i '' 's/go.temporal.io\/cloud-sdk\/api\/google\/api/google.golang.org\/api/g' {} +
+
+##### Tests #####
+
+tests:
+	go test -v ./cloudclient
 
 ##### api-cloud Submodule #####
 load-submodule:
