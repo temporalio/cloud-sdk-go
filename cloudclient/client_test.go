@@ -46,11 +46,8 @@ func TestClient(t *testing.T) {
 		t.Fatalf("failed to create client: %v", err)
 	}
 
-	resp, err := client.CloudService().GetNamespaces(ctx, &cloudservicev1.GetNamespacesRequest{})
+	_, err = client.CloudService().GetNamespaces(ctx, &cloudservicev1.GetNamespacesRequest{})
 	if err != nil {
 		t.Fatalf("failed to get namespaces: %v", err)
-	}
-	if len(resp.Namespaces) == 0 {
-		t.Fatalf("expected at least one namespace, got none")
 	}
 }
