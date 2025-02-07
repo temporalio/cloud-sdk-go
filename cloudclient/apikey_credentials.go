@@ -9,7 +9,7 @@ import (
 
 type (
 	apikeyCreds struct {
-		getAPIKeyFn            func() (string, error)
+		reader                 APIKeyReader
 		allowInsecureTransport bool
 	}
 )
@@ -27,7 +27,7 @@ func (c apikeyCreds) GetRequestMetadata(ctx context.Context, uri ...string) (map
 		}
 	}
 
-	apiKey, err := c.getAPIKeyFn()
+	apiKey, err := c.reader.GetAPIKey(ctx)
 	if err != nil {
 		return nil, fmt.Errorf("failed to get API key: %v", err)
 	}
@@ -39,8 +39,4 @@ func (c apikeyCreds) GetRequestMetadata(ctx context.Context, uri ...string) (map
 
 func (c apikeyCreds) RequireTransportSecurity() bool {
 	return !c.allowInsecureTransport
-}
-
-func (c *apikeyCreds) allowInsecure() {
-	c.allowInsecureTransport = true
 }

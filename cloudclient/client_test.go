@@ -18,8 +18,9 @@ const (
 
 func TestClient(t *testing.T) {
 
+	options := cloudclient.Options{}
 	// Create a new client
-	client, err := cloudclient.New()
+	client, err := cloudclient.New(options)
 	if err != nil {
 		t.Fatalf("failed to create client: %v", err)
 	}
@@ -39,9 +40,9 @@ func TestClient(t *testing.T) {
 		return
 	}
 
-	client, err = cloudclient.New(cloudclient.WithAPIKey(func() (string, error) {
-		return apikey, nil
-	}))
+	// Set the API key
+	options.APIKeyReader = cloudclient.StaticAPIKeyReader{apikey}
+	client, err = cloudclient.New(options)
 	if err != nil {
 		t.Fatalf("failed to create client: %v", err)
 	}

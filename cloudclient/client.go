@@ -21,19 +21,19 @@ type (
 // The client will not establish a connection to the server until the first call is made.
 // The client is safe for concurrent use by multiple goroutines.
 // The client must be closed when it is no longer needed to clean up resources.
-func New(options ...Option) (*Client, error) {
+func New(options Options) (*Client, error) {
 
 	// compute the options provided by the user
-	opts := computeOptions(options)
+	hostPort, grpcDialOptions := options.compute()
 
 	// create a new gRPC client connection
 	// note that the grpc.NewClient will not establish a connection to the server until the first call is made
 	conn, err := grpc.NewClient(
-		opts.hostPort.String(),
-		opts.grpcDialOptions...,
+		hostPort.String(),
+		grpcDialOptions...,
 	)
 	if err != nil {
-		return nil, fmt.Errorf("failed to dial `%s`: %w", opts.hostPort.String(), err)
+		return nil, fmt.Errorf("failed to dial `%s`: %w", hostPort.String(), err)
 	}
 
 	return &Client{
