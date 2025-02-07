@@ -23,8 +23,8 @@ buf-install:
 
 grpc-install:
 	# "Install/update grpc and plugins..."
-	go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.36.4
-	go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.5.1
+	go install -modfile=go.mod google.golang.org/protobuf/cmd/protoc-gen-go
+	go install -modfile=go.mod google.golang.org/grpc/cmd/protoc-gen-go-grpc
 
 ##### Clean #####
 clean:
