@@ -16,10 +16,12 @@ jobs:
         with:
           submodules: 'true'
       - uses: actions/setup-go@v5
+      - uses: bufbuild/buf-setup-action@v1.49.0
       - run: go install -modfile=go.mod google.golang.org/protobuf/cmd/protoc-gen-go
       - run: go install -modfile=go.mod google.golang.org/grpc/cmd/protoc-gen-go-grpc
-      - run: go install github.com/bufbuild/buf/cmd/buf@v1.49.0
-      - run: buf generate
+      - run: |
+          buf generate 
+          mv -f api/temporal/api/cloud/* api && rm -rf api/temporal
       - run: |
           git config --local user.email "${GITHUB_ACTOR}@users.noreply.github.com"
           git config --local user.name "${GITHUB_ACTOR}"
