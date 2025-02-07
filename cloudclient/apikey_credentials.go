@@ -33,7 +33,7 @@ func (c apikeyCreds) GetRequestMetadata(ctx context.Context, uri ...string) (map
 	}
 
 	return map[string]string{
-		AuthorizationHeader: fmt.Sprintf("%s %s", AuthorizationBearer, apiKey),
+		authorizationHeader: fmt.Sprintf("%s %s", authorizationBearer, apiKey),
 	}, nil
 }
 

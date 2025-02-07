@@ -8,18 +8,7 @@ import (
 )
 
 type (
-	// Client is the client for cloud operations.
-	//
-	// WARNING: Cloud operations client is currently experimental.
-	Client interface {
-		// CloudService provides access to the underlying gRPC service.
-		CloudService() cloudservice.CloudServiceClient
-
-		// Close client and clean up underlying resources.
-		Close()
-	}
-
-	client struct {
+	Client struct {
 		conn               *grpc.ClientConn
 		cloudServiceClient cloudservice.CloudServiceClient
 	}
@@ -28,11 +17,11 @@ type (
 // New creates a client to perform cloud-management operations.
 //
 // WARNING: Cloud operations client is currently experimental.
-func New(options ...Option) (Client, error) {
-	return newClient(options)
-}
-
-func newClient(options []Option) (Client, error) {
+//
+// The client will not establish a connection to the server until the first call is made.
+// The client is safe for concurrent use by multiple goroutines.
+// The client must be closed when it is no longer needed to clean up resources.
+func New(options ...Option) (*Client, error) {
 
 	// compute the options provided by the user
 	opts := computeOptions(options)
@@ -44,19 +33,19 @@ func newClient(options []Option) (Client, error) {
 		opts.grpcDialOptions...,
 	)
 	if err != nil {
-		return nil, fmt.Errorf("failed to dial `%s`: %v", opts.hostPort.String(), err)
+		return nil, fmt.Errorf("failed to dial `%s`: %w", opts.hostPort.String(), err)
 	}
 
-	return &client{
+	return &Client{
 		conn:               conn,
 		cloudServiceClient: cloudservice.NewCloudServiceClient(conn),
 	}, nil
 }
 
-func (c *client) CloudService() cloudservice.CloudServiceClient {
+func (c *Client) CloudService() cloudservice.CloudServiceClient {
 	return c.cloudServiceClient
 }
 
-func (c *client) Close() {
-	c.conn.Close()
+func (c *Client) Close() error {
+	return c.conn.Close()
 }

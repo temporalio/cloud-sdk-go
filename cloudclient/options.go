@@ -14,12 +14,12 @@ import (
 )
 
 const (
-	DefaultCloudOpsAPIHostPort = "saas-api.tmprl.cloud:443"
-	DefaultAPIVersion          = "v0.3.0"
+	defaultCloudOpsAPIHostPort = "saas-api.tmprl.cloud:443"
+	defaultAPIVersion          = "v0.3.0"
 
-	AuthorizationHeader           = "Authorization"
-	AuthorizationBearer           = "Bearer"
-	TemporalCloudAPIVersionHeader = "temporal-cloud-api-version"
+	authorizationHeader           = "Authorization"
+	authorizationBearer           = "Bearer"
+	temporalCloudAPIVersionHeader = "temporal-cloud-api-version"
 )
 
 type (
@@ -59,6 +59,7 @@ func WithAllowInsecure() Option {
 
 // Use the provided API key to authenticate with the cloud operations API.
 // The API key will be sent as a bearer token in the `Authorization` header.
+// Note that the getAPIKeyFn function will be called every time a request is made to the cloud operations API.
 func WithAPIKey(getAPIKeyFn func() (string, error)) Option {
 	return func(o *clientOptions) {
 		o.perRPCCredentials = &apikeyCreds{
@@ -103,7 +104,7 @@ func computeOptions(opts []Option) *clientOptions {
 
 	// set the default host port if not provided
 	if options.hostPort.String() == "" {
-		defaultHostPort, err := url.Parse(DefaultCloudOpsAPIHostPort)
+		defaultHostPort, err := url.Parse(defaultCloudOpsAPIHostPort)
 		if err != nil {
 			panic(err)
 		}
@@ -139,7 +140,7 @@ func computeOptions(opts []Option) *clientOptions {
 	// setup the api version header
 	version := options.apiVersion
 	if version == "" {
-		version = DefaultAPIVersion
+		version = defaultAPIVersion
 	}
 	grpcDialOptions = append(grpcDialOptions, grpc.WithUnaryInterceptor(
 		func(
@@ -150,7 +151,7 @@ func computeOptions(opts []Option) *clientOptions {
 			invoker grpc.UnaryInvoker,
 			opts ...grpc.CallOption,
 		) error {
-			ctx = metadata.AppendToOutgoingContext(ctx, TemporalCloudAPIVersionHeader, version)
+			ctx = metadata.AppendToOutgoingContext(ctx, temporalCloudAPIVersionHeader, version)
 			return invoker(ctx, method, req, reply, conn, opts...)
 		}),
 	)
