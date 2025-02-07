@@ -4,9 +4,6 @@ all: clean go-grpc tests
 go-grpc:
 	buf generate
 	mv -f api/temporal/api/cloud/* api && rm -rf api/temporal
-	find api -type f -name '*.go' -exec sed -i '' 's/api\/temporal\/api\/cloud/api/g' {} +
-	find api -type f -name '*.go' -exec sed -i '' 's/go.temporal.io\/cloud-sdk\/api\/temporal\/api/go.temporal.io\/api/g' {} +
-	find api -type f -name '*.go' -exec sed -i '' 's/go.temporal.io\/cloud-sdk\/api\/google\/api/google.golang.org\/api/g' {} +
 
 ##### Tests #####
 
@@ -31,8 +28,8 @@ buf-install:
 
 grpc-install:
 	# "Install/update grpc and plugins..."
-	go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.36.4
-	go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.5.1
+	go install -modfile=go.mod google.golang.org/protobuf/cmd/protoc-gen-go
+	go install -modfile=go.mod google.golang.org/grpc/cmd/protoc-gen-go-grpc
 
 ##### Clean #####
 clean:

@@ -4,7 +4,7 @@
 // - protoc             (unknown)
 // source: temporal/api/cloud/cloudservice/v1/service.proto
 
-package cloudservicev1
+package cloudservice
 
 import (
 	context "context"
