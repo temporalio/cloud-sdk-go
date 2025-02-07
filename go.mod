@@ -4,7 +4,7 @@ go 1.23.4
 
 require (
 	go.temporal.io/api v1.43.2
-	google.golang.org/api v0.219.0
+	google.golang.org/genproto/googleapis/api v0.0.0-20241202173237-19429a94021a
 	google.golang.org/grpc v1.70.0
 	google.golang.org/protobuf v1.36.4
 )
