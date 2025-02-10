@@ -1,11 +1,12 @@
 name: Tests
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+on: [push, pull_request]
+# on:
+#   push:
+#     branches:
+#       - main
+#   pull_request:
+#     branches:
+#       - main
 jobs:
   generate:
     name: Generate
@@ -15,9 +16,9 @@ jobs:
         with:
           submodules: 'true'
       - uses: actions/setup-go@v5
-      - uses: bufbuild/buf-setup-action@v1.49.0
-      - run: go install -modfile=go.mod google.golang.org/protobuf/cmd/protoc-gen-go
-      - run: go install -modfile=go.mod google.golang.org/grpc/cmd/protoc-gen-go-grpc
+      - run: go install -modfile internal/build/go.mod github.com/bufbuild/buf/cmd/buf
+      - run: go install -modfile internal/build/go.mod google.golang.org/protobuf/cmd/protoc-gen-go
+      - run: go install -modfile internal/build/go.mod google.golang.org/grpc/cmd/protoc-gen-go-grpc
       - run: |
           rm -rf api/*
           buf generate 
