@@ -35,6 +35,19 @@ jobs:
             exit 1
           fi
   tests:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-intel, macos-arm, windows-latest]
+        go-version: ["oldstable", "stable"]
+        include:
+          - os: ubuntu-latest
+            go-version: "stable"
+          - os: macos-intel
+            runsOn: macos-13
+          - os: macos-arm
+            runsOn: macos-14
+    runs-on: ${{ matrix.runsOn || matrix.os }}
     name: Test Cloud Client
     runs-on: ubuntu-latest
     env:
@@ -42,4 +55,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-go@v5
+        with:
+          go-version: ${{ matrix.go-version }}
       - run: go test ./cloudclient
