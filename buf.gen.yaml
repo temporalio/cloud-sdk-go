@@ -4,6 +4,7 @@ plugins:
     out: api
     opt: 
       - paths=source_relative
+      # TODO: Fix the package names in the cloud-api repository when after we deprecate the cloud client from the api-go repository
       - Mtemporal/api/cloud/resource/v1/message.proto=go.temporal.io/cloud-sdk/api/resource/v1
       - Mtemporal/api/cloud/account/v1/message.proto=go.temporal.io/cloud-sdk/api/account/v1
       - Mtemporal/api/cloud/identity/v1/message.proto=go.temporal.io/cloud-sdk/api/identity/v1
