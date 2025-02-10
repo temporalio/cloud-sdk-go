@@ -14,132 +14,108 @@ import (
 )
 
 const (
-	DefaultCloudOpsAPIHostPort = "saas-api.tmprl.cloud:443"
-	DefaultAPIVersion          = "v0.3.0"
+	defaultCloudOpsAPIHostPort = "saas-api.tmprl.cloud:443"
+	defaultAPIVersion          = "v0.3.0"
 
-	AuthorizationHeader           = "Authorization"
-	AuthorizationBearer           = "Bearer"
-	TemporalCloudAPIVersionHeader = "temporal-cloud-api-version"
+	authorizationHeader           = "Authorization"
+	authorizationBearer           = "Bearer"
+	temporalCloudAPIVersionHeader = "temporal-cloud-api-version"
 )
 
 type (
-	clientOptions struct {
-		hostPort          url.URL
-		allowInsecure     bool
-		perRPCCredentials perRPCCredentials
-		apiVersion        string
-		disableRetry      bool
-		retryOpts         []retry.CallOption
-		grpcDialOptions   []grpc.DialOption
+	Options struct {
+		// The hostport to use when connecting to the cloud operations API.
+		// If not provided, the default hostport of `saas-api.tmprl.cloud:443` will be used.
+		HostPort url.URL
+
+		// Allow the client to connect to the cloud operations API using an insecure connection.
+		// This should only be used for testing purposes.
+		AllowInsecure bool
+
+		// The API key to use when making requests to the cloud operations API.
+		// If not provided, the request will fail to authenticate.
+		APIKeyReader APIKeyReader
+
+		// The API version to use when making requests to the cloud operations API.
+		// If not provided, the latest API version  will be used.
+		APIVersion string
+
+		// Disable the default retry policy.
+		// If not provided, the default retry policy will be used.
+		// The default retry policy is an exponential backoff with jitter with a maximum of 7 retries for retriable errors.
+		// The default retry policy will also set the operations id on the write requests, if not already set.
+		// This is useful for ensuring that the write requests are idempotent in the case of a retry.
+		DisableRetry bool
+
+		// Add additional gRPC dial options.
+		// This can be used to set custom timeouts, interceptors, etc.
+		GRPCDialOptions []grpc.DialOption
 	}
 
-	Option func(*clientOptions)
+	APIKeyReader interface {
+		// Get the API key to use when making requests to the cloud operations API.
+		// If an error is returned, the request will fail.
+		// The GetAPIKey function will be called every time a request is made to the cloud operations API.
+		GetAPIKey(ctx context.Context) (string, error)
+	}
 
-	perRPCCredentials interface {
-		credentials.PerRPCCredentials
-		allowInsecure()
+	// StaticAPIKeyReader is an API key reader that always returns the same API key.
+	StaticAPIKeyReader struct {
+		// The API key to use when making requests to the cloud operations API.
+		APIKey string
 	}
 )
 
-// The hostport to use when connecting to the cloud operations API.
-// If not provided, the default hostport of `saas-api.tmprl.cloud:443` will be used.
-func WithHostPort(hostPort url.URL) Option {
-	return func(o *clientOptions) {
-		o.hostPort = hostPort
-	}
+func (r StaticAPIKeyReader) GetAPIKey(ctx context.Context) (string, error) {
+	return r.APIKey, nil
 }
 
-// Allow the client to connect to the cloud operations API using an insecure connection.
-// This should only be used for testing purposes.
-func WithAllowInsecure() Option {
-	return func(o *clientOptions) {
-		o.allowInsecure = true
-	}
-}
+func (o *Options) compute() (
+	hostPort url.URL,
+	grpcDialOptions []grpc.DialOption,
+) {
 
-// Use the provided API key to authenticate with the cloud operations API.
-// The API key will be sent as a bearer token in the `Authorization` header.
-func WithAPIKey(getAPIKeyFn func() (string, error)) Option {
-	return func(o *clientOptions) {
-		o.perRPCCredentials = &apikeyCreds{
-			getAPIKeyFn: getAPIKeyFn,
-		}
-	}
-}
-
-// Add additional gRPC dial options.
-// This can be used to set custom timeouts, interceptors, etc.
-func WithGRPCDialOptions(opts ...grpc.DialOption) Option {
-	return func(o *clientOptions) {
-		o.grpcDialOptions = append(o.grpcDialOptions, opts...)
-	}
-}
-
-// Set the API version to use when making requests to the cloud operations API.
-// If not provided, the default API version of `v0.3.0` will be used.
-func WithAPIVersion(version string) Option {
-	return func(o *clientOptions) {
-		o.apiVersion = version
-	}
-}
-
-// Disable the retry policy for the client.
-// By default, the client will retry requests with exponential backoff up to 7 times.
-func WithDisableRetry() Option {
-	return func(o *clientOptions) {
-		o.disableRetry = true
-	}
-}
-
-func computeOptions(opts []Option) *clientOptions {
-
-	options := &clientOptions{}
-	// apply user-provided options
-	for _, opt := range opts {
-		opt(options)
-	}
-
-	grpcDialOptions := make([]grpc.DialOption, 0, len(options.grpcDialOptions)+4)
-
+	grpcDialOptions = make([]grpc.DialOption, 0, len(o.GRPCDialOptions)+4)
 	// set the default host port if not provided
-	if options.hostPort.String() == "" {
-		defaultHostPort, err := url.Parse(DefaultCloudOpsAPIHostPort)
+	if o.HostPort.String() == "" {
+		defaultHostPort, err := url.Parse(defaultCloudOpsAPIHostPort)
 		if err != nil {
 			panic(err)
 		}
-		options.hostPort = *defaultHostPort
+		hostPort = *defaultHostPort
+	} else {
+		hostPort = o.HostPort
 	}
 
 	var transport credentials.TransportCredentials
 	// setup the transport
-	if options.allowInsecure {
-		if options.perRPCCredentials != nil {
-			options.perRPCCredentials.allowInsecure()
-		}
+	if o.AllowInsecure {
 		transport = insecure.NewCredentials()
 	} else {
 		transport = credentials.NewTLS(&tls.Config{
 			MinVersion: tls.VersionTLS12,
-			ServerName: options.hostPort.Hostname(),
+			ServerName: o.HostPort.Hostname(),
 		})
 	}
-	if transport != nil {
-		grpcDialOptions = append(grpcDialOptions,
-			grpc.WithTransportCredentials(transport),
-		)
-	}
+	grpcDialOptions = append(grpcDialOptions,
+		grpc.WithTransportCredentials(transport),
+	)
 
-	// setup the auth credentials
-	if options.perRPCCredentials != nil {
+	// setup the api key credentials
+	if o.APIKeyReader != nil {
+		creds := apikeyCreds{
+			reader:                 o.APIKeyReader,
+			allowInsecureTransport: o.AllowInsecure,
+		}
 		grpcDialOptions = append(grpcDialOptions,
-			grpc.WithPerRPCCredentials(options.perRPCCredentials),
+			grpc.WithPerRPCCredentials(creds),
 		)
 	}
 
 	// setup the api version header
-	version := options.apiVersion
+	version := o.APIVersion
 	if version == "" {
-		version = DefaultAPIVersion
+		version = defaultAPIVersion
 	}
 	grpcDialOptions = append(grpcDialOptions, grpc.WithUnaryInterceptor(
 		func(
@@ -150,12 +126,12 @@ func computeOptions(opts []Option) *clientOptions {
 			invoker grpc.UnaryInvoker,
 			opts ...grpc.CallOption,
 		) error {
-			ctx = metadata.AppendToOutgoingContext(ctx, TemporalCloudAPIVersionHeader, version)
+			ctx = metadata.AppendToOutgoingContext(ctx, temporalCloudAPIVersionHeader, version)
 			return invoker(ctx, method, req, reply, conn, opts...)
 		}),
 	)
 
-	if !options.disableRetry {
+	if !o.DisableRetry {
 		// setup the default retry policy
 		retryOpts := []retry.CallOption{
 			retry.WithBackoff(
@@ -164,12 +140,16 @@ func computeOptions(opts []Option) *clientOptions {
 			retry.WithMax(7),
 		}
 		grpcDialOptions = append(grpcDialOptions,
-			grpc.WithChainUnaryInterceptor(retry.UnaryClientInterceptor(retryOpts...)),
+			grpc.WithChainUnaryInterceptor(
+				// set the operation id on the write requests if not already set
+				// this is useful for ensuring that the write requests are idempotent in the case of a retry
+				SetOperationIDInterceptor,
+				// retry the request on retriable errors
+				retry.UnaryClientInterceptor(retryOpts...), // retry the request on retriable errors
+			),
 		)
 	}
 
-	grpcDialOptions = append(grpcDialOptions, options.grpcDialOptions...)
-	options.grpcDialOptions = grpcDialOptions
-
-	return options
+	grpcDialOptions = append(grpcDialOptions, o.GRPCDialOptions...)
+	return
 }
