@@ -49,7 +49,6 @@ jobs:
             runsOn: macos-14
     runs-on: ${{ matrix.runsOn || matrix.os }}
     name: Test Cloud Client
-    runs-on: ubuntu-latest
     env:
       TEMPORAL_API_KEY: ${{ secrets.TEMPORAL_API_KEY }}
     steps:
