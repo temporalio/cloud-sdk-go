@@ -16,9 +16,7 @@ jobs:
         with:
           submodules: 'true'
       - uses: actions/setup-go@v5
-      - run: go install -modfile internal/build/go.mod github.com/bufbuild/buf/cmd/buf
-      - run: go install -modfile internal/build/go.mod google.golang.org/protobuf/cmd/protoc-gen-go
-      - run: go install -modfile internal/build/go.mod google.golang.org/grpc/cmd/protoc-gen-go-grpc
+      - run: go generate ./internal/build/tools.go
       - run: |
           rm -rf api/*
           buf generate 
