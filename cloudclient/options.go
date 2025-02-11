@@ -95,14 +95,14 @@ func (o *Options) compute() (
 	var transport credentials.TransportCredentials
 	// setup the transport
 	if o.AllowInsecure {
+		// allow insecure transport
 		transport = insecure.NewCredentials()
 	} else if o.TLSConfig != nil {
+		// use the provided tls config if available
 		transport = credentials.NewTLS(o.TLSConfig)
 	} else {
-		transport = credentials.NewTLS(&tls.Config{
-			MinVersion: tls.VersionTLS12,
-			ServerName: o.HostPort.Hostname(),
-		})
+		// fallback to using grpc's default tls config
+		transport = credentials.NewTLS(nil)
 	}
 	grpcDialOptions = append(grpcDialOptions,
 		grpc.WithTransportCredentials(transport),
