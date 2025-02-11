@@ -41,6 +41,11 @@ type Options struct {
 	// This should only be used for testing purposes.
 	AllowInsecure bool
 
+	// The TLS configuration to use when connecting to the cloud operations API.
+	// If not provided, a default TLS configuration will be used.
+	// Will be ignored if AllowInsecure is set to true.
+	TLSConfig *tls.Config
+
 	// The API version to use when making requests to the cloud operations API.
 	// If not provided, the latest API version  will be used.
 	APIVersion string
@@ -91,6 +96,8 @@ func (o *Options) compute() (
 	// setup the transport
 	if o.AllowInsecure {
 		transport = insecure.NewCredentials()
+	} else if o.TLSConfig != nil {
+		transport = credentials.NewTLS(o.TLSConfig)
 	} else {
 		transport = credentials.NewTLS(&tls.Config{
 			MinVersion: tls.VersionTLS12,
@@ -109,7 +116,6 @@ func (o *Options) compute() (
 		creds.reader = staticAPIKeyReader{APIKey: o.APIKey}
 	} else if o.APIKeyReader != nil {
 		creds.reader = o.APIKeyReader
-
 	}
 	if creds.reader != nil {
 		grpcDialOptions = append(grpcDialOptions,
