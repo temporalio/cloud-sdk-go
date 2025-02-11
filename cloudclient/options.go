@@ -22,48 +22,56 @@ const (
 	temporalCloudAPIVersionHeader = "temporal-cloud-api-version"
 )
 
-type (
-	Options struct {
-		// The hostport to use when connecting to the cloud operations API.
-		// If not provided, the default hostport of `saas-api.tmprl.cloud:443` will be used.
-		HostPort url.URL
+type Options struct {
+	// The API key to use when making requests to the cloud operations API.
+	// Cannot be used with the APIKeyReader field. If both are provided, the APIKey field will be used.
+	// If none are provided, the request will fail to authenticate.
+	APIKey string
 
-		// Allow the client to connect to the cloud operations API using an insecure connection.
-		// This should only be used for testing purposes.
-		AllowInsecure bool
+	// The API key reader to dynamically retrieve apikey to use when making requests to the cloud operations API.
+	// Cannot be used with the APIKey field. If both are provided, the APIKey field will be used.
+	// If none are provided, the request will fail to authenticate.
+	APIKeyReader APIKeyReader
 
-		// The API key to use when making requests to the cloud operations API.
-		// If not provided, the request will fail to authenticate.
-		APIKeyReader APIKeyReader
+	// The hostport to use when connecting to the cloud operations API.
+	// If not provided, the default hostport of `saas-api.tmprl.cloud:443` will be used.
+	HostPort url.URL
 
-		// The API version to use when making requests to the cloud operations API.
-		// If not provided, the latest API version  will be used.
-		APIVersion string
+	// Allow the client to connect to the cloud operations API using an insecure connection.
+	// This should only be used for testing purposes.
+	AllowInsecure bool
 
-		// Enable the default retry policy.
-		// The default retry policy is an exponential backoff with jitter with a maximum of 7 retries for retriable errors.
-		EnableRetry bool
+	// The TLS configuration to use when connecting to the cloud operations API.
+	// If not provided, a default TLS configuration will be used.
+	// Will be ignored if AllowInsecure is set to true.
+	TLSConfig tls.Config
 
-		// Add additional gRPC dial options.
-		// This can be used to set custom timeouts, interceptors, etc.
-		GRPCDialOptions []grpc.DialOption
-	}
+	// The API version to use when making requests to the cloud operations API.
+	// If not provided, the latest API version  will be used.
+	APIVersion string
 
-	APIKeyReader interface {
-		// Get the API key to use when making requests to the cloud operations API.
-		// If an error is returned, the request will fail.
-		// The GetAPIKey function will be called every time a request is made to the cloud operations API.
-		GetAPIKey(ctx context.Context) (string, error)
-	}
+	// Enable the default retry policy.
+	// The default retry policy is an exponential backoff with jitter with a maximum of 7 retries for retriable errors.
+	EnableRetry bool
 
-	// StaticAPIKeyReader is an API key reader that always returns the same API key.
-	StaticAPIKeyReader struct {
-		// The API key to use when making requests to the cloud operations API.
-		APIKey string
-	}
-)
+	// Add additional gRPC dial options.
+	// This can be used to set custom timeouts, interceptors, etc.
+	GRPCDialOptions []grpc.DialOption
+}
 
-func (r StaticAPIKeyReader) GetAPIKey(ctx context.Context) (string, error) {
+type APIKeyReader interface {
+	// Get the API key to use when making requests to the cloud operations API.
+	// If an error is returned, the request will fail.
+	// The GetAPIKey function will be called every time a request is made to the cloud operations API.
+	GetAPIKey(ctx context.Context) (string, error)
+}
+
+type staticAPIKeyReader struct {
+	// The API key to use when making requests to the cloud operations API.
+	APIKey string
+}
+
+func (r staticAPIKeyReader) GetAPIKey(ctx context.Context) (string, error) {
 	return r.APIKey, nil
 }
 
@@ -87,23 +95,26 @@ func (o *Options) compute() (
 	var transport credentials.TransportCredentials
 	// setup the transport
 	if o.AllowInsecure {
+		// allow insecure transport
 		transport = insecure.NewCredentials()
 	} else {
-		transport = credentials.NewTLS(&tls.Config{
-			MinVersion: tls.VersionTLS12,
-			ServerName: o.HostPort.Hostname(),
-		})
+		// use the provided tls config, or the zero value if not provided
+		transport = credentials.NewTLS(&o.TLSConfig)
 	}
 	grpcDialOptions = append(grpcDialOptions,
 		grpc.WithTransportCredentials(transport),
 	)
 
 	// setup the api key credentials
-	if o.APIKeyReader != nil {
-		creds := apikeyCreds{
-			reader:                 o.APIKeyReader,
-			allowInsecureTransport: o.AllowInsecure,
-		}
+	creds := apikeyCreds{
+		allowInsecureTransport: o.AllowInsecure,
+	}
+	if o.APIKey != "" {
+		creds.reader = staticAPIKeyReader{APIKey: o.APIKey}
+	} else if o.APIKeyReader != nil {
+		creds.reader = o.APIKeyReader
+	}
+	if creds.reader != nil {
 		grpcDialOptions = append(grpcDialOptions,
 			grpc.WithPerRPCCredentials(creds),
 		)

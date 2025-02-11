@@ -24,9 +24,7 @@ Temporal Cloud Go SDK uses protocol buffers to define the API. To generate the G
 # Load the proto submodule
 git submodule update --init --recursive
 # Install the dependencies tools at the correct version
-go install -modfile internal/build/go.mod github.com/bufbuild/buf/cmd/buf
-go install -modfile internal/build/go.mod google.golang.org/protobuf/cmd/protoc-gen-go
-go install -modfile internal/build/go.mod google.golang.org/grpc/cmd/protoc-gen-go-grpc
+go generate ./internal/build/tools.go
 # Run buf to generate
 buf generate
 
