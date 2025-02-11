@@ -13,7 +13,7 @@ import (
 
 const (
 	// TemporalCloudAPIKeyEnv is the environment variable that contains the Temporal Cloud API key.
-	TemporalCloudAPIKeyEnv = "TEMPORAL_API_KEY"
+	TemporalCloudAPIKeyEnv = "TEST_TEMPORAL_CLOUD_SDK_API_KEY"
 )
 
 func TestClient(t *testing.T) {
@@ -35,13 +35,13 @@ func TestClient(t *testing.T) {
 		t.Fatalf("expected error code %v, got %v", codes.Unauthenticated, status.Code(err))
 	}
 
-	apikey := os.Getenv("TEMPORAL_API_KEY")
+	apikey := os.Getenv(TemporalCloudAPIKeyEnv)
 	if apikey == "" {
-		return
+		t.Fatalf("environment variable %s is required", TemporalCloudAPIKeyEnv)
 	}
 
 	// Set the API key
-	options.APIKeyReader = cloudclient.StaticAPIKeyReader{apikey}
+	options.APIKey = apikey
 	client, err = cloudclient.New(options)
 	if err != nil {
 		t.Fatalf("failed to create client: %v", err)
