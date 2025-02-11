@@ -2,7 +2,8 @@
 
 [Temporal Cloud](https://temporal.io/cloud) serves as a software as a service (SaaS) infrastructure platform, specifically designed to manage the durability of your Temporal Applications.
 
-And `Temporal Cloud Ops Go SDK` is a framework for managing resources hosted on Temporal Cloud.
+The APIs that Temporal Cloud provides are accessible via the `Temporal Cloud Ops Go SDK`. This SDK is a Go client library for the [Temporal Cloud APIs](https://github.com/temporalio/cloud-api). It allows you to manage your Temporal Cloud resources programmatically.
+
 
 ## How to use
 
