@@ -20,16 +20,8 @@ update-submodule:
 	git submodule update --recursive --remote --merge
 
 ##### Plugins & tools #####
-install: buf-install grpc-install
-
-buf-install:
-	# "Install/update buf..."
-	go install -modfile internal/build/go.mod github.com/bufbuild/buf/cmd/buf
-
-grpc-install:
-	# "Install/update grpc and plugins..."
-	go install -modfile internal/build/go.mod google.golang.org/protobuf/cmd/protoc-gen-go
-	go install -modfile internal/build/go.mod google.golang.org/grpc/cmd/protoc-gen-go-grpc
+install:
+	go generate ./internal/build/tools.go
 
 ##### Clean #####
 clean:
