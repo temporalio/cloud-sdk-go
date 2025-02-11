@@ -1,6 +1,8 @@
 module go.temporal.io/cloud-sdk
 
-go 1.23.4
+go 1.22
+
+toolchain go1.22.1
 
 require (
 	github.com/grpc-ecosystem/go-grpc-middleware/v2 v2.2.0
