@@ -11,7 +11,7 @@ jobs:
     name: Test Cloud Client
     runs-on: ubuntu-latest
     env:
-      TEMPORAL_API_KEY: ${{ secrets.TEMPORAL_API_KEY }}
+      TEST_TEMPORAL_CLOUD_SDK_API_KEY: ${{ secrets.TEST_TEMPORAL_CLOUD_SDK_API_KEY }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-go@v5
