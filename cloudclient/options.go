@@ -44,7 +44,7 @@ type Options struct {
 	// The TLS configuration to use when connecting to the cloud operations API.
 	// If not provided, a default TLS configuration will be used.
 	// Will be ignored if AllowInsecure is set to true.
-	TLSConfig *tls.Config
+	TLSConfig tls.Config
 
 	// The API version to use when making requests to the cloud operations API.
 	// If not provided, the latest API version  will be used.
@@ -97,12 +97,9 @@ func (o *Options) compute() (
 	if o.AllowInsecure {
 		// allow insecure transport
 		transport = insecure.NewCredentials()
-	} else if o.TLSConfig != nil {
-		// use the provided tls config if available
-		transport = credentials.NewTLS(o.TLSConfig)
 	} else {
-		// fallback to using grpc's default tls config
-		transport = credentials.NewTLS(nil)
+		// use the provided tls config, or the zero value if not provided
+		transport = credentials.NewTLS(&o.TLSConfig)
 	}
 	grpcDialOptions = append(grpcDialOptions,
 		grpc.WithTransportCredentials(transport),
