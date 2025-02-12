@@ -22,7 +22,7 @@ func TestClient(t *testing.T) {
 	}
 
 	// Set the API key
-	client, err := cloudclient.New(&cloudclient.Options{
+	client, err := cloudclient.New(cloudclient.Options{
 		APIKey: apikey,
 	})
 	if err != nil {

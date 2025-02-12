@@ -21,7 +21,7 @@ type (
 // The client will not establish a connection to the server until the first call is made.
 // The client is safe for concurrent use by multiple goroutines.
 // The client must be closed when it is no longer needed to clean up resources.
-func New(options *Options) (*Client, error) {
+func New(options Options) (*Client, error) {
 
 	// compute the options provided by the user
 	hostPort, grpcDialOptions, err := options.compute()
