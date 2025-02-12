@@ -50,9 +50,12 @@ type Options struct {
 	// If not provided, the latest API version  will be used.
 	APIVersion string
 
-	// Enable the default retry policy.
+	// Disable the default retry policy.
+	// If not provided, the default retry policy will be used.
 	// The default retry policy is an exponential backoff with jitter with a maximum of 7 retries for retriable errors.
-	EnableRetry bool
+	// The default retry policy will also set the operations id on the write requests, if not already set.
+	// This is to ensuring that the write requests are idempotent in the case of a retry.
+	DisableRetry bool
 
 	// Add additional gRPC dial options.
 	// This can be used to set custom timeouts, interceptors, etc.
@@ -146,7 +149,7 @@ func (o *Options) compute() (
 		},
 	))
 
-	if o.EnableRetry {
+	if !o.DisableRetry {
 		// setup the default retry policy
 		retryOpts := []retry.CallOption{
 			retry.WithBackoff(
@@ -155,6 +158,9 @@ func (o *Options) compute() (
 			retry.WithMax(7),
 		}
 		grpcDialOptions = append(grpcDialOptions, grpc.WithChainUnaryInterceptor(
+			// set the operation id on the write requests, if not already set
+			// this will make the write requests idempotent in the case of a retry
+			SetOperationIDInterceptor,
 			// retry the request on retriable errors
 			retry.UnaryClientInterceptor(retryOpts...),
 		))
