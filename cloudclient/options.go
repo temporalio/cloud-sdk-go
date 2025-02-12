@@ -24,11 +24,6 @@ const (
 	temporalCloudAPIVersionHeader = "temporal-cloud-api-version"
 )
 
-var (
-	ErrAPIKeyAndAPIKeyReaderProvided = errors.New("only one of APIKey and APIKeyReader can be provided")
-	ErrNoAPIKeyProvided              = errors.New("either APIKey or APIKeyReader must be provided")
-)
-
 type Options struct {
 	// The API key to use when making requests to the cloud operations API.
 	// At least one of APIKey and APIKeyReader must be provided, but not both.
@@ -93,6 +88,7 @@ func (o *Options) compute() (
 		defaultHostPort, err = url.Parse(defaultCloudOpsAPIHostPort)
 		if err != nil {
 			err = fmt.Errorf("failed to parse default host port: %w", err)
+			return
 		}
 		hostPort = *defaultHostPort
 	} else {
@@ -113,7 +109,7 @@ func (o *Options) compute() (
 	)
 
 	if o.APIKey != "" && o.APIKeyReader != nil {
-		err = ErrAPIKeyAndAPIKeyReaderProvided
+		err = errors.New("only one of APIKey and APIKeyReader can be provided")
 		return
 	}
 	// setup the api key credentials
@@ -126,7 +122,8 @@ func (o *Options) compute() (
 		creds.reader = o.APIKeyReader
 	}
 	if creds.reader == nil {
-		err = ErrNoAPIKeyProvided
+		err = errors.New("either APIKey or APIKeyReader must be provided")
+		return
 	} else {
 		grpcDialOptions = append(grpcDialOptions,
 			grpc.WithPerRPCCredentials(creds),
