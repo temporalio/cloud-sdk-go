@@ -87,8 +87,7 @@ func (o *Options) compute() (
 		var defaultHostPort *url.URL
 		defaultHostPort, err = url.Parse(defaultCloudOpsAPIHostPort)
 		if err != nil {
-			err = fmt.Errorf("failed to parse default host port: %w", err)
-			return
+			return url.URL{}, nil, fmt.Errorf("failed to parse default host port: %w", err)
 		}
 		hostPort = *defaultHostPort
 	} else {
@@ -109,8 +108,7 @@ func (o *Options) compute() (
 	)
 
 	if o.APIKey != "" && o.APIKeyReader != nil {
-		err = errors.New("only one of APIKey and APIKeyReader can be provided")
-		return
+		return url.URL{}, nil, errors.New("only one of APIKey and APIKeyReader can be provided")
 	}
 	// setup the api key credentials
 	creds := apikeyCreds{
@@ -122,8 +120,7 @@ func (o *Options) compute() (
 		creds.reader = o.APIKeyReader
 	}
 	if creds.reader == nil {
-		err = errors.New("either APIKey or APIKeyReader must be provided")
-		return
+		return url.URL{}, nil, errors.New("either APIKey or APIKeyReader must be provided")
 	} else {
 		grpcDialOptions = append(grpcDialOptions,
 			grpc.WithPerRPCCredentials(creds),
@@ -164,5 +161,5 @@ func (o *Options) compute() (
 	}
 
 	grpcDialOptions = append(grpcDialOptions, o.GRPCDialOptions...)
-	return
+	return hostPort, grpcDialOptions, nil
 }
