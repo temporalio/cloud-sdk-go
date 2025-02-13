@@ -9,10 +9,6 @@ import (
 )
 
 type (
-	requestWithAsyncOperationID interface {
-		GetAsyncOperationId() string
-	}
-
 	requestWithProtoReflectMessage interface {
 		ProtoReflect() protoreflect.Message
 	}
