@@ -1,4 +1,4 @@
-name: Test Cloud Client
+name: Tests
 on:
   push:
     branches:
@@ -7,12 +7,50 @@ on:
     branches:
       - main
 jobs:
-  tests:
-    name: Test Cloud Client
+  generate:
+    name: Generate
     runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: 'true'
+      - uses: actions/setup-go@v5
+      - run: go generate ./internal/build/tools.go
+      - run: |
+          rm -rf api/*
+          buf generate 
+          mv -f api/temporal/api/cloud/* api && rm -rf api/temporal
+      - run: |
+          git config --local user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+          git config --local user.name "${GITHUB_ACTOR}"
+          git add --all 
+          if git diff-index --quiet HEAD --; then
+            echo "No changes to commit"
+          else
+            echo "Error: Proto files not generated correctly."
+            git diff --name-status HEAD
+            exit 1
+          fi
+  tests:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-intel, macos-arm, windows-latest]
+        go-version: ["oldstable", "stable"]
+        include:
+          - os: ubuntu-latest
+            go-version: "stable"
+          - os: macos-intel
+            runsOn: macos-13
+          - os: macos-arm
+            runsOn: macos-14
+    runs-on: ${{ matrix.runsOn || matrix.os }}
+    name: Test Cloud Client
     env:
       TEST_TEMPORAL_CLOUD_SDK_API_KEY: ${{ secrets.TEST_TEMPORAL_CLOUD_SDK_API_KEY }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-go@v5
+        with:
+          go-version: ${{ matrix.go-version }}
       - run: go test ./cloudclient
