@@ -1,0 +1,18 @@
+name: Test Cloud Client
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+jobs:
+  tests:
+    name: Test Cloud Client
+    runs-on: ubuntu-latest
+    env:
+      TEST_TEMPORAL_CLOUD_SDK_API_KEY: ${{ secrets.TEST_TEMPORAL_CLOUD_SDK_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+      - run: go test ./cloudclient

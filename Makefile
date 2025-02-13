@@ -1,9 +1,13 @@
-##### Compile proto files for go #####
-proto: clean go-grpc
+all: clean go-grpc tests
 
+##### Compile proto files for go #####
 go-grpc:
 	buf generate
 	mv -f api/temporal/api/cloud/* api && rm -rf api/temporal
+
+##### Tests #####
+tests:
+	go test -v ./cloudclient
 
 ##### api-cloud Submodule #####
 load-submodule:
