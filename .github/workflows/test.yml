@@ -1,12 +1,11 @@
 name: Tests
-on: [push, pull_request]
-# on:
-#   push:
-#     branches:
-#       - main
-#   pull_request:
-#     branches:
-#       - main
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 jobs:
   generate:
     name: Generate

@@ -6,7 +6,6 @@ go-grpc:
 	mv -f api/temporal/api/cloud/* api && rm -rf api/temporal
 
 ##### Tests #####
-
 tests:
 	go test -v ./cloudclient
 
