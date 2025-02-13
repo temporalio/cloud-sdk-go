@@ -9,6 +9,10 @@ import (
 )
 
 type (
+	requestWithGetAsyncOperationId interface {
+		GetAsyncOperationId() string
+	}
+
 	requestWithProtoReflectMessage interface {
 		ProtoReflect() protoreflect.Message
 	}
@@ -23,14 +27,16 @@ func setOperationIDGRPCInterceptor(
 	opts ...grpc.CallOption,
 ) error {
 
-	if msg, ok := req.(requestWithProtoReflectMessage); ok {
-		// It is a proto message, check if it has an operation ID field.
-		field := msg.ProtoReflect().Descriptor().Fields().ByTextName("async_operation_id")
-		if field != nil {
-			// The field exists, check if it is empty
-			if val := msg.ProtoReflect().Get(field); val.IsValid() && val.String() == "" {
-				// The field is empty, set a random value
-				msg.ProtoReflect().Set(field, protoreflect.ValueOfString(uuid.NewString()))
+	if _, ok := req.(requestWithGetAsyncOperationId); ok {
+		if msg, ok := req.(requestWithProtoReflectMessage); ok {
+			// It is a proto message, check if it has an operation ID field.
+			field := msg.ProtoReflect().Descriptor().Fields().ByTextName("async_operation_id")
+			if field != nil {
+				// The field exists, check if it is empty
+				if val := msg.ProtoReflect().Get(field); val.IsValid() && val.String() == "" {
+					// The field is empty, set a random value
+					msg.ProtoReflect().Set(field, protoreflect.ValueOfString(uuid.NewString()))
+				}
 			}
 		}
 	}
