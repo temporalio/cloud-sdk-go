@@ -1,0 +1,3 @@
+[submodule "proto/cloud-api"]
+	path = proto/cloud-api
+	url = https://github.com/temporalio/cloud-api
