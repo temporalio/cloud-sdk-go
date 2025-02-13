@@ -160,7 +160,7 @@ func (o *Options) compute() (
 		grpcDialOptions = append(grpcDialOptions, grpc.WithChainUnaryInterceptor(
 			// set the operation id on the write requests, if not already set
 			// this will make the write requests idempotent in the case of a retry
-			SetOperationIDInterceptor,
+			setOperationIDGRPCInterceptor,
 			// retry the request on retriable errors
 			retry.UnaryClientInterceptor(retryOpts...),
 		))

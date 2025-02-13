@@ -20,18 +20,19 @@ func TestClient(t *testing.T) {
 	if apikey == "" {
 		t.Fatalf("environment variable %s is required", temporalCloudAPIKeyEnv)
 	}
+	t.Run("New", func(t *testing.T) {
+		client, err := cloudclient.New(cloudclient.Options{
+			APIKey: apikey,
+		})
+		if err != nil {
+			t.Fatalf("failed to create client: %v", err)
+		}
+		defer client.Close()
 
-	// Set the API key
-	client, err := cloudclient.New(cloudclient.Options{
-		APIKey: apikey,
+		ctx := context.Background()
+		_, err = client.CloudService().GetNamespaces(ctx, &cloudservicev1.GetNamespacesRequest{})
+		if err != nil {
+			t.Fatalf("failed to get namespaces: %v", err)
+		}
 	})
-	if err != nil {
-		t.Fatalf("failed to create client: %v", err)
-	}
-
-	ctx := context.Background()
-	_, err = client.CloudService().GetNamespaces(ctx, &cloudservicev1.GetNamespacesRequest{})
-	if err != nil {
-		t.Fatalf("failed to get namespaces: %v", err)
-	}
 }
