@@ -24,7 +24,10 @@ type (
 func New(options Options) (*Client, error) {
 
 	// compute the options provided by the user
-	hostPort, grpcDialOptions := options.compute()
+	hostPort, grpcDialOptions, err := options.compute()
+	if err != nil {
+		return nil, fmt.Errorf("failed to compute options: %w", err)
+	}
 
 	// create a new gRPC client connection
 	// note that the grpc.NewClient will not establish a connection to the server until the first call is made
