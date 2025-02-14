@@ -18,7 +18,7 @@ func TestClient(t *testing.T) {
 
 	apikey := os.Getenv(temporalCloudAPIKeyEnv)
 	if apikey == "" {
-		t.Fatalf("environment variable %s is required", temporalCloudAPIKeyEnv)
+		t.Skipf("skipping test; environment variable %s is not set", temporalCloudAPIKeyEnv)
 	}
 	t.Run("New", func(t *testing.T) {
 		client, err := cloudclient.New(cloudclient.Options{

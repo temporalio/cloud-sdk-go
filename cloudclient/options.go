@@ -24,6 +24,9 @@ const (
 	temporalCloudAPIVersionHeader = "temporal-cloud-api-version"
 )
 
+// Options to configure the cloud operations client.
+// The minimum requirement is one of APIKey or APIKeyReader to be set.
+// All other options are optional.
 type Options struct {
 	// The API key to use when making requests to the cloud operations API.
 	// At least one of APIKey and APIKeyReader must be provided, but not both.
@@ -62,6 +65,7 @@ type Options struct {
 	GRPCDialOptions []grpc.DialOption
 }
 
+// APIKeyReader is an interface to dynamically retrieve the API key to use when making requests to the cloud operations API.
 type APIKeyReader interface {
 	// Get the API key to use when making requests to the cloud operations API.
 	// If an error is returned, the request will fail.
