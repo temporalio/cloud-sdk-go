@@ -43,7 +43,7 @@ git submodule update --recursive --remote --merge
 Run the tests:
 
 ```bash
-export TEMPORAL_API_KEY=<your_api_key>
+export TEST_TEMPORAL_CLOUD_SDK_API_KEY=<your_api_key>
 go test ./cloudclient/...
 ```
 
