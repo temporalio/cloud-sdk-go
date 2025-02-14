@@ -1,6 +1,6 @@
 # Temporal Cloud Ops Go SDK [![Build Status](https://github.com/temporalio/cloud-sdk-go/actions/workflows/test.yml/badge.svg?event=push&branch=main)](https://github.com/temporalio/cloud-sdk-go/actions/workflows/test.yml?query=branch%3Amain) [![PkgGoDev](https://pkg.go.dev/badge/go.temporal.io/cloud-sdk)](https://pkg.go.dev/go.temporal.io/cloud-sdk)
 
-> [!WARNING] This project is still experimental.
+> :warning: ** This project is still experimental. **
 
 [Temporal Cloud](https://temporal.io/cloud) serves as a software as a service (SaaS) infrastructure platform, specifically designed to manage the durability of your Temporal Applications.
 
