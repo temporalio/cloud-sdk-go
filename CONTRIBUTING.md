@@ -25,8 +25,12 @@ Temporal Cloud Go SDK uses protocol buffers to define the API. To generate the G
 git submodule update --init --recursive
 # Install the dependencies tools at the correct version
 go generate ./internal/build/tools.go
+# Clean the generated files
+rm -rf api/*
 # Run buf to generate
 buf generate
+# Move the generated files to the correct location
+mv -f api/temporal/api/cloud/* api && rm -rf api/temporal
 
 ```
 
