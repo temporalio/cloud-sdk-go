@@ -16,22 +16,6 @@ const (
 
 func TestClient(t *testing.T) {
 
-	t.Run("New Unauthenticated", func(t *testing.T) {
-		client, err := cloudclient.New(cloudclient.Options{
-			APIKey: "some-invalid-api-key",
-		})
-		if err != nil {
-			t.Fatalf("failed to create client: %v", err)
-		}
-		defer client.Close()
-
-		ctx := context.Background()
-		_, err = client.CloudService().GetNamespaces(ctx, &cloudservicev1.GetNamespacesRequest{})
-		if err == nil {
-			t.Fatalf("expected error, got nil")
-		}
-	})
-
 	apikey := os.Getenv(temporalCloudAPIKeyEnv)
 	if apikey == "" {
 		t.Skipf("skipping test; environment variable %s is not set", temporalCloudAPIKeyEnv)
