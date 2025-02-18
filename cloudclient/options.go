@@ -4,8 +4,6 @@ import (
 	"context"
 	"crypto/tls"
 	"errors"
-	"fmt"
-	"net/url"
 	"time"
 
 	"github.com/grpc-ecosystem/go-grpc-middleware/v2/interceptors/retry"
@@ -38,7 +36,7 @@ type Options struct {
 
 	// The hostport to use when connecting to the cloud operations API.
 	// If not provided, the default hostport of `saas-api.tmprl.cloud:443` will be used.
-	HostPort url.URL
+	HostPort string
 
 	// Allow the client to connect to the cloud operations API using an insecure connection.
 	// This should only be used for testing purposes.
@@ -83,23 +81,18 @@ func (r staticAPIKeyReader) GetAPIKey(ctx context.Context) (string, error) {
 }
 
 func (o *Options) compute() (
-	hostPort url.URL,
+	hostPort string,
 	grpcDialOptions []grpc.DialOption,
 	err error,
 ) {
-
-	grpcDialOptions = make([]grpc.DialOption, 0, len(o.GRPCDialOptions)+4)
-	// set the default host port if not provided
-	if o.HostPort.String() == "" {
-		var defaultHostPort *url.URL
-		defaultHostPort, err = url.Parse(defaultCloudOpsAPIHostPort)
-		if err != nil {
-			return url.URL{}, nil, fmt.Errorf("failed to parse default host port: %w", err)
-		}
-		hostPort = *defaultHostPort
-	} else {
-		hostPort = o.HostPort
+	hostPort = o.HostPort
+	if hostPort == "" {
+		// set the default host port if not provided
+		hostPort = defaultCloudOpsAPIHostPort
 	}
+
+	// setup the grpc dial options
+	grpcDialOptions = make([]grpc.DialOption, 0, len(o.GRPCDialOptions)+4)
 
 	var transport credentials.TransportCredentials
 	// setup the transport
@@ -115,7 +108,7 @@ func (o *Options) compute() (
 	)
 
 	if o.APIKey != "" && o.APIKeyReader != nil {
-		return url.URL{}, nil, errors.New("only one of APIKey and APIKeyReader can be provided")
+		return "", nil, errors.New("only one of APIKey and APIKeyReader can be provided")
 	}
 	// setup the api key credentials
 	creds := apikeyCreds{
@@ -127,7 +120,7 @@ func (o *Options) compute() (
 		creds.reader = o.APIKeyReader
 	}
 	if creds.reader == nil {
-		return url.URL{}, nil, errors.New("either APIKey or APIKeyReader must be provided")
+		return "", nil, errors.New("either APIKey or APIKeyReader must be provided")
 	} else {
 		grpcDialOptions = append(grpcDialOptions,
 			grpc.WithPerRPCCredentials(creds),
