@@ -33,11 +33,11 @@ func New(options Options) (*Client, error) {
 	// create a new gRPC client connection
 	// note that the grpc.NewClient will not establish a connection to the server until the first call is made
 	conn, err := grpc.NewClient(
-		hostPort.String(),
+		hostPort,
 		grpcDialOptions...,
 	)
 	if err != nil {
-		return nil, fmt.Errorf("failed to dial `%s`: %w", hostPort.String(), err)
+		return nil, fmt.Errorf("failed to dial `%s`: %w", hostPort, err)
 	}
 
 	return &Client{
