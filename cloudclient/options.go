@@ -4,6 +4,8 @@ import (
 	"context"
 	"crypto/tls"
 	"errors"
+	"fmt"
+	"strings"
 	"time"
 
 	"github.com/grpc-ecosystem/go-grpc-middleware/v2/interceptors/retry"
@@ -20,6 +22,8 @@ const (
 	authorizationHeader           = "Authorization"
 	authorizationBearer           = "Bearer"
 	temporalCloudAPIVersionHeader = "temporal-cloud-api-version"
+
+	sdkVersion = "0.2.0"
 )
 
 // Options to configure the cloud operations client.
@@ -55,8 +59,12 @@ type Options struct {
 	// If not provided, the default retry policy will be used.
 	// The default retry policy is an exponential backoff with jitter with a maximum of 7 retries for retriable errors.
 	// The default retry policy will also set the operations id on the write requests, if not already set.
-	// This is to ensuring that the write requests are idempotent in the case of a retry.
+	// This is to ensure the write requests are idempotent in the case of a retry.
 	DisableRetry bool
+
+	// UserAgent product information to prepend to the user-agent header. Must follow RFC 9110.
+	// If not provided, the user-agent header will contain product and version information for this SDK and grpc.
+	UserAgent string
 
 	// Add additional gRPC dial options.
 	// This can be used to set custom timeouts, interceptors, etc.
@@ -132,6 +140,14 @@ func (o *Options) compute() (
 	if version == "" {
 		version = defaultAPIVersion
 	}
+
+	// setup user-agent string
+	userAgent := fmt.Sprintf("temporalio-cloud-sdk-go/%s", sdkVersion)
+	if o.UserAgent != "" {
+		userAgent = fmt.Sprintf("%s %s", strings.TrimSpace(o.UserAgent), userAgent)
+	}
+	grpcDialOptions = append(grpcDialOptions, grpc.WithUserAgent(userAgent))
+
 	grpcDialOptions = append(grpcDialOptions, grpc.WithChainUnaryInterceptor(
 		func(
 			ctx context.Context,
