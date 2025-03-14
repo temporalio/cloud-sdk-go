@@ -23,7 +23,7 @@ const (
 	authorizationBearer           = "Bearer"
 	temporalCloudAPIVersionHeader = "temporal-cloud-api-version"
 
-	sdkVersion = "0.2.0"
+	sdkVersion = "0.2.1"
 )
 
 // Options to configure the cloud operations client.
