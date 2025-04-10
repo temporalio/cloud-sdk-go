@@ -53,6 +53,9 @@ const (
 	CloudService_UpdateUserGroup_FullMethodName             = "/temporal.api.cloud.cloudservice.v1.CloudService/UpdateUserGroup"
 	CloudService_DeleteUserGroup_FullMethodName             = "/temporal.api.cloud.cloudservice.v1.CloudService/DeleteUserGroup"
 	CloudService_SetUserGroupNamespaceAccess_FullMethodName = "/temporal.api.cloud.cloudservice.v1.CloudService/SetUserGroupNamespaceAccess"
+	CloudService_AddUserGroupMember_FullMethodName          = "/temporal.api.cloud.cloudservice.v1.CloudService/AddUserGroupMember"
+	CloudService_RemoveUserGroupMember_FullMethodName       = "/temporal.api.cloud.cloudservice.v1.CloudService/RemoveUserGroupMember"
+	CloudService_GetUserGroupMembers_FullMethodName         = "/temporal.api.cloud.cloudservice.v1.CloudService/GetUserGroupMembers"
 	CloudService_CreateServiceAccount_FullMethodName        = "/temporal.api.cloud.cloudservice.v1.CloudService/CreateServiceAccount"
 	CloudService_GetServiceAccount_FullMethodName           = "/temporal.api.cloud.cloudservice.v1.CloudService/GetServiceAccount"
 	CloudService_GetServiceAccounts_FullMethodName          = "/temporal.api.cloud.cloudservice.v1.CloudService/GetServiceAccounts"
@@ -144,6 +147,11 @@ type CloudServiceClient interface {
 	DeleteUserGroup(ctx context.Context, in *DeleteUserGroupRequest, opts ...grpc.CallOption) (*DeleteUserGroupResponse, error)
 	// Set a user group's access to a namespace
 	SetUserGroupNamespaceAccess(ctx context.Context, in *SetUserGroupNamespaceAccessRequest, opts ...grpc.CallOption) (*SetUserGroupNamespaceAccessResponse, error)
+	// Add a member to the group, can only be used with Cloud group types.
+	AddUserGroupMember(ctx context.Context, in *AddUserGroupMemberRequest, opts ...grpc.CallOption) (*AddUserGroupMemberResponse, error)
+	// Remove a member from the group, can only be used with Cloud group types.
+	RemoveUserGroupMember(ctx context.Context, in *RemoveUserGroupMemberRequest, opts ...grpc.CallOption) (*RemoveUserGroupMemberResponse, error)
+	GetUserGroupMembers(ctx context.Context, in *GetUserGroupMembersRequest, opts ...grpc.CallOption) (*GetUserGroupMembersResponse, error)
 	// Create a service account.
 	CreateServiceAccount(ctx context.Context, in *CreateServiceAccountRequest, opts ...grpc.CallOption) (*CreateServiceAccountResponse, error)
 	// Get a service account.
@@ -524,6 +532,36 @@ func (c *cloudServiceClient) SetUserGroupNamespaceAccess(ctx context.Context, in
 	return out, nil
 }
 
+func (c *cloudServiceClient) AddUserGroupMember(ctx context.Context, in *AddUserGroupMemberRequest, opts ...grpc.CallOption) (*AddUserGroupMemberResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AddUserGroupMemberResponse)
+	err := c.cc.Invoke(ctx, CloudService_AddUserGroupMember_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cloudServiceClient) RemoveUserGroupMember(ctx context.Context, in *RemoveUserGroupMemberRequest, opts ...grpc.CallOption) (*RemoveUserGroupMemberResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RemoveUserGroupMemberResponse)
+	err := c.cc.Invoke(ctx, CloudService_RemoveUserGroupMember_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cloudServiceClient) GetUserGroupMembers(ctx context.Context, in *GetUserGroupMembersRequest, opts ...grpc.CallOption) (*GetUserGroupMembersResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUserGroupMembersResponse)
+	err := c.cc.Invoke(ctx, CloudService_GetUserGroupMembers_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *cloudServiceClient) CreateServiceAccount(ctx context.Context, in *CreateServiceAccountRequest, opts ...grpc.CallOption) (*CreateServiceAccountResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CreateServiceAccountResponse)
@@ -739,6 +777,11 @@ type CloudServiceServer interface {
 	DeleteUserGroup(context.Context, *DeleteUserGroupRequest) (*DeleteUserGroupResponse, error)
 	// Set a user group's access to a namespace
 	SetUserGroupNamespaceAccess(context.Context, *SetUserGroupNamespaceAccessRequest) (*SetUserGroupNamespaceAccessResponse, error)
+	// Add a member to the group, can only be used with Cloud group types.
+	AddUserGroupMember(context.Context, *AddUserGroupMemberRequest) (*AddUserGroupMemberResponse, error)
+	// Remove a member from the group, can only be used with Cloud group types.
+	RemoveUserGroupMember(context.Context, *RemoveUserGroupMemberRequest) (*RemoveUserGroupMemberResponse, error)
+	GetUserGroupMembers(context.Context, *GetUserGroupMembersRequest) (*GetUserGroupMembersResponse, error)
 	// Create a service account.
 	CreateServiceAccount(context.Context, *CreateServiceAccountRequest) (*CreateServiceAccountResponse, error)
 	// Get a service account.
@@ -880,6 +923,15 @@ func (UnimplementedCloudServiceServer) DeleteUserGroup(context.Context, *DeleteU
 }
 func (UnimplementedCloudServiceServer) SetUserGroupNamespaceAccess(context.Context, *SetUserGroupNamespaceAccessRequest) (*SetUserGroupNamespaceAccessResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SetUserGroupNamespaceAccess not implemented")
+}
+func (UnimplementedCloudServiceServer) AddUserGroupMember(context.Context, *AddUserGroupMemberRequest) (*AddUserGroupMemberResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddUserGroupMember not implemented")
+}
+func (UnimplementedCloudServiceServer) RemoveUserGroupMember(context.Context, *RemoveUserGroupMemberRequest) (*RemoveUserGroupMemberResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RemoveUserGroupMember not implemented")
+}
+func (UnimplementedCloudServiceServer) GetUserGroupMembers(context.Context, *GetUserGroupMembersRequest) (*GetUserGroupMembersResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserGroupMembers not implemented")
 }
 func (UnimplementedCloudServiceServer) CreateServiceAccount(context.Context, *CreateServiceAccountRequest) (*CreateServiceAccountResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateServiceAccount not implemented")
@@ -1556,6 +1608,60 @@ func _CloudService_SetUserGroupNamespaceAccess_Handler(srv interface{}, ctx cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _CloudService_AddUserGroupMember_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddUserGroupMemberRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CloudServiceServer).AddUserGroupMember(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CloudService_AddUserGroupMember_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CloudServiceServer).AddUserGroupMember(ctx, req.(*AddUserGroupMemberRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CloudService_RemoveUserGroupMember_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RemoveUserGroupMemberRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CloudServiceServer).RemoveUserGroupMember(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CloudService_RemoveUserGroupMember_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CloudServiceServer).RemoveUserGroupMember(ctx, req.(*RemoveUserGroupMemberRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CloudService_GetUserGroupMembers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserGroupMembersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CloudServiceServer).GetUserGroupMembers(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CloudService_GetUserGroupMembers_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CloudServiceServer).GetUserGroupMembers(ctx, req.(*GetUserGroupMembersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _CloudService_CreateServiceAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateServiceAccountRequest)
 	if err := dec(in); err != nil {
@@ -1950,6 +2056,18 @@ var CloudService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SetUserGroupNamespaceAccess",
 			Handler:    _CloudService_SetUserGroupNamespaceAccess_Handler,
+		},
+		{
+			MethodName: "AddUserGroupMember",
+			Handler:    _CloudService_AddUserGroupMember_Handler,
+		},
+		{
+			MethodName: "RemoveUserGroupMember",
+			Handler:    _CloudService_RemoveUserGroupMember_Handler,
+		},
+		{
+			MethodName: "GetUserGroupMembers",
+			Handler:    _CloudService_GetUserGroupMembers_Handler,
 		},
 		{
 			MethodName: "CreateServiceAccount",
