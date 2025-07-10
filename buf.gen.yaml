@@ -14,6 +14,7 @@ plugins:
       - Mtemporal/api/cloud/region/v1/message.proto=go.temporal.io/cloud-sdk/api/region/v1
       - Mtemporal/api/cloud/usage/v1/message.proto=go.temporal.io/cloud-sdk/api/usage/v1
       - Mtemporal/api/cloud/nexus/v1/message.proto=go.temporal.io/cloud-sdk/api/nexus/v1
+      - Mtemporal/api/cloud/connectivityrule/v1/message.proto=go.temporal.io/cloud-sdk/api/connectivityrule/v1
   - local: protoc-gen-go-grpc
     out: api
     opt: paths=source_relative
