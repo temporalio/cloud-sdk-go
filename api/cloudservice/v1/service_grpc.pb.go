@@ -70,6 +70,10 @@ const (
 	CloudService_UpdateNamespaceExportSink_FullMethodName   = "/temporal.api.cloud.cloudservice.v1.CloudService/UpdateNamespaceExportSink"
 	CloudService_DeleteNamespaceExportSink_FullMethodName   = "/temporal.api.cloud.cloudservice.v1.CloudService/DeleteNamespaceExportSink"
 	CloudService_ValidateNamespaceExportSink_FullMethodName = "/temporal.api.cloud.cloudservice.v1.CloudService/ValidateNamespaceExportSink"
+	CloudService_CreateConnectivityRule_FullMethodName      = "/temporal.api.cloud.cloudservice.v1.CloudService/CreateConnectivityRule"
+	CloudService_GetConnectivityRule_FullMethodName         = "/temporal.api.cloud.cloudservice.v1.CloudService/GetConnectivityRule"
+	CloudService_GetConnectivityRules_FullMethodName        = "/temporal.api.cloud.cloudservice.v1.CloudService/GetConnectivityRules"
+	CloudService_DeleteConnectivityRule_FullMethodName      = "/temporal.api.cloud.cloudservice.v1.CloudService/DeleteConnectivityRule"
 )
 
 // CloudServiceClient is the client API for CloudService service.
@@ -182,6 +186,14 @@ type CloudServiceClient interface {
 	// Validates an export sink configuration by delivering an empty test file to the specified sink.
 	// This operation verifies that the sink is correctly configured, accessible, and ready for data export.
 	ValidateNamespaceExportSink(ctx context.Context, in *ValidateNamespaceExportSinkRequest, opts ...grpc.CallOption) (*ValidateNamespaceExportSinkResponse, error)
+	// Creates a connectivity rule
+	CreateConnectivityRule(ctx context.Context, in *CreateConnectivityRuleRequest, opts ...grpc.CallOption) (*CreateConnectivityRuleResponse, error)
+	// Gets a connectivity rule by id
+	GetConnectivityRule(ctx context.Context, in *GetConnectivityRuleRequest, opts ...grpc.CallOption) (*GetConnectivityRuleResponse, error)
+	// Lists connectivity rules by account
+	GetConnectivityRules(ctx context.Context, in *GetConnectivityRulesRequest, opts ...grpc.CallOption) (*GetConnectivityRulesResponse, error)
+	// Deletes a connectivity rule by id
+	DeleteConnectivityRule(ctx context.Context, in *DeleteConnectivityRuleRequest, opts ...grpc.CallOption) (*DeleteConnectivityRuleResponse, error)
 }
 
 type cloudServiceClient struct {
@@ -702,6 +714,46 @@ func (c *cloudServiceClient) ValidateNamespaceExportSink(ctx context.Context, in
 	return out, nil
 }
 
+func (c *cloudServiceClient) CreateConnectivityRule(ctx context.Context, in *CreateConnectivityRuleRequest, opts ...grpc.CallOption) (*CreateConnectivityRuleResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateConnectivityRuleResponse)
+	err := c.cc.Invoke(ctx, CloudService_CreateConnectivityRule_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cloudServiceClient) GetConnectivityRule(ctx context.Context, in *GetConnectivityRuleRequest, opts ...grpc.CallOption) (*GetConnectivityRuleResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetConnectivityRuleResponse)
+	err := c.cc.Invoke(ctx, CloudService_GetConnectivityRule_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cloudServiceClient) GetConnectivityRules(ctx context.Context, in *GetConnectivityRulesRequest, opts ...grpc.CallOption) (*GetConnectivityRulesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetConnectivityRulesResponse)
+	err := c.cc.Invoke(ctx, CloudService_GetConnectivityRules_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cloudServiceClient) DeleteConnectivityRule(ctx context.Context, in *DeleteConnectivityRuleRequest, opts ...grpc.CallOption) (*DeleteConnectivityRuleResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteConnectivityRuleResponse)
+	err := c.cc.Invoke(ctx, CloudService_DeleteConnectivityRule_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CloudServiceServer is the server API for CloudService service.
 // All implementations must embed UnimplementedCloudServiceServer
 // for forward compatibility.
@@ -812,6 +864,14 @@ type CloudServiceServer interface {
 	// Validates an export sink configuration by delivering an empty test file to the specified sink.
 	// This operation verifies that the sink is correctly configured, accessible, and ready for data export.
 	ValidateNamespaceExportSink(context.Context, *ValidateNamespaceExportSinkRequest) (*ValidateNamespaceExportSinkResponse, error)
+	// Creates a connectivity rule
+	CreateConnectivityRule(context.Context, *CreateConnectivityRuleRequest) (*CreateConnectivityRuleResponse, error)
+	// Gets a connectivity rule by id
+	GetConnectivityRule(context.Context, *GetConnectivityRuleRequest) (*GetConnectivityRuleResponse, error)
+	// Lists connectivity rules by account
+	GetConnectivityRules(context.Context, *GetConnectivityRulesRequest) (*GetConnectivityRulesResponse, error)
+	// Deletes a connectivity rule by id
+	DeleteConnectivityRule(context.Context, *DeleteConnectivityRuleRequest) (*DeleteConnectivityRuleResponse, error)
 	mustEmbedUnimplementedCloudServiceServer()
 }
 
@@ -974,6 +1034,18 @@ func (UnimplementedCloudServiceServer) DeleteNamespaceExportSink(context.Context
 }
 func (UnimplementedCloudServiceServer) ValidateNamespaceExportSink(context.Context, *ValidateNamespaceExportSinkRequest) (*ValidateNamespaceExportSinkResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ValidateNamespaceExportSink not implemented")
+}
+func (UnimplementedCloudServiceServer) CreateConnectivityRule(context.Context, *CreateConnectivityRuleRequest) (*CreateConnectivityRuleResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateConnectivityRule not implemented")
+}
+func (UnimplementedCloudServiceServer) GetConnectivityRule(context.Context, *GetConnectivityRuleRequest) (*GetConnectivityRuleResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetConnectivityRule not implemented")
+}
+func (UnimplementedCloudServiceServer) GetConnectivityRules(context.Context, *GetConnectivityRulesRequest) (*GetConnectivityRulesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetConnectivityRules not implemented")
+}
+func (UnimplementedCloudServiceServer) DeleteConnectivityRule(context.Context, *DeleteConnectivityRuleRequest) (*DeleteConnectivityRuleResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteConnectivityRule not implemented")
 }
 func (UnimplementedCloudServiceServer) mustEmbedUnimplementedCloudServiceServer() {}
 func (UnimplementedCloudServiceServer) testEmbeddedByValue()                      {}
@@ -1914,6 +1986,78 @@ func _CloudService_ValidateNamespaceExportSink_Handler(srv interface{}, ctx cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _CloudService_CreateConnectivityRule_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateConnectivityRuleRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CloudServiceServer).CreateConnectivityRule(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CloudService_CreateConnectivityRule_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CloudServiceServer).CreateConnectivityRule(ctx, req.(*CreateConnectivityRuleRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CloudService_GetConnectivityRule_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetConnectivityRuleRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CloudServiceServer).GetConnectivityRule(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CloudService_GetConnectivityRule_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CloudServiceServer).GetConnectivityRule(ctx, req.(*GetConnectivityRuleRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CloudService_GetConnectivityRules_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetConnectivityRulesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CloudServiceServer).GetConnectivityRules(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CloudService_GetConnectivityRules_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CloudServiceServer).GetConnectivityRules(ctx, req.(*GetConnectivityRulesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CloudService_DeleteConnectivityRule_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteConnectivityRuleRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CloudServiceServer).DeleteConnectivityRule(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CloudService_DeleteConnectivityRule_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CloudServiceServer).DeleteConnectivityRule(ctx, req.(*DeleteConnectivityRuleRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // CloudService_ServiceDesc is the grpc.ServiceDesc for CloudService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -2124,6 +2268,22 @@ var CloudService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ValidateNamespaceExportSink",
 			Handler:    _CloudService_ValidateNamespaceExportSink_Handler,
+		},
+		{
+			MethodName: "CreateConnectivityRule",
+			Handler:    _CloudService_CreateConnectivityRule_Handler,
+		},
+		{
+			MethodName: "GetConnectivityRule",
+			Handler:    _CloudService_GetConnectivityRule_Handler,
+		},
+		{
+			MethodName: "GetConnectivityRules",
+			Handler:    _CloudService_GetConnectivityRules_Handler,
+		},
+		{
+			MethodName: "DeleteConnectivityRule",
+			Handler:    _CloudService_DeleteConnectivityRule_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
