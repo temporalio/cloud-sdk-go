@@ -5683,8 +5683,9 @@ func (*ValidateNamespaceExportSinkResponse) Descriptor() ([]byte, []int) {
 }
 
 type CreateConnectivityRuleRequest struct {
-	state protoimpl.MessageState    `protogen:"open.v1"`
-	Spec  *v17.ConnectivityRuleSpec `protobuf:"bytes,1,opt,name=spec,proto3" json:"spec,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The connectivity rule specification.
+	Spec *v17.ConnectivityRuleSpec `protobuf:"bytes,1,opt,name=spec,proto3" json:"spec,omitempty"`
 	// The id to use for this async operation.
 	// Optional, if not provided a random id will be generated.
 	AsyncOperationId string `protobuf:"bytes,2,opt,name=async_operation_id,json=asyncOperationId,proto3" json:"async_operation_id,omitempty"`
@@ -5737,8 +5738,9 @@ func (x *CreateConnectivityRuleRequest) GetAsyncOperationId() string {
 }
 
 type CreateConnectivityRuleResponse struct {
-	state              protoimpl.MessageState `protogen:"open.v1"`
-	ConnectivityRuleId string                 `protobuf:"bytes,1,opt,name=connectivity_rule_id,json=connectivityRuleId,proto3" json:"connectivity_rule_id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The id of the connectivity rule that was created.
+	ConnectivityRuleId string `protobuf:"bytes,1,opt,name=connectivity_rule_id,json=connectivityRuleId,proto3" json:"connectivity_rule_id,omitempty"`
 	// The async operation
 	AsyncOperation *v11.AsyncOperation `protobuf:"bytes,2,opt,name=async_operation,json=asyncOperation,proto3" json:"async_operation,omitempty"`
 	unknownFields  protoimpl.UnknownFields
@@ -5790,8 +5792,9 @@ func (x *CreateConnectivityRuleResponse) GetAsyncOperation() *v11.AsyncOperation
 }
 
 type GetConnectivityRuleRequest struct {
-	state              protoimpl.MessageState `protogen:"open.v1"`
-	ConnectivityRuleId string                 `protobuf:"bytes,1,opt,name=connectivity_rule_id,json=connectivityRuleId,proto3" json:"connectivity_rule_id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The id of the connectivity rule to get.
+	ConnectivityRuleId string `protobuf:"bytes,1,opt,name=connectivity_rule_id,json=connectivityRuleId,proto3" json:"connectivity_rule_id,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
@@ -5885,7 +5888,7 @@ type GetConnectivityRulesRequest struct {
 	// The page token if this is continuing from another response.
 	// Optional, defaults to empty.
 	PageToken string `protobuf:"bytes,2,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
-	// Namespace id
+	// Filter connectivity rule by the namespace id.
 	Namespace     string `protobuf:"bytes,3,opt,name=namespace,proto3" json:"namespace,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -6001,6 +6004,7 @@ type DeleteConnectivityRuleRequest struct {
 	// The ID of the connectivity rule that need be deleted, required.
 	ConnectivityRuleId string `protobuf:"bytes,1,opt,name=connectivity_rule_id,json=connectivityRuleId,proto3" json:"connectivity_rule_id,omitempty"`
 	// The resource version which should be the same from the the db, required
+	// The latest version can be found in the GetConnectivityRule operation response
 	ResourceVersion string `protobuf:"bytes,2,opt,name=resource_version,json=resourceVersion,proto3" json:"resource_version,omitempty"`
 	// The id to use for this async operation.
 	// Optional, if not provided a random id will be generated.

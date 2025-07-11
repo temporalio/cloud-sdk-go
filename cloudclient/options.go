@@ -17,13 +17,13 @@ import (
 
 const (
 	defaultCloudOpsAPIHostPort = "saas-api.tmprl.cloud:443"
-	defaultAPIVersion          = "test-cr"
+	defaultAPIVersion          = "v0.6.0"
 
 	authorizationHeader           = "Authorization"
 	authorizationBearer           = "Bearer"
 	temporalCloudAPIVersionHeader = "temporal-cloud-api-version"
 
-	sdkVersion = "test-cr-sdk"
+	sdkVersion = "0.4.0"
 )
 
 // Options to configure the cloud operations client.
