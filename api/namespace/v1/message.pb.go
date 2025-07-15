@@ -621,7 +621,7 @@ type NamespaceSpec struct {
 	HighAvailability *HighAvailabilitySpec `protobuf:"bytes,10,opt,name=high_availability,json=highAvailability,proto3" json:"high_availability,omitempty"`
 	// The private connectivity configuration for the namespace.
 	// This will apply the connectivity rules specified to the namespace.
-	// temporal:versioning:min_version=prerelease
+	// temporal:versioning:min_version=v0.6.0
 	ConnectivityRuleIds []string `protobuf:"bytes,11,rep,name=connectivity_rule_ids,json=connectivityRuleIds,proto3" json:"connectivity_rule_ids,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
