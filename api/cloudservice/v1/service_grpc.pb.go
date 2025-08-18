@@ -70,6 +70,7 @@ const (
 	CloudService_UpdateNamespaceExportSink_FullMethodName   = "/temporal.api.cloud.cloudservice.v1.CloudService/UpdateNamespaceExportSink"
 	CloudService_DeleteNamespaceExportSink_FullMethodName   = "/temporal.api.cloud.cloudservice.v1.CloudService/DeleteNamespaceExportSink"
 	CloudService_ValidateNamespaceExportSink_FullMethodName = "/temporal.api.cloud.cloudservice.v1.CloudService/ValidateNamespaceExportSink"
+	CloudService_UpdateNamespaceTags_FullMethodName         = "/temporal.api.cloud.cloudservice.v1.CloudService/UpdateNamespaceTags"
 	CloudService_CreateConnectivityRule_FullMethodName      = "/temporal.api.cloud.cloudservice.v1.CloudService/CreateConnectivityRule"
 	CloudService_GetConnectivityRule_FullMethodName         = "/temporal.api.cloud.cloudservice.v1.CloudService/GetConnectivityRule"
 	CloudService_GetConnectivityRules_FullMethodName        = "/temporal.api.cloud.cloudservice.v1.CloudService/GetConnectivityRules"
@@ -186,6 +187,8 @@ type CloudServiceClient interface {
 	// Validates an export sink configuration by delivering an empty test file to the specified sink.
 	// This operation verifies that the sink is correctly configured, accessible, and ready for data export.
 	ValidateNamespaceExportSink(ctx context.Context, in *ValidateNamespaceExportSinkRequest, opts ...grpc.CallOption) (*ValidateNamespaceExportSinkResponse, error)
+	// Update the tags for a namespace
+	UpdateNamespaceTags(ctx context.Context, in *UpdateNamespaceTagsRequest, opts ...grpc.CallOption) (*UpdateNamespaceTagsResponse, error)
 	// Creates a connectivity rule
 	CreateConnectivityRule(ctx context.Context, in *CreateConnectivityRuleRequest, opts ...grpc.CallOption) (*CreateConnectivityRuleResponse, error)
 	// Gets a connectivity rule by id
@@ -714,6 +717,16 @@ func (c *cloudServiceClient) ValidateNamespaceExportSink(ctx context.Context, in
 	return out, nil
 }
 
+func (c *cloudServiceClient) UpdateNamespaceTags(ctx context.Context, in *UpdateNamespaceTagsRequest, opts ...grpc.CallOption) (*UpdateNamespaceTagsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateNamespaceTagsResponse)
+	err := c.cc.Invoke(ctx, CloudService_UpdateNamespaceTags_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *cloudServiceClient) CreateConnectivityRule(ctx context.Context, in *CreateConnectivityRuleRequest, opts ...grpc.CallOption) (*CreateConnectivityRuleResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CreateConnectivityRuleResponse)
@@ -864,6 +877,8 @@ type CloudServiceServer interface {
 	// Validates an export sink configuration by delivering an empty test file to the specified sink.
 	// This operation verifies that the sink is correctly configured, accessible, and ready for data export.
 	ValidateNamespaceExportSink(context.Context, *ValidateNamespaceExportSinkRequest) (*ValidateNamespaceExportSinkResponse, error)
+	// Update the tags for a namespace
+	UpdateNamespaceTags(context.Context, *UpdateNamespaceTagsRequest) (*UpdateNamespaceTagsResponse, error)
 	// Creates a connectivity rule
 	CreateConnectivityRule(context.Context, *CreateConnectivityRuleRequest) (*CreateConnectivityRuleResponse, error)
 	// Gets a connectivity rule by id
@@ -1034,6 +1049,9 @@ func (UnimplementedCloudServiceServer) DeleteNamespaceExportSink(context.Context
 }
 func (UnimplementedCloudServiceServer) ValidateNamespaceExportSink(context.Context, *ValidateNamespaceExportSinkRequest) (*ValidateNamespaceExportSinkResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ValidateNamespaceExportSink not implemented")
+}
+func (UnimplementedCloudServiceServer) UpdateNamespaceTags(context.Context, *UpdateNamespaceTagsRequest) (*UpdateNamespaceTagsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateNamespaceTags not implemented")
 }
 func (UnimplementedCloudServiceServer) CreateConnectivityRule(context.Context, *CreateConnectivityRuleRequest) (*CreateConnectivityRuleResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateConnectivityRule not implemented")
@@ -1986,6 +2004,24 @@ func _CloudService_ValidateNamespaceExportSink_Handler(srv interface{}, ctx cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _CloudService_UpdateNamespaceTags_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateNamespaceTagsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CloudServiceServer).UpdateNamespaceTags(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CloudService_UpdateNamespaceTags_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CloudServiceServer).UpdateNamespaceTags(ctx, req.(*UpdateNamespaceTagsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _CloudService_CreateConnectivityRule_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateConnectivityRuleRequest)
 	if err := dec(in); err != nil {
@@ -2268,6 +2304,10 @@ var CloudService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ValidateNamespaceExportSink",
 			Handler:    _CloudService_ValidateNamespaceExportSink_Handler,
+		},
+		{
+			MethodName: "UpdateNamespaceTags",
+			Handler:    _CloudService_UpdateNamespaceTags_Handler,
 		},
 		{
 			MethodName: "CreateConnectivityRule",
