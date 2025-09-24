@@ -19,62 +19,64 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	CloudService_GetUsers_FullMethodName                    = "/temporal.api.cloud.cloudservice.v1.CloudService/GetUsers"
-	CloudService_GetUser_FullMethodName                     = "/temporal.api.cloud.cloudservice.v1.CloudService/GetUser"
-	CloudService_CreateUser_FullMethodName                  = "/temporal.api.cloud.cloudservice.v1.CloudService/CreateUser"
-	CloudService_UpdateUser_FullMethodName                  = "/temporal.api.cloud.cloudservice.v1.CloudService/UpdateUser"
-	CloudService_DeleteUser_FullMethodName                  = "/temporal.api.cloud.cloudservice.v1.CloudService/DeleteUser"
-	CloudService_SetUserNamespaceAccess_FullMethodName      = "/temporal.api.cloud.cloudservice.v1.CloudService/SetUserNamespaceAccess"
-	CloudService_GetAsyncOperation_FullMethodName           = "/temporal.api.cloud.cloudservice.v1.CloudService/GetAsyncOperation"
-	CloudService_CreateNamespace_FullMethodName             = "/temporal.api.cloud.cloudservice.v1.CloudService/CreateNamespace"
-	CloudService_GetNamespaces_FullMethodName               = "/temporal.api.cloud.cloudservice.v1.CloudService/GetNamespaces"
-	CloudService_GetNamespace_FullMethodName                = "/temporal.api.cloud.cloudservice.v1.CloudService/GetNamespace"
-	CloudService_UpdateNamespace_FullMethodName             = "/temporal.api.cloud.cloudservice.v1.CloudService/UpdateNamespace"
-	CloudService_RenameCustomSearchAttribute_FullMethodName = "/temporal.api.cloud.cloudservice.v1.CloudService/RenameCustomSearchAttribute"
-	CloudService_DeleteNamespace_FullMethodName             = "/temporal.api.cloud.cloudservice.v1.CloudService/DeleteNamespace"
-	CloudService_FailoverNamespaceRegion_FullMethodName     = "/temporal.api.cloud.cloudservice.v1.CloudService/FailoverNamespaceRegion"
-	CloudService_AddNamespaceRegion_FullMethodName          = "/temporal.api.cloud.cloudservice.v1.CloudService/AddNamespaceRegion"
-	CloudService_DeleteNamespaceRegion_FullMethodName       = "/temporal.api.cloud.cloudservice.v1.CloudService/DeleteNamespaceRegion"
-	CloudService_GetRegions_FullMethodName                  = "/temporal.api.cloud.cloudservice.v1.CloudService/GetRegions"
-	CloudService_GetRegion_FullMethodName                   = "/temporal.api.cloud.cloudservice.v1.CloudService/GetRegion"
-	CloudService_GetApiKeys_FullMethodName                  = "/temporal.api.cloud.cloudservice.v1.CloudService/GetApiKeys"
-	CloudService_GetApiKey_FullMethodName                   = "/temporal.api.cloud.cloudservice.v1.CloudService/GetApiKey"
-	CloudService_CreateApiKey_FullMethodName                = "/temporal.api.cloud.cloudservice.v1.CloudService/CreateApiKey"
-	CloudService_UpdateApiKey_FullMethodName                = "/temporal.api.cloud.cloudservice.v1.CloudService/UpdateApiKey"
-	CloudService_DeleteApiKey_FullMethodName                = "/temporal.api.cloud.cloudservice.v1.CloudService/DeleteApiKey"
-	CloudService_GetNexusEndpoints_FullMethodName           = "/temporal.api.cloud.cloudservice.v1.CloudService/GetNexusEndpoints"
-	CloudService_GetNexusEndpoint_FullMethodName            = "/temporal.api.cloud.cloudservice.v1.CloudService/GetNexusEndpoint"
-	CloudService_CreateNexusEndpoint_FullMethodName         = "/temporal.api.cloud.cloudservice.v1.CloudService/CreateNexusEndpoint"
-	CloudService_UpdateNexusEndpoint_FullMethodName         = "/temporal.api.cloud.cloudservice.v1.CloudService/UpdateNexusEndpoint"
-	CloudService_DeleteNexusEndpoint_FullMethodName         = "/temporal.api.cloud.cloudservice.v1.CloudService/DeleteNexusEndpoint"
-	CloudService_GetUserGroups_FullMethodName               = "/temporal.api.cloud.cloudservice.v1.CloudService/GetUserGroups"
-	CloudService_GetUserGroup_FullMethodName                = "/temporal.api.cloud.cloudservice.v1.CloudService/GetUserGroup"
-	CloudService_CreateUserGroup_FullMethodName             = "/temporal.api.cloud.cloudservice.v1.CloudService/CreateUserGroup"
-	CloudService_UpdateUserGroup_FullMethodName             = "/temporal.api.cloud.cloudservice.v1.CloudService/UpdateUserGroup"
-	CloudService_DeleteUserGroup_FullMethodName             = "/temporal.api.cloud.cloudservice.v1.CloudService/DeleteUserGroup"
-	CloudService_SetUserGroupNamespaceAccess_FullMethodName = "/temporal.api.cloud.cloudservice.v1.CloudService/SetUserGroupNamespaceAccess"
-	CloudService_AddUserGroupMember_FullMethodName          = "/temporal.api.cloud.cloudservice.v1.CloudService/AddUserGroupMember"
-	CloudService_RemoveUserGroupMember_FullMethodName       = "/temporal.api.cloud.cloudservice.v1.CloudService/RemoveUserGroupMember"
-	CloudService_GetUserGroupMembers_FullMethodName         = "/temporal.api.cloud.cloudservice.v1.CloudService/GetUserGroupMembers"
-	CloudService_CreateServiceAccount_FullMethodName        = "/temporal.api.cloud.cloudservice.v1.CloudService/CreateServiceAccount"
-	CloudService_GetServiceAccount_FullMethodName           = "/temporal.api.cloud.cloudservice.v1.CloudService/GetServiceAccount"
-	CloudService_GetServiceAccounts_FullMethodName          = "/temporal.api.cloud.cloudservice.v1.CloudService/GetServiceAccounts"
-	CloudService_UpdateServiceAccount_FullMethodName        = "/temporal.api.cloud.cloudservice.v1.CloudService/UpdateServiceAccount"
-	CloudService_DeleteServiceAccount_FullMethodName        = "/temporal.api.cloud.cloudservice.v1.CloudService/DeleteServiceAccount"
-	CloudService_GetUsage_FullMethodName                    = "/temporal.api.cloud.cloudservice.v1.CloudService/GetUsage"
-	CloudService_GetAccount_FullMethodName                  = "/temporal.api.cloud.cloudservice.v1.CloudService/GetAccount"
-	CloudService_UpdateAccount_FullMethodName               = "/temporal.api.cloud.cloudservice.v1.CloudService/UpdateAccount"
-	CloudService_CreateNamespaceExportSink_FullMethodName   = "/temporal.api.cloud.cloudservice.v1.CloudService/CreateNamespaceExportSink"
-	CloudService_GetNamespaceExportSink_FullMethodName      = "/temporal.api.cloud.cloudservice.v1.CloudService/GetNamespaceExportSink"
-	CloudService_GetNamespaceExportSinks_FullMethodName     = "/temporal.api.cloud.cloudservice.v1.CloudService/GetNamespaceExportSinks"
-	CloudService_UpdateNamespaceExportSink_FullMethodName   = "/temporal.api.cloud.cloudservice.v1.CloudService/UpdateNamespaceExportSink"
-	CloudService_DeleteNamespaceExportSink_FullMethodName   = "/temporal.api.cloud.cloudservice.v1.CloudService/DeleteNamespaceExportSink"
-	CloudService_ValidateNamespaceExportSink_FullMethodName = "/temporal.api.cloud.cloudservice.v1.CloudService/ValidateNamespaceExportSink"
-	CloudService_UpdateNamespaceTags_FullMethodName         = "/temporal.api.cloud.cloudservice.v1.CloudService/UpdateNamespaceTags"
-	CloudService_CreateConnectivityRule_FullMethodName      = "/temporal.api.cloud.cloudservice.v1.CloudService/CreateConnectivityRule"
-	CloudService_GetConnectivityRule_FullMethodName         = "/temporal.api.cloud.cloudservice.v1.CloudService/GetConnectivityRule"
-	CloudService_GetConnectivityRules_FullMethodName        = "/temporal.api.cloud.cloudservice.v1.CloudService/GetConnectivityRules"
-	CloudService_DeleteConnectivityRule_FullMethodName      = "/temporal.api.cloud.cloudservice.v1.CloudService/DeleteConnectivityRule"
+	CloudService_GetUsers_FullMethodName                         = "/temporal.api.cloud.cloudservice.v1.CloudService/GetUsers"
+	CloudService_GetUser_FullMethodName                          = "/temporal.api.cloud.cloudservice.v1.CloudService/GetUser"
+	CloudService_CreateUser_FullMethodName                       = "/temporal.api.cloud.cloudservice.v1.CloudService/CreateUser"
+	CloudService_UpdateUser_FullMethodName                       = "/temporal.api.cloud.cloudservice.v1.CloudService/UpdateUser"
+	CloudService_DeleteUser_FullMethodName                       = "/temporal.api.cloud.cloudservice.v1.CloudService/DeleteUser"
+	CloudService_SetUserNamespaceAccess_FullMethodName           = "/temporal.api.cloud.cloudservice.v1.CloudService/SetUserNamespaceAccess"
+	CloudService_GetAsyncOperation_FullMethodName                = "/temporal.api.cloud.cloudservice.v1.CloudService/GetAsyncOperation"
+	CloudService_CreateNamespace_FullMethodName                  = "/temporal.api.cloud.cloudservice.v1.CloudService/CreateNamespace"
+	CloudService_GetNamespaces_FullMethodName                    = "/temporal.api.cloud.cloudservice.v1.CloudService/GetNamespaces"
+	CloudService_GetNamespace_FullMethodName                     = "/temporal.api.cloud.cloudservice.v1.CloudService/GetNamespace"
+	CloudService_UpdateNamespace_FullMethodName                  = "/temporal.api.cloud.cloudservice.v1.CloudService/UpdateNamespace"
+	CloudService_RenameCustomSearchAttribute_FullMethodName      = "/temporal.api.cloud.cloudservice.v1.CloudService/RenameCustomSearchAttribute"
+	CloudService_DeleteNamespace_FullMethodName                  = "/temporal.api.cloud.cloudservice.v1.CloudService/DeleteNamespace"
+	CloudService_FailoverNamespaceRegion_FullMethodName          = "/temporal.api.cloud.cloudservice.v1.CloudService/FailoverNamespaceRegion"
+	CloudService_AddNamespaceRegion_FullMethodName               = "/temporal.api.cloud.cloudservice.v1.CloudService/AddNamespaceRegion"
+	CloudService_DeleteNamespaceRegion_FullMethodName            = "/temporal.api.cloud.cloudservice.v1.CloudService/DeleteNamespaceRegion"
+	CloudService_GetRegions_FullMethodName                       = "/temporal.api.cloud.cloudservice.v1.CloudService/GetRegions"
+	CloudService_GetRegion_FullMethodName                        = "/temporal.api.cloud.cloudservice.v1.CloudService/GetRegion"
+	CloudService_GetApiKeys_FullMethodName                       = "/temporal.api.cloud.cloudservice.v1.CloudService/GetApiKeys"
+	CloudService_GetApiKey_FullMethodName                        = "/temporal.api.cloud.cloudservice.v1.CloudService/GetApiKey"
+	CloudService_CreateApiKey_FullMethodName                     = "/temporal.api.cloud.cloudservice.v1.CloudService/CreateApiKey"
+	CloudService_UpdateApiKey_FullMethodName                     = "/temporal.api.cloud.cloudservice.v1.CloudService/UpdateApiKey"
+	CloudService_DeleteApiKey_FullMethodName                     = "/temporal.api.cloud.cloudservice.v1.CloudService/DeleteApiKey"
+	CloudService_GetNexusEndpoints_FullMethodName                = "/temporal.api.cloud.cloudservice.v1.CloudService/GetNexusEndpoints"
+	CloudService_GetNexusEndpoint_FullMethodName                 = "/temporal.api.cloud.cloudservice.v1.CloudService/GetNexusEndpoint"
+	CloudService_CreateNexusEndpoint_FullMethodName              = "/temporal.api.cloud.cloudservice.v1.CloudService/CreateNexusEndpoint"
+	CloudService_UpdateNexusEndpoint_FullMethodName              = "/temporal.api.cloud.cloudservice.v1.CloudService/UpdateNexusEndpoint"
+	CloudService_DeleteNexusEndpoint_FullMethodName              = "/temporal.api.cloud.cloudservice.v1.CloudService/DeleteNexusEndpoint"
+	CloudService_GetUserGroups_FullMethodName                    = "/temporal.api.cloud.cloudservice.v1.CloudService/GetUserGroups"
+	CloudService_GetUserGroup_FullMethodName                     = "/temporal.api.cloud.cloudservice.v1.CloudService/GetUserGroup"
+	CloudService_CreateUserGroup_FullMethodName                  = "/temporal.api.cloud.cloudservice.v1.CloudService/CreateUserGroup"
+	CloudService_UpdateUserGroup_FullMethodName                  = "/temporal.api.cloud.cloudservice.v1.CloudService/UpdateUserGroup"
+	CloudService_DeleteUserGroup_FullMethodName                  = "/temporal.api.cloud.cloudservice.v1.CloudService/DeleteUserGroup"
+	CloudService_SetUserGroupNamespaceAccess_FullMethodName      = "/temporal.api.cloud.cloudservice.v1.CloudService/SetUserGroupNamespaceAccess"
+	CloudService_AddUserGroupMember_FullMethodName               = "/temporal.api.cloud.cloudservice.v1.CloudService/AddUserGroupMember"
+	CloudService_RemoveUserGroupMember_FullMethodName            = "/temporal.api.cloud.cloudservice.v1.CloudService/RemoveUserGroupMember"
+	CloudService_GetUserGroupMembers_FullMethodName              = "/temporal.api.cloud.cloudservice.v1.CloudService/GetUserGroupMembers"
+	CloudService_CreateServiceAccount_FullMethodName             = "/temporal.api.cloud.cloudservice.v1.CloudService/CreateServiceAccount"
+	CloudService_GetServiceAccount_FullMethodName                = "/temporal.api.cloud.cloudservice.v1.CloudService/GetServiceAccount"
+	CloudService_GetServiceAccounts_FullMethodName               = "/temporal.api.cloud.cloudservice.v1.CloudService/GetServiceAccounts"
+	CloudService_UpdateServiceAccount_FullMethodName             = "/temporal.api.cloud.cloudservice.v1.CloudService/UpdateServiceAccount"
+	CloudService_SetServiceAccountNamespaceAccess_FullMethodName = "/temporal.api.cloud.cloudservice.v1.CloudService/SetServiceAccountNamespaceAccess"
+	CloudService_DeleteServiceAccount_FullMethodName             = "/temporal.api.cloud.cloudservice.v1.CloudService/DeleteServiceAccount"
+	CloudService_GetUsage_FullMethodName                         = "/temporal.api.cloud.cloudservice.v1.CloudService/GetUsage"
+	CloudService_GetAccount_FullMethodName                       = "/temporal.api.cloud.cloudservice.v1.CloudService/GetAccount"
+	CloudService_UpdateAccount_FullMethodName                    = "/temporal.api.cloud.cloudservice.v1.CloudService/UpdateAccount"
+	CloudService_CreateNamespaceExportSink_FullMethodName        = "/temporal.api.cloud.cloudservice.v1.CloudService/CreateNamespaceExportSink"
+	CloudService_GetNamespaceExportSink_FullMethodName           = "/temporal.api.cloud.cloudservice.v1.CloudService/GetNamespaceExportSink"
+	CloudService_GetNamespaceExportSinks_FullMethodName          = "/temporal.api.cloud.cloudservice.v1.CloudService/GetNamespaceExportSinks"
+	CloudService_UpdateNamespaceExportSink_FullMethodName        = "/temporal.api.cloud.cloudservice.v1.CloudService/UpdateNamespaceExportSink"
+	CloudService_DeleteNamespaceExportSink_FullMethodName        = "/temporal.api.cloud.cloudservice.v1.CloudService/DeleteNamespaceExportSink"
+	CloudService_ValidateNamespaceExportSink_FullMethodName      = "/temporal.api.cloud.cloudservice.v1.CloudService/ValidateNamespaceExportSink"
+	CloudService_UpdateNamespaceTags_FullMethodName              = "/temporal.api.cloud.cloudservice.v1.CloudService/UpdateNamespaceTags"
+	CloudService_CreateConnectivityRule_FullMethodName           = "/temporal.api.cloud.cloudservice.v1.CloudService/CreateConnectivityRule"
+	CloudService_GetConnectivityRule_FullMethodName              = "/temporal.api.cloud.cloudservice.v1.CloudService/GetConnectivityRule"
+	CloudService_GetConnectivityRules_FullMethodName             = "/temporal.api.cloud.cloudservice.v1.CloudService/GetConnectivityRules"
+	CloudService_DeleteConnectivityRule_FullMethodName           = "/temporal.api.cloud.cloudservice.v1.CloudService/DeleteConnectivityRule"
+	CloudService_ValidateAccountAuditLogSink_FullMethodName      = "/temporal.api.cloud.cloudservice.v1.CloudService/ValidateAccountAuditLogSink"
 )
 
 // CloudServiceClient is the client API for CloudService service.
@@ -165,6 +167,8 @@ type CloudServiceClient interface {
 	GetServiceAccounts(ctx context.Context, in *GetServiceAccountsRequest, opts ...grpc.CallOption) (*GetServiceAccountsResponse, error)
 	// Update a service account.
 	UpdateServiceAccount(ctx context.Context, in *UpdateServiceAccountRequest, opts ...grpc.CallOption) (*UpdateServiceAccountResponse, error)
+	// Set a service account's access to a namespace.
+	SetServiceAccountNamespaceAccess(ctx context.Context, in *SetServiceAccountNamespaceAccessRequest, opts ...grpc.CallOption) (*SetServiceAccountNamespaceAccessResponse, error)
 	// Delete a service account.
 	DeleteServiceAccount(ctx context.Context, in *DeleteServiceAccountRequest, opts ...grpc.CallOption) (*DeleteServiceAccountResponse, error)
 	// WARNING: Pre-Release Feature
@@ -197,6 +201,9 @@ type CloudServiceClient interface {
 	GetConnectivityRules(ctx context.Context, in *GetConnectivityRulesRequest, opts ...grpc.CallOption) (*GetConnectivityRulesResponse, error)
 	// Deletes a connectivity rule by id
 	DeleteConnectivityRule(ctx context.Context, in *DeleteConnectivityRuleRequest, opts ...grpc.CallOption) (*DeleteConnectivityRuleResponse, error)
+	// Validate customer audit log sink is accessible from Temporal's workflow by delivering an empty file to the specified sink.
+	// The operation verifies that the sink is correctly configured, accessible and ready to receive audit logs.
+	ValidateAccountAuditLogSink(ctx context.Context, in *ValidateAccountAuditLogSinkRequest, opts ...grpc.CallOption) (*ValidateAccountAuditLogSinkResponse, error)
 }
 
 type cloudServiceClient struct {
@@ -617,6 +624,16 @@ func (c *cloudServiceClient) UpdateServiceAccount(ctx context.Context, in *Updat
 	return out, nil
 }
 
+func (c *cloudServiceClient) SetServiceAccountNamespaceAccess(ctx context.Context, in *SetServiceAccountNamespaceAccessRequest, opts ...grpc.CallOption) (*SetServiceAccountNamespaceAccessResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetServiceAccountNamespaceAccessResponse)
+	err := c.cc.Invoke(ctx, CloudService_SetServiceAccountNamespaceAccess_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *cloudServiceClient) DeleteServiceAccount(ctx context.Context, in *DeleteServiceAccountRequest, opts ...grpc.CallOption) (*DeleteServiceAccountResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(DeleteServiceAccountResponse)
@@ -767,6 +784,16 @@ func (c *cloudServiceClient) DeleteConnectivityRule(ctx context.Context, in *Del
 	return out, nil
 }
 
+func (c *cloudServiceClient) ValidateAccountAuditLogSink(ctx context.Context, in *ValidateAccountAuditLogSinkRequest, opts ...grpc.CallOption) (*ValidateAccountAuditLogSinkResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ValidateAccountAuditLogSinkResponse)
+	err := c.cc.Invoke(ctx, CloudService_ValidateAccountAuditLogSink_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CloudServiceServer is the server API for CloudService service.
 // All implementations must embed UnimplementedCloudServiceServer
 // for forward compatibility.
@@ -855,6 +882,8 @@ type CloudServiceServer interface {
 	GetServiceAccounts(context.Context, *GetServiceAccountsRequest) (*GetServiceAccountsResponse, error)
 	// Update a service account.
 	UpdateServiceAccount(context.Context, *UpdateServiceAccountRequest) (*UpdateServiceAccountResponse, error)
+	// Set a service account's access to a namespace.
+	SetServiceAccountNamespaceAccess(context.Context, *SetServiceAccountNamespaceAccessRequest) (*SetServiceAccountNamespaceAccessResponse, error)
 	// Delete a service account.
 	DeleteServiceAccount(context.Context, *DeleteServiceAccountRequest) (*DeleteServiceAccountResponse, error)
 	// WARNING: Pre-Release Feature
@@ -887,6 +916,9 @@ type CloudServiceServer interface {
 	GetConnectivityRules(context.Context, *GetConnectivityRulesRequest) (*GetConnectivityRulesResponse, error)
 	// Deletes a connectivity rule by id
 	DeleteConnectivityRule(context.Context, *DeleteConnectivityRuleRequest) (*DeleteConnectivityRuleResponse, error)
+	// Validate customer audit log sink is accessible from Temporal's workflow by delivering an empty file to the specified sink.
+	// The operation verifies that the sink is correctly configured, accessible and ready to receive audit logs.
+	ValidateAccountAuditLogSink(context.Context, *ValidateAccountAuditLogSinkRequest) (*ValidateAccountAuditLogSinkResponse, error)
 	mustEmbedUnimplementedCloudServiceServer()
 }
 
@@ -1020,6 +1052,9 @@ func (UnimplementedCloudServiceServer) GetServiceAccounts(context.Context, *GetS
 func (UnimplementedCloudServiceServer) UpdateServiceAccount(context.Context, *UpdateServiceAccountRequest) (*UpdateServiceAccountResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateServiceAccount not implemented")
 }
+func (UnimplementedCloudServiceServer) SetServiceAccountNamespaceAccess(context.Context, *SetServiceAccountNamespaceAccessRequest) (*SetServiceAccountNamespaceAccessResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetServiceAccountNamespaceAccess not implemented")
+}
 func (UnimplementedCloudServiceServer) DeleteServiceAccount(context.Context, *DeleteServiceAccountRequest) (*DeleteServiceAccountResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteServiceAccount not implemented")
 }
@@ -1064,6 +1099,9 @@ func (UnimplementedCloudServiceServer) GetConnectivityRules(context.Context, *Ge
 }
 func (UnimplementedCloudServiceServer) DeleteConnectivityRule(context.Context, *DeleteConnectivityRuleRequest) (*DeleteConnectivityRuleResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteConnectivityRule not implemented")
+}
+func (UnimplementedCloudServiceServer) ValidateAccountAuditLogSink(context.Context, *ValidateAccountAuditLogSinkRequest) (*ValidateAccountAuditLogSinkResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ValidateAccountAuditLogSink not implemented")
 }
 func (UnimplementedCloudServiceServer) mustEmbedUnimplementedCloudServiceServer() {}
 func (UnimplementedCloudServiceServer) testEmbeddedByValue()                      {}
@@ -1824,6 +1862,24 @@ func _CloudService_UpdateServiceAccount_Handler(srv interface{}, ctx context.Con
 	return interceptor(ctx, in, info, handler)
 }
 
+func _CloudService_SetServiceAccountNamespaceAccess_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetServiceAccountNamespaceAccessRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CloudServiceServer).SetServiceAccountNamespaceAccess(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CloudService_SetServiceAccountNamespaceAccess_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CloudServiceServer).SetServiceAccountNamespaceAccess(ctx, req.(*SetServiceAccountNamespaceAccessRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _CloudService_DeleteServiceAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteServiceAccountRequest)
 	if err := dec(in); err != nil {
@@ -2094,6 +2150,24 @@ func _CloudService_DeleteConnectivityRule_Handler(srv interface{}, ctx context.C
 	return interceptor(ctx, in, info, handler)
 }
 
+func _CloudService_ValidateAccountAuditLogSink_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ValidateAccountAuditLogSinkRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CloudServiceServer).ValidateAccountAuditLogSink(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CloudService_ValidateAccountAuditLogSink_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CloudServiceServer).ValidateAccountAuditLogSink(ctx, req.(*ValidateAccountAuditLogSinkRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // CloudService_ServiceDesc is the grpc.ServiceDesc for CloudService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -2266,6 +2340,10 @@ var CloudService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _CloudService_UpdateServiceAccount_Handler,
 		},
 		{
+			MethodName: "SetServiceAccountNamespaceAccess",
+			Handler:    _CloudService_SetServiceAccountNamespaceAccess_Handler,
+		},
+		{
 			MethodName: "DeleteServiceAccount",
 			Handler:    _CloudService_DeleteServiceAccount_Handler,
 		},
@@ -2324,6 +2402,10 @@ var CloudService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteConnectivityRule",
 			Handler:    _CloudService_DeleteConnectivityRule_Handler,
+		},
+		{
+			MethodName: "ValidateAccountAuditLogSink",
+			Handler:    _CloudService_ValidateAccountAuditLogSink_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
