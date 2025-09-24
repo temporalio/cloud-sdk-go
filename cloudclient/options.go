@@ -17,7 +17,7 @@ import (
 
 const (
 	defaultCloudOpsAPIHostPort = "saas-api.tmprl.cloud:443"
-	defaultAPIVersion          = "v0.7.1"
+	defaultAPIVersion          = "v9999.9.9" // temporal:dev
 
 	authorizationHeader           = "Authorization"
 	authorizationBearer           = "Bearer"
