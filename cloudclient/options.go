@@ -26,6 +26,14 @@ const (
 	sdkVersion = "0.6.0"
 )
 
+func GetDefaultAPIVersion() string {
+	return defaultAPIVersion
+}
+
+func GetTemporalCloudAPIVersionHeader() string {
+	return temporalCloudAPIVersionHeader
+}
+
 // Options to configure the cloud operations client.
 // The minimum requirement is one of APIKey or APIKeyReader to be set.
 // All other options are optional.
