@@ -17,20 +17,20 @@ import (
 
 const (
 	defaultCloudOpsAPIHostPort = "saas-api.tmprl.cloud:443"
-	defaultAPIVersion          = "v0.8.0"
 
 	authorizationHeader           = "Authorization"
 	authorizationBearer           = "Bearer"
 	temporalCloudAPIVersionHeader = "temporal-cloud-api-version"
 
-	sdkVersion = "0.6.0"
+	sdkVersion        = "0.6.0"
+	defaultAPIVersion = "v0.8.0"
 )
 
-func GetDefaultAPIVersion() string {
+func DefaultAPIVersion() string {
 	return defaultAPIVersion
 }
 
-func GetTemporalCloudAPIVersionHeader() string {
+func TemporalCloudAPIVersionHeader() string {
 	return temporalCloudAPIVersionHeader
 }
 
