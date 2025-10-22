@@ -31,6 +31,8 @@ rm -rf api/*
 buf generate
 # Move the generated files to the correct location
 mv -f api/temporal/api/cloud/* api && rm -rf api/temporal
+# Update the default API version in cloudclient/options.go
+sed -i '' 's/defaultAPIVersion = ".*"/defaultAPIVersion = "'$(cat proto/cloud-api/VERSION)'"/' cloudclient/options.go
 
 ```
 

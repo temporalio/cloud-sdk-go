@@ -17,14 +17,22 @@ import (
 
 const (
 	defaultCloudOpsAPIHostPort = "saas-api.tmprl.cloud:443"
-	defaultAPIVersion          = "v0.8.0"
 
 	authorizationHeader           = "Authorization"
 	authorizationBearer           = "Bearer"
 	temporalCloudAPIVersionHeader = "temporal-cloud-api-version"
 
-	sdkVersion = "0.6.0"
+	sdkVersion        = "0.6.0"
+	defaultAPIVersion = "v0.8.0"
 )
+
+func DefaultAPIVersion() string {
+	return defaultAPIVersion
+}
+
+func TemporalCloudAPIVersionHeader() string {
+	return temporalCloudAPIVersionHeader
+}
 
 // Options to configure the cloud operations client.
 // The minimum requirement is one of APIKey or APIKeyReader to be set.
