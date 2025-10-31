@@ -77,6 +77,11 @@ const (
 	CloudService_GetConnectivityRules_FullMethodName             = "/temporal.api.cloud.cloudservice.v1.CloudService/GetConnectivityRules"
 	CloudService_DeleteConnectivityRule_FullMethodName           = "/temporal.api.cloud.cloudservice.v1.CloudService/DeleteConnectivityRule"
 	CloudService_ValidateAccountAuditLogSink_FullMethodName      = "/temporal.api.cloud.cloudservice.v1.CloudService/ValidateAccountAuditLogSink"
+	CloudService_CreateAccountAuditLogSink_FullMethodName        = "/temporal.api.cloud.cloudservice.v1.CloudService/CreateAccountAuditLogSink"
+	CloudService_GetAccountAuditLogSink_FullMethodName           = "/temporal.api.cloud.cloudservice.v1.CloudService/GetAccountAuditLogSink"
+	CloudService_GetAccountAuditLogSinks_FullMethodName          = "/temporal.api.cloud.cloudservice.v1.CloudService/GetAccountAuditLogSinks"
+	CloudService_UpdateAccountAuditLogSink_FullMethodName        = "/temporal.api.cloud.cloudservice.v1.CloudService/UpdateAccountAuditLogSink"
+	CloudService_DeleteAccountAuditLogSink_FullMethodName        = "/temporal.api.cloud.cloudservice.v1.CloudService/DeleteAccountAuditLogSink"
 )
 
 // CloudServiceClient is the client API for CloudService service.
@@ -204,6 +209,16 @@ type CloudServiceClient interface {
 	// Validate customer audit log sink is accessible from Temporal's workflow by delivering an empty file to the specified sink.
 	// The operation verifies that the sink is correctly configured, accessible and ready to receive audit logs.
 	ValidateAccountAuditLogSink(ctx context.Context, in *ValidateAccountAuditLogSinkRequest, opts ...grpc.CallOption) (*ValidateAccountAuditLogSinkResponse, error)
+	// Create an audit log sink
+	CreateAccountAuditLogSink(ctx context.Context, in *CreateAccountAuditLogSinkRequest, opts ...grpc.CallOption) (*CreateAccountAuditLogSinkResponse, error)
+	// Get an audit log sink
+	GetAccountAuditLogSink(ctx context.Context, in *GetAccountAuditLogSinkRequest, opts ...grpc.CallOption) (*GetAccountAuditLogSinkResponse, error)
+	// Get audit log sinks
+	GetAccountAuditLogSinks(ctx context.Context, in *GetAccountAuditLogSinksRequest, opts ...grpc.CallOption) (*GetAccountAuditLogSinksResponse, error)
+	// Update an audit log sink
+	UpdateAccountAuditLogSink(ctx context.Context, in *UpdateAccountAuditLogSinkRequest, opts ...grpc.CallOption) (*UpdateAccountAuditLogSinkResponse, error)
+	// Delete an audit log sink
+	DeleteAccountAuditLogSink(ctx context.Context, in *DeleteAccountAuditLogSinkRequest, opts ...grpc.CallOption) (*DeleteAccountAuditLogSinkResponse, error)
 }
 
 type cloudServiceClient struct {
@@ -794,6 +809,56 @@ func (c *cloudServiceClient) ValidateAccountAuditLogSink(ctx context.Context, in
 	return out, nil
 }
 
+func (c *cloudServiceClient) CreateAccountAuditLogSink(ctx context.Context, in *CreateAccountAuditLogSinkRequest, opts ...grpc.CallOption) (*CreateAccountAuditLogSinkResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateAccountAuditLogSinkResponse)
+	err := c.cc.Invoke(ctx, CloudService_CreateAccountAuditLogSink_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cloudServiceClient) GetAccountAuditLogSink(ctx context.Context, in *GetAccountAuditLogSinkRequest, opts ...grpc.CallOption) (*GetAccountAuditLogSinkResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAccountAuditLogSinkResponse)
+	err := c.cc.Invoke(ctx, CloudService_GetAccountAuditLogSink_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cloudServiceClient) GetAccountAuditLogSinks(ctx context.Context, in *GetAccountAuditLogSinksRequest, opts ...grpc.CallOption) (*GetAccountAuditLogSinksResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAccountAuditLogSinksResponse)
+	err := c.cc.Invoke(ctx, CloudService_GetAccountAuditLogSinks_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cloudServiceClient) UpdateAccountAuditLogSink(ctx context.Context, in *UpdateAccountAuditLogSinkRequest, opts ...grpc.CallOption) (*UpdateAccountAuditLogSinkResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateAccountAuditLogSinkResponse)
+	err := c.cc.Invoke(ctx, CloudService_UpdateAccountAuditLogSink_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cloudServiceClient) DeleteAccountAuditLogSink(ctx context.Context, in *DeleteAccountAuditLogSinkRequest, opts ...grpc.CallOption) (*DeleteAccountAuditLogSinkResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteAccountAuditLogSinkResponse)
+	err := c.cc.Invoke(ctx, CloudService_DeleteAccountAuditLogSink_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CloudServiceServer is the server API for CloudService service.
 // All implementations must embed UnimplementedCloudServiceServer
 // for forward compatibility.
@@ -919,6 +984,16 @@ type CloudServiceServer interface {
 	// Validate customer audit log sink is accessible from Temporal's workflow by delivering an empty file to the specified sink.
 	// The operation verifies that the sink is correctly configured, accessible and ready to receive audit logs.
 	ValidateAccountAuditLogSink(context.Context, *ValidateAccountAuditLogSinkRequest) (*ValidateAccountAuditLogSinkResponse, error)
+	// Create an audit log sink
+	CreateAccountAuditLogSink(context.Context, *CreateAccountAuditLogSinkRequest) (*CreateAccountAuditLogSinkResponse, error)
+	// Get an audit log sink
+	GetAccountAuditLogSink(context.Context, *GetAccountAuditLogSinkRequest) (*GetAccountAuditLogSinkResponse, error)
+	// Get audit log sinks
+	GetAccountAuditLogSinks(context.Context, *GetAccountAuditLogSinksRequest) (*GetAccountAuditLogSinksResponse, error)
+	// Update an audit log sink
+	UpdateAccountAuditLogSink(context.Context, *UpdateAccountAuditLogSinkRequest) (*UpdateAccountAuditLogSinkResponse, error)
+	// Delete an audit log sink
+	DeleteAccountAuditLogSink(context.Context, *DeleteAccountAuditLogSinkRequest) (*DeleteAccountAuditLogSinkResponse, error)
 	mustEmbedUnimplementedCloudServiceServer()
 }
 
@@ -1102,6 +1177,21 @@ func (UnimplementedCloudServiceServer) DeleteConnectivityRule(context.Context, *
 }
 func (UnimplementedCloudServiceServer) ValidateAccountAuditLogSink(context.Context, *ValidateAccountAuditLogSinkRequest) (*ValidateAccountAuditLogSinkResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ValidateAccountAuditLogSink not implemented")
+}
+func (UnimplementedCloudServiceServer) CreateAccountAuditLogSink(context.Context, *CreateAccountAuditLogSinkRequest) (*CreateAccountAuditLogSinkResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateAccountAuditLogSink not implemented")
+}
+func (UnimplementedCloudServiceServer) GetAccountAuditLogSink(context.Context, *GetAccountAuditLogSinkRequest) (*GetAccountAuditLogSinkResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAccountAuditLogSink not implemented")
+}
+func (UnimplementedCloudServiceServer) GetAccountAuditLogSinks(context.Context, *GetAccountAuditLogSinksRequest) (*GetAccountAuditLogSinksResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAccountAuditLogSinks not implemented")
+}
+func (UnimplementedCloudServiceServer) UpdateAccountAuditLogSink(context.Context, *UpdateAccountAuditLogSinkRequest) (*UpdateAccountAuditLogSinkResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateAccountAuditLogSink not implemented")
+}
+func (UnimplementedCloudServiceServer) DeleteAccountAuditLogSink(context.Context, *DeleteAccountAuditLogSinkRequest) (*DeleteAccountAuditLogSinkResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteAccountAuditLogSink not implemented")
 }
 func (UnimplementedCloudServiceServer) mustEmbedUnimplementedCloudServiceServer() {}
 func (UnimplementedCloudServiceServer) testEmbeddedByValue()                      {}
@@ -2168,6 +2258,96 @@ func _CloudService_ValidateAccountAuditLogSink_Handler(srv interface{}, ctx cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _CloudService_CreateAccountAuditLogSink_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateAccountAuditLogSinkRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CloudServiceServer).CreateAccountAuditLogSink(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CloudService_CreateAccountAuditLogSink_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CloudServiceServer).CreateAccountAuditLogSink(ctx, req.(*CreateAccountAuditLogSinkRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CloudService_GetAccountAuditLogSink_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAccountAuditLogSinkRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CloudServiceServer).GetAccountAuditLogSink(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CloudService_GetAccountAuditLogSink_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CloudServiceServer).GetAccountAuditLogSink(ctx, req.(*GetAccountAuditLogSinkRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CloudService_GetAccountAuditLogSinks_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAccountAuditLogSinksRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CloudServiceServer).GetAccountAuditLogSinks(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CloudService_GetAccountAuditLogSinks_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CloudServiceServer).GetAccountAuditLogSinks(ctx, req.(*GetAccountAuditLogSinksRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CloudService_UpdateAccountAuditLogSink_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateAccountAuditLogSinkRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CloudServiceServer).UpdateAccountAuditLogSink(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CloudService_UpdateAccountAuditLogSink_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CloudServiceServer).UpdateAccountAuditLogSink(ctx, req.(*UpdateAccountAuditLogSinkRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CloudService_DeleteAccountAuditLogSink_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteAccountAuditLogSinkRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CloudServiceServer).DeleteAccountAuditLogSink(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CloudService_DeleteAccountAuditLogSink_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CloudServiceServer).DeleteAccountAuditLogSink(ctx, req.(*DeleteAccountAuditLogSinkRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // CloudService_ServiceDesc is the grpc.ServiceDesc for CloudService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -2406,6 +2586,26 @@ var CloudService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ValidateAccountAuditLogSink",
 			Handler:    _CloudService_ValidateAccountAuditLogSink_Handler,
+		},
+		{
+			MethodName: "CreateAccountAuditLogSink",
+			Handler:    _CloudService_CreateAccountAuditLogSink_Handler,
+		},
+		{
+			MethodName: "GetAccountAuditLogSink",
+			Handler:    _CloudService_GetAccountAuditLogSink_Handler,
+		},
+		{
+			MethodName: "GetAccountAuditLogSinks",
+			Handler:    _CloudService_GetAccountAuditLogSinks_Handler,
+		},
+		{
+			MethodName: "UpdateAccountAuditLogSink",
+			Handler:    _CloudService_UpdateAccountAuditLogSink_Handler,
+		},
+		{
+			MethodName: "DeleteAccountAuditLogSink",
+			Handler:    _CloudService_DeleteAccountAuditLogSink_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
