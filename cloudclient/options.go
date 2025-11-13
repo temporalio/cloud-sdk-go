@@ -35,16 +35,20 @@ func TemporalCloudAPIVersionHeader() string {
 }
 
 // Options to configure the cloud operations client.
-// The minimum requirement is one of APIKey or APIKeyReader to be set.
+// The minimum requirement is one of APIKey or APIKeyReader to be set, unless DisableAPIKeyCheck is set.
 // All other options are optional.
 type Options struct {
 	// The API key to use when making requests to the cloud operations API.
-	// At least one of APIKey and APIKeyReader must be provided, but not both.
+	// At least one of APIKey and APIKeyReader must be provided, but not both, unless DisableAPIKeyCheck is set.
 	APIKey string
 
 	// The API key reader to dynamically retrieve apikey to use when making requests to the cloud operations API.
-	// At least one of APIKey and APIKeyReader must be provided, but not both.
+	// At least one of APIKey and APIKeyReader must be provided, but not both, unless DisableAPIKeyCheck is set.
 	APIKeyReader APIKeyReader
+
+	// This disables the APIKey or APIKeyReader check. This will be used in the case that the user provides a
+	// a per rpc credential in the grpc dial options.
+	DisableAPIKeyCheck bool
 
 	// The hostport to use when connecting to the cloud operations API.
 	// If not provided, the default hostport of `saas-api.tmprl.cloud:443` will be used.
@@ -135,9 +139,13 @@ func (o *Options) compute() (
 	} else if o.APIKeyReader != nil {
 		creds.reader = o.APIKeyReader
 	}
-	if creds.reader == nil {
+	if creds.reader == nil && !o.DisableAPIKeyCheck {
 		return "", nil, errors.New("either APIKey or APIKeyReader must be provided")
-	} else {
+	} else if creds.reader != nil && !o.DisableAPIKeyCheck {
+		// if there's a creds.reader, it means that the user
+		// specified an api key or api key reader. If not, then the user
+		// explicitly disabled the API Key check for them to add the per
+		// rpc credential.
 		grpcDialOptions = append(grpcDialOptions,
 			grpc.WithPerRPCCredentials(creds),
 		)
