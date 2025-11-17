@@ -4,9 +4,12 @@ on:
   workflow_dispatch:
     inputs:
       release_version:
-        description: 'Cloud API release version to checkout (e.g., v1.2.3). Leave empty for latest.'
-        required: false
-        default: ''
+        description: 'Cloud API release version to update to (e.g., v1.2.3).'
+        required: true
+        type: string
+      sdk_version:
+        description: 'SDK version to set (e.g., 0.7.0). Use the version that is intended for the next release.'
+        required: true
         type: string
       branch_name:
         description: 'Branch name for the PR (default: auto-generated)'
@@ -39,210 +42,24 @@ jobs:
         with:
           go-version: 'stable'
 
-      - name: Update proto submodule
+      - name: Install GitHub CLI
         run: |
-          RELEASE_VERSION="${{ github.event.inputs.release_version }}"
-          
-          if [ -n "$RELEASE_VERSION" ]; then
-            echo "Checking out specific release version: $RELEASE_VERSION"
-            
-            # Update submodule to latest first
-            git submodule update --init --recursive
-            
-            # Navigate to submodule and checkout specific release
-            cd proto/cloud-api
-            git fetch --tags
-            git checkout "$RELEASE_VERSION"
-            cd ../..
-            
-            # Get the version from the checked out release
-            PROTO_VERSION=$(cat proto/cloud-api/VERSION)
-            echo "Checked out proto version: $PROTO_VERSION"
-          else
-            echo "Updating proto submodule to get latest changes..."
-            git submodule update --recursive --remote --merge
-            
-            # Get the current proto version
-            PROTO_VERSION=$(cat proto/cloud-api/VERSION)
-            echo "Current proto version: $PROTO_VERSION"
-          fi
-          
-          # Check if there are any changes
-          if git diff --quiet proto/cloud-api; then
-            echo "No changes in proto submodule. Exiting..."
-            echo "NO_CHANGES=true" >> $GITHUB_ENV
-          else
-            echo "Changes detected in proto submodule"
-            echo "NO_CHANGES=false" >> $GITHUB_ENV
-            echo "PROTO_VERSION=$PROTO_VERSION" >> $GITHUB_ENV
-            echo "RELEASE_VERSION=$RELEASE_VERSION" >> $GITHUB_ENV
-          fi
+          curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
+          echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+          sudo apt update
+          sudo apt install gh -y
 
-      - name: Generate Go code from protos
-        if: env.NO_CHANGES == 'false'
+      - name: Update protos using script
         run: |
-          echo "Installing dependencies..."
-          go generate ./internal/build/tools.go
+          # Set environment variables for the script
+          export GITHUB_TOKEN="${{ secrets.GITHUB_TOKEN }}"
+          export GITHUB_REPOSITORY="${{ github.repository }}"
+          export GITHUB_ACTIONS="true"
           
-          echo "Cleaning generated files..."
-          rm -rf api/*
-          
-          echo "Generating Go code from protos..."
-          buf generate
-          
-          echo "Moving generated files to correct location..."
-          mv -f api/temporal/api/cloud/* api && rm -rf api/temporal
-          
-          echo "Updating default API version in cloudclient/options.go..."
-          sed -i "s/defaultAPIVersion = \".*\"/defaultAPIVersion = \"$PROTO_VERSION\"/" cloudclient/options.go
-          
-          echo "Incrementing SDK patch version in cloudclient/options.go..."
-          # Extract current SDK version
-          CURRENT_SDK_VERSION=$(grep 'sdkVersion.*=' cloudclient/options.go | sed 's/.*= "\(.*\)".*/\1/')
-          echo "Current SDK version: $CURRENT_SDK_VERSION"
-          
-          # Increment patch version
-          IFS='.' read -r major minor patch <<< "$CURRENT_SDK_VERSION"
-          NEW_PATCH=$((patch + 1))
-          NEW_SDK_VERSION="$major.$minor.$NEW_PATCH"
-          echo "New SDK version: $NEW_SDK_VERSION"
-          
-          # Update SDK version in options.go
-          sed -i "s/sdkVersion.*= \".*\"/sdkVersion        = \"$NEW_SDK_VERSION\"/" cloudclient/options.go
-          echo "SDK_VERSION=$NEW_SDK_VERSION" >> $GITHUB_ENV
-
-      - name: Check for changes
-        if: env.NO_CHANGES == 'false'
-        run: |
-          # Check if there are any changes to commit
-          if git diff --quiet; then
-            echo "No changes to commit after proto generation"
-            echo "NO_GENERATED_CHANGES=true" >> $GITHUB_ENV
-          else
-            echo "Generated changes detected"
-            echo "NO_GENERATED_CHANGES=false" >> $GITHUB_ENV
-          fi
-
-      - name: Create branch and commit changes
-        if: env.NO_CHANGES == 'false' && env.NO_GENERATED_CHANGES == 'false'
-        run: |
-          # Generate branch name if not provided
-          if [ -z "${{ github.event.inputs.branch_name }}" ]; then
-            BRANCH_NAME="update-protos-$(date +%Y%m%d-%H%M%S)"
-          else
-            BRANCH_NAME="${{ github.event.inputs.branch_name }}"
-          fi
-          echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
-          
-          # Configure git
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          
-          # Create and checkout new branch
-          git checkout -b "$BRANCH_NAME"
-          
-          # Add all changes
-          git add .
-          
-          # Generate commit message
-          if [ -n "$RELEASE_VERSION" ]; then
-            COMMIT_MSG="Update protos to release $RELEASE_VERSION (version $PROTO_VERSION) and bump SDK to $NEW_SDK_VERSION"
-          else
-            COMMIT_MSG="Update protos to version $PROTO_VERSION and bump SDK to $NEW_SDK_VERSION"
-          fi
-          echo "COMMIT_MSG=$COMMIT_MSG" >> $GITHUB_ENV
-          
-          # Commit changes
-          git commit -m "$COMMIT_MSG"
-          
-          # Push branch
-          git push origin "$BRANCH_NAME"
-
-      - name: Create Pull Request
-        if: env.NO_CHANGES == 'false' && env.NO_GENERATED_CHANGES == 'false'
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const branchName = process.env.BRANCH_NAME;
-            const protoVersion = process.env.PROTO_VERSION;
-            const releaseVersion = process.env.RELEASE_VERSION;
-            
-            const sdkVersion = process.env.SDK_VERSION;
-            
-            // Generate PR title if not provided
-            let prTitle = '${{ github.event.inputs.pr_title }}';
-            if (!prTitle) {
-              if (releaseVersion) {
-                prTitle = `Update protos to release ${releaseVersion} (version ${protoVersion}) and bump SDK to ${sdkVersion}`;
-              } else {
-                prTitle = `Update protos to version ${protoVersion} and bump SDK to ${sdkVersion}`;
-              }
-            }
-            
-            // Generate PR body
-            let prBody = `## Changes
-            
-            This PR updates the proto files to version **${protoVersion}** and bumps the SDK version to **${sdkVersion}**.`;
-            
-            if (releaseVersion) {
-              prBody += `\n\n**Release:** ${releaseVersion}`;
-            }
-            
-            prBody += `\n\n### What was done:
-            - Updated proto submodule${releaseVersion ? ` to release ${releaseVersion}` : ' to latest version'}
-            - Regenerated Go code from proto files
-            - Updated default API version in \`cloudclient/options.go\` to \`${protoVersion}\`
-            - Incremented SDK patch version in \`cloudclient/options.go\` to \`${sdkVersion}\`
-            
-            ### Generated files:
-            - All files in \`api/\` directory have been regenerated
-            - API version updated to \`${protoVersion}\`
-            - SDK version updated to \`${sdkVersion}\`
-            
-            This PR was automatically created by the Update Protos workflow.`;
-            
-            // Check if PR already exists
-            const existingPRs = await github.rest.pulls.list({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              head: `${context.repo.owner}:${branchName}`,
-              state: 'open'
-            });
-            
-            if (existingPRs.data.length > 0) {
-              console.log(`PR already exists: ${existingPRs.data[0].html_url}`);
-              return;
-            }
-            
-            // Create PR
-            const pr = await github.rest.pulls.create({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              title: prTitle,
-              head: branchName,
-              base: 'main',
-              body: prBody
-            });
-            
-            console.log(`Created PR: ${pr.data.html_url}`);
-
-      - name: Summary
-        if: always()
-        run: |
-          if [ "${{ env.NO_CHANGES }}" == "true" ]; then
-            echo "## Summary" >> $GITHUB_STEP_SUMMARY
-            echo "✅ No changes detected in proto submodule. No action needed." >> $GITHUB_STEP_SUMMARY
-          elif [ "${{ env.NO_GENERATED_CHANGES }}" == "true" ]; then
-            echo "## Summary" >> $GITHUB_STEP_SUMMARY
-            echo "✅ Proto submodule updated but no generated code changes detected." >> $GITHUB_STEP_SUMMARY
-          else
-            echo "## Summary" >> $GITHUB_STEP_SUMMARY
-            echo "✅ Successfully updated protos and created PR:" >> $GITHUB_STEP_SUMMARY
-            echo "- Proto version: ${{ env.PROTO_VERSION }}" >> $GITHUB_STEP_SUMMARY
-            echo "- SDK version: ${{ env.SDK_VERSION }}" >> $GITHUB_STEP_SUMMARY
-            if [ -n "${{ env.RELEASE_VERSION }}" ]; then
-              echo "- Release: ${{ env.RELEASE_VERSION }}" >> $GITHUB_STEP_SUMMARY
-            fi
-            echo "- Branch: ${{ env.BRANCH_NAME }}" >> $GITHUB_STEP_SUMMARY
-            echo "- Commit: ${{ env.COMMIT_MSG }}" >> $GITHUB_STEP_SUMMARY
-          fi
+          # Run the update script
+          ./scripts/update-protos.sh \
+            --release-version "${{ github.event.inputs.release_version }}" \
+            --sdk-version "${{ github.event.inputs.sdk_version }}" \
+            --branch-name "${{ github.event.inputs.branch_name }}" \
+            --pr-title "${{ github.event.inputs.pr_title }}" \
+            --verbose
