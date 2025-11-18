@@ -43,6 +43,27 @@ To get the latest protos, run the following commands:
 git submodule update --recursive --remote --merge
 ```
 
+### Automated Proto Updates
+For convenience, there's a GitHub Action workflow that can automatically update the protos and create a PR. This workflow:
+
+1. Updates the proto submodule to get the latest changes or a specific release
+2. Regenerates all Go code from the proto files
+3. Updates the default API version in `cloudclient/options.go`
+4. Increments the patch version of the SDK version in `cloudclient/options.go`
+5. Creates a new branch and commits the changes
+6. Opens a pull request with the updates
+
+To use this workflow:
+1. Go to the "Actions" tab in the GitHub repository
+2. Select "Update Protos and Create PR" from the workflow list
+3. Click "Run workflow"
+4. Provide the following optional inputs:
+   - **Release version**: Specify a cloud-api release version (e.g., `v1.2.3`) to checkout that specific release. Leave empty to get the latest.
+   - **Branch name**: Custom branch name for the PR (default: auto-generated)
+   - **PR title**: Custom PR title (default: auto-generated)
+5. Click "Run workflow" to execute
+
+The workflow will automatically handle all the steps from the manual process above and create a PR for review.
 
 ## Testing
 

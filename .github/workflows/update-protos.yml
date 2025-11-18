@@ -1,0 +1,65 @@
+name: Update Protos and Create PR
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_version:
+        description: 'Cloud API release version to update to (e.g., v1.2.3).'
+        required: true
+        type: string
+      sdk_version:
+        description: 'SDK version to set (e.g., 0.7.0). Use the version that is intended for the next release.'
+        required: true
+        type: string
+      branch_name:
+        description: 'Branch name for the PR (default: auto-generated)'
+        required: false
+        default: ''
+        type: string
+      pr_title:
+        description: 'PR title (default: auto-generated)'
+        required: false
+        default: ''
+        type: string
+
+jobs:
+  update-protos:
+    name: Update Protos and Create PR
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          submodules: 'true'
+          fetch-depth: 0
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: 'stable'
+
+      - name: Install GitHub CLI
+        run: |
+          curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
+          echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+          sudo apt update
+          sudo apt install gh -y
+
+      - name: Update protos using script
+        run: |
+          # Set environment variables for the script
+          export GITHUB_TOKEN="${{ secrets.GITHUB_TOKEN }}"
+          export GITHUB_REPOSITORY="${{ github.repository }}"
+          export GITHUB_ACTIONS="true"
+          
+          # Run the update script
+          ./scripts/update-protos.sh \
+            --release-version "${{ github.event.inputs.release_version }}" \
+            --sdk-version "${{ github.event.inputs.sdk_version }}" \
+            --branch-name "${{ github.event.inputs.branch_name }}" \
+            --pr-title "${{ github.event.inputs.pr_title }}" \
+            --verbose
