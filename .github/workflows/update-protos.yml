@@ -8,8 +8,8 @@ on:
         required: true
         type: string
       sdk_version:
-        description: 'SDK version to set (e.g., 0.7.0). Use the version that is intended for the next release.'
-        required: true
+        description: 'SDK version to set (e.g., 0.7.0). Use the version that is intended for the next release. If not specified, the sdk version will not be updated.'
+        required: false
         type: string
       branch_name:
         description: 'Branch name for the PR (default: auto-generated)'

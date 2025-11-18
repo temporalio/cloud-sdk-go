@@ -84,36 +84,46 @@ parse_args() {
         case $1 in
             -r|--release-version)
                 RELEASE_VERSION="$2"
-                if ! validate_version "$RELEASE_VERSION"; then
-                    log_error "Invalid release version format: $RELEASE_VERSION"
-                    log_error "Expected format: v1.2.3 or 1.2.3 (with optional pre-release suffix)"
-                    exit 1
+                # Allow empty value to fallback to no set
+                if [[ -n "$RELEASE_VERSION" ]]; then
+                    if ! validate_version "$RELEASE_VERSION"; then
+                        log_error "Invalid release version format: $RELEASE_VERSION"
+                        log_error "Expected format: v1.2.3 or 1.2.3 (with optional pre-release suffix)"
+                        exit 1
+                    fi
                 fi
                 shift 2
                 ;;
             -s|--sdk-version)
                 SDK_VERSION="$2"
-                if ! validate_version "$SDK_VERSION"; then
-                    log_error "Invalid SDK version format: $SDK_VERSION"
-                    log_error "Expected format: v1.2.3 or 1.2.3 (with optional pre-release suffix)"
-                    exit 1
+                # Allow empty value to fallback to no set
+                if [[ -n "$SDK_VERSION" ]]; then
+                    if ! validate_version "$SDK_VERSION"; then
+                        log_error "Invalid SDK version format: $SDK_VERSION"
+                        log_error "Expected format: v1.2.3 or 1.2.3 (with optional pre-release suffix)"
+                        exit 1
+                    fi
                 fi
                 shift 2
                 ;;
             -b|--branch-name)
                 BRANCH_NAME="$2"
-                if ! validate_branch_name "$BRANCH_NAME"; then
-                    log_error "Invalid branch name format: $BRANCH_NAME"
-                    log_error "Branch name must be alphanumeric with dashes, underscores, slashes, or dots"
-                    exit 1
+                # Allow empty value to fallback to no set (auto-generated)
+                if [[ -n "$BRANCH_NAME" ]]; then
+                    if ! validate_branch_name "$BRANCH_NAME"; then
+                        log_error "Invalid branch name format: $BRANCH_NAME"
+                        log_error "Branch name must be alphanumeric with dashes, underscores, slashes, or dots"
+                        exit 1
+                    fi
                 fi
                 shift 2
                 ;;
             -t|--pr-title)
                 PR_TITLE="$2"
-                # Validate PR title is not empty and doesn't contain dangerous characters
-                if [[ -z "$PR_TITLE" ]] || [[ "$PR_TITLE" =~ [\`\$\(\)] ]]; then
-                    log_error "Invalid PR title: contains dangerous characters or is empty"
+                # Allow empty value to fallback to no set (auto-generated)
+                # Validate PR title doesn't contain dangerous characters if provided
+                if [[ -n "$PR_TITLE" ]] && [[ "$PR_TITLE" =~ [\`\$\(\)] ]]; then
+                    log_error "Invalid PR title: contains dangerous characters"
                     exit 1
                 fi
                 shift 2
