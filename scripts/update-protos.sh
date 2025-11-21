@@ -296,7 +296,8 @@ generate_go_code() {
         log_info "New SDK version: $SDK_VERSION"
         
         # Update SDK version in options.go
-        SDK_VERSION_SAFE=$(sanitize_for_sed "$SDK_VERSION")
+        SDK_VERSION_CLEAN="${SDK_VERSION#v}"
+	SDK_VERSION_SAFE=$(sanitize_for_sed "$SDK_VERSION_CLEAN")
         sed_inplace "s/sdkVersion.*= \".*\"/sdkVersion        = \"$SDK_VERSION_SAFE\"/" cloudclient/options.go
         
         # Export variables for later use
@@ -328,7 +329,7 @@ create_branch_and_commit() {
         PROTO_VERSION_CLEAN="${PROTO_VERSION_CLEAN//./-}"
         
         # Generate a random suffix to ensure uniqueness
-        RANDOM_SUFFIX=$(date +%s%5n | cut -b2-10)
+        RANDOM_SUFFIX=$(printf "%08x" $RANDOM$RANDOM)
         
         if [[ -n "$SDK_VERSION" ]]; then
             # Include both proto and SDK versions in branch name
