@@ -327,8 +327,8 @@ create_branch_and_commit() {
         PROTO_VERSION_CLEAN="${PROTO_VERSION#v}"
         PROTO_VERSION_CLEAN="${PROTO_VERSION_CLEAN//./-}"
         
-        # Generate a random 6-character string to avoid collisions
-        RANDOM_SUFFIX=$(LC_ALL=C tr -dc 'a-z0-9' < /dev/urandom | head -c 6)
+        # Generate a random suffix to ensure uniqueness
+        RANDOM_SUFFIX=$(date +%s%5n | cut -b2-10)
         
         if [[ -n "$SDK_VERSION" ]]; then
             # Include both proto and SDK versions in branch name
