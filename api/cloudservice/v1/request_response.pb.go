@@ -2017,6 +2017,7 @@ type GetApiKeysRequest struct {
 	OwnerId string `protobuf:"bytes,3,opt,name=owner_id,json=ownerId,proto3" json:"owner_id,omitempty"`
 	// Filter api keys by owner type - optional.
 	// Possible values: user, service-account
+	// temporal:versioning:max_version=v0.3.0
 	//
 	// Deprecated: Marked as deprecated in temporal/api/cloud/cloudservice/v1/request_response.proto.
 	OwnerTypeDeprecated string `protobuf:"bytes,4,opt,name=owner_type_deprecated,json=ownerTypeDeprecated,proto3" json:"owner_type_deprecated,omitempty"`
@@ -6448,6 +6449,522 @@ func (*ValidateAccountAuditLogSinkResponse) Descriptor() ([]byte, []int) {
 	return file_temporal_api_cloud_cloudservice_v1_request_response_proto_rawDescGZIP(), []int{115}
 }
 
+type CreateAccountAuditLogSinkRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The specification for the audit log sink.
+	Spec *v16.AuditLogSinkSpec `protobuf:"bytes,1,opt,name=spec,proto3" json:"spec,omitempty"`
+	// Optional. The ID to use for this async operation.
+	AsyncOperationId string `protobuf:"bytes,2,opt,name=async_operation_id,json=asyncOperationId,proto3" json:"async_operation_id,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *CreateAccountAuditLogSinkRequest) Reset() {
+	*x = CreateAccountAuditLogSinkRequest{}
+	mi := &file_temporal_api_cloud_cloudservice_v1_request_response_proto_msgTypes[116]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateAccountAuditLogSinkRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateAccountAuditLogSinkRequest) ProtoMessage() {}
+
+func (x *CreateAccountAuditLogSinkRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_temporal_api_cloud_cloudservice_v1_request_response_proto_msgTypes[116]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateAccountAuditLogSinkRequest.ProtoReflect.Descriptor instead.
+func (*CreateAccountAuditLogSinkRequest) Descriptor() ([]byte, []int) {
+	return file_temporal_api_cloud_cloudservice_v1_request_response_proto_rawDescGZIP(), []int{116}
+}
+
+func (x *CreateAccountAuditLogSinkRequest) GetSpec() *v16.AuditLogSinkSpec {
+	if x != nil {
+		return x.Spec
+	}
+	return nil
+}
+
+func (x *CreateAccountAuditLogSinkRequest) GetAsyncOperationId() string {
+	if x != nil {
+		return x.AsyncOperationId
+	}
+	return ""
+}
+
+type CreateAccountAuditLogSinkResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The async operation.
+	AsyncOperation *v11.AsyncOperation `protobuf:"bytes,1,opt,name=async_operation,json=asyncOperation,proto3" json:"async_operation,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *CreateAccountAuditLogSinkResponse) Reset() {
+	*x = CreateAccountAuditLogSinkResponse{}
+	mi := &file_temporal_api_cloud_cloudservice_v1_request_response_proto_msgTypes[117]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateAccountAuditLogSinkResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateAccountAuditLogSinkResponse) ProtoMessage() {}
+
+func (x *CreateAccountAuditLogSinkResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_temporal_api_cloud_cloudservice_v1_request_response_proto_msgTypes[117]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateAccountAuditLogSinkResponse.ProtoReflect.Descriptor instead.
+func (*CreateAccountAuditLogSinkResponse) Descriptor() ([]byte, []int) {
+	return file_temporal_api_cloud_cloudservice_v1_request_response_proto_rawDescGZIP(), []int{117}
+}
+
+func (x *CreateAccountAuditLogSinkResponse) GetAsyncOperation() *v11.AsyncOperation {
+	if x != nil {
+		return x.AsyncOperation
+	}
+	return nil
+}
+
+type GetAccountAuditLogSinkRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The name of the sink to retrieve.
+	Name          string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetAccountAuditLogSinkRequest) Reset() {
+	*x = GetAccountAuditLogSinkRequest{}
+	mi := &file_temporal_api_cloud_cloudservice_v1_request_response_proto_msgTypes[118]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetAccountAuditLogSinkRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetAccountAuditLogSinkRequest) ProtoMessage() {}
+
+func (x *GetAccountAuditLogSinkRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_temporal_api_cloud_cloudservice_v1_request_response_proto_msgTypes[118]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetAccountAuditLogSinkRequest.ProtoReflect.Descriptor instead.
+func (*GetAccountAuditLogSinkRequest) Descriptor() ([]byte, []int) {
+	return file_temporal_api_cloud_cloudservice_v1_request_response_proto_rawDescGZIP(), []int{118}
+}
+
+func (x *GetAccountAuditLogSinkRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+type GetAccountAuditLogSinkResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The audit log sink retrieved.
+	Sink          *v16.AuditLogSink `protobuf:"bytes,1,opt,name=sink,proto3" json:"sink,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetAccountAuditLogSinkResponse) Reset() {
+	*x = GetAccountAuditLogSinkResponse{}
+	mi := &file_temporal_api_cloud_cloudservice_v1_request_response_proto_msgTypes[119]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetAccountAuditLogSinkResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetAccountAuditLogSinkResponse) ProtoMessage() {}
+
+func (x *GetAccountAuditLogSinkResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_temporal_api_cloud_cloudservice_v1_request_response_proto_msgTypes[119]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetAccountAuditLogSinkResponse.ProtoReflect.Descriptor instead.
+func (*GetAccountAuditLogSinkResponse) Descriptor() ([]byte, []int) {
+	return file_temporal_api_cloud_cloudservice_v1_request_response_proto_rawDescGZIP(), []int{119}
+}
+
+func (x *GetAccountAuditLogSinkResponse) GetSink() *v16.AuditLogSink {
+	if x != nil {
+		return x.Sink
+	}
+	return nil
+}
+
+type GetAccountAuditLogSinksRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The requested size of the page to retrieve. Cannot exceed 1000.
+	// Defaults to 100 if not specified.
+	PageSize int32 `protobuf:"varint,1,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// The page token if this is continuing from another response - optional.
+	PageToken     string `protobuf:"bytes,2,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetAccountAuditLogSinksRequest) Reset() {
+	*x = GetAccountAuditLogSinksRequest{}
+	mi := &file_temporal_api_cloud_cloudservice_v1_request_response_proto_msgTypes[120]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetAccountAuditLogSinksRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetAccountAuditLogSinksRequest) ProtoMessage() {}
+
+func (x *GetAccountAuditLogSinksRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_temporal_api_cloud_cloudservice_v1_request_response_proto_msgTypes[120]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetAccountAuditLogSinksRequest.ProtoReflect.Descriptor instead.
+func (*GetAccountAuditLogSinksRequest) Descriptor() ([]byte, []int) {
+	return file_temporal_api_cloud_cloudservice_v1_request_response_proto_rawDescGZIP(), []int{120}
+}
+
+func (x *GetAccountAuditLogSinksRequest) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *GetAccountAuditLogSinksRequest) GetPageToken() string {
+	if x != nil {
+		return x.PageToken
+	}
+	return ""
+}
+
+type GetAccountAuditLogSinksResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The list of audit log sinks retrieved.
+	Sinks []*v16.AuditLogSink `protobuf:"bytes,1,rep,name=sinks,proto3" json:"sinks,omitempty"`
+	// The next page token, set if there is another page.
+	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetAccountAuditLogSinksResponse) Reset() {
+	*x = GetAccountAuditLogSinksResponse{}
+	mi := &file_temporal_api_cloud_cloudservice_v1_request_response_proto_msgTypes[121]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetAccountAuditLogSinksResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetAccountAuditLogSinksResponse) ProtoMessage() {}
+
+func (x *GetAccountAuditLogSinksResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_temporal_api_cloud_cloudservice_v1_request_response_proto_msgTypes[121]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetAccountAuditLogSinksResponse.ProtoReflect.Descriptor instead.
+func (*GetAccountAuditLogSinksResponse) Descriptor() ([]byte, []int) {
+	return file_temporal_api_cloud_cloudservice_v1_request_response_proto_rawDescGZIP(), []int{121}
+}
+
+func (x *GetAccountAuditLogSinksResponse) GetSinks() []*v16.AuditLogSink {
+	if x != nil {
+		return x.Sinks
+	}
+	return nil
+}
+
+func (x *GetAccountAuditLogSinksResponse) GetNextPageToken() string {
+	if x != nil {
+		return x.NextPageToken
+	}
+	return ""
+}
+
+type UpdateAccountAuditLogSinkRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The updated audit log sink specification.
+	Spec *v16.AuditLogSinkSpec `protobuf:"bytes,1,opt,name=spec,proto3" json:"spec,omitempty"`
+	// The version of the audit log sink to update. The latest version can be
+	// retrieved using the GetAuditLogSink call.
+	ResourceVersion string `protobuf:"bytes,2,opt,name=resource_version,json=resourceVersion,proto3" json:"resource_version,omitempty"`
+	// The ID to use for this async operation - optional.
+	AsyncOperationId string `protobuf:"bytes,3,opt,name=async_operation_id,json=asyncOperationId,proto3" json:"async_operation_id,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *UpdateAccountAuditLogSinkRequest) Reset() {
+	*x = UpdateAccountAuditLogSinkRequest{}
+	mi := &file_temporal_api_cloud_cloudservice_v1_request_response_proto_msgTypes[122]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateAccountAuditLogSinkRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateAccountAuditLogSinkRequest) ProtoMessage() {}
+
+func (x *UpdateAccountAuditLogSinkRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_temporal_api_cloud_cloudservice_v1_request_response_proto_msgTypes[122]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateAccountAuditLogSinkRequest.ProtoReflect.Descriptor instead.
+func (*UpdateAccountAuditLogSinkRequest) Descriptor() ([]byte, []int) {
+	return file_temporal_api_cloud_cloudservice_v1_request_response_proto_rawDescGZIP(), []int{122}
+}
+
+func (x *UpdateAccountAuditLogSinkRequest) GetSpec() *v16.AuditLogSinkSpec {
+	if x != nil {
+		return x.Spec
+	}
+	return nil
+}
+
+func (x *UpdateAccountAuditLogSinkRequest) GetResourceVersion() string {
+	if x != nil {
+		return x.ResourceVersion
+	}
+	return ""
+}
+
+func (x *UpdateAccountAuditLogSinkRequest) GetAsyncOperationId() string {
+	if x != nil {
+		return x.AsyncOperationId
+	}
+	return ""
+}
+
+type UpdateAccountAuditLogSinkResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The async operation.
+	AsyncOperation *v11.AsyncOperation `protobuf:"bytes,1,opt,name=async_operation,json=asyncOperation,proto3" json:"async_operation,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *UpdateAccountAuditLogSinkResponse) Reset() {
+	*x = UpdateAccountAuditLogSinkResponse{}
+	mi := &file_temporal_api_cloud_cloudservice_v1_request_response_proto_msgTypes[123]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateAccountAuditLogSinkResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateAccountAuditLogSinkResponse) ProtoMessage() {}
+
+func (x *UpdateAccountAuditLogSinkResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_temporal_api_cloud_cloudservice_v1_request_response_proto_msgTypes[123]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateAccountAuditLogSinkResponse.ProtoReflect.Descriptor instead.
+func (*UpdateAccountAuditLogSinkResponse) Descriptor() ([]byte, []int) {
+	return file_temporal_api_cloud_cloudservice_v1_request_response_proto_rawDescGZIP(), []int{123}
+}
+
+func (x *UpdateAccountAuditLogSinkResponse) GetAsyncOperation() *v11.AsyncOperation {
+	if x != nil {
+		return x.AsyncOperation
+	}
+	return nil
+}
+
+type DeleteAccountAuditLogSinkRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The name of the sink to delete.
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	// The version of the sink to delete. The latest version can be
+	// retrieved using the GetAccountAuditLogSink call.
+	ResourceVersion string `protobuf:"bytes,2,opt,name=resource_version,json=resourceVersion,proto3" json:"resource_version,omitempty"`
+	// The ID to use for this async operation - optional.
+	AsyncOperationId string `protobuf:"bytes,3,opt,name=async_operation_id,json=asyncOperationId,proto3" json:"async_operation_id,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *DeleteAccountAuditLogSinkRequest) Reset() {
+	*x = DeleteAccountAuditLogSinkRequest{}
+	mi := &file_temporal_api_cloud_cloudservice_v1_request_response_proto_msgTypes[124]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteAccountAuditLogSinkRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteAccountAuditLogSinkRequest) ProtoMessage() {}
+
+func (x *DeleteAccountAuditLogSinkRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_temporal_api_cloud_cloudservice_v1_request_response_proto_msgTypes[124]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteAccountAuditLogSinkRequest.ProtoReflect.Descriptor instead.
+func (*DeleteAccountAuditLogSinkRequest) Descriptor() ([]byte, []int) {
+	return file_temporal_api_cloud_cloudservice_v1_request_response_proto_rawDescGZIP(), []int{124}
+}
+
+func (x *DeleteAccountAuditLogSinkRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *DeleteAccountAuditLogSinkRequest) GetResourceVersion() string {
+	if x != nil {
+		return x.ResourceVersion
+	}
+	return ""
+}
+
+func (x *DeleteAccountAuditLogSinkRequest) GetAsyncOperationId() string {
+	if x != nil {
+		return x.AsyncOperationId
+	}
+	return ""
+}
+
+type DeleteAccountAuditLogSinkResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The async operation.
+	AsyncOperation *v11.AsyncOperation `protobuf:"bytes,1,opt,name=async_operation,json=asyncOperation,proto3" json:"async_operation,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *DeleteAccountAuditLogSinkResponse) Reset() {
+	*x = DeleteAccountAuditLogSinkResponse{}
+	mi := &file_temporal_api_cloud_cloudservice_v1_request_response_proto_msgTypes[125]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteAccountAuditLogSinkResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteAccountAuditLogSinkResponse) ProtoMessage() {}
+
+func (x *DeleteAccountAuditLogSinkResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_temporal_api_cloud_cloudservice_v1_request_response_proto_msgTypes[125]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteAccountAuditLogSinkResponse.ProtoReflect.Descriptor instead.
+func (*DeleteAccountAuditLogSinkResponse) Descriptor() ([]byte, []int) {
+	return file_temporal_api_cloud_cloudservice_v1_request_response_proto_rawDescGZIP(), []int{125}
+}
+
+func (x *DeleteAccountAuditLogSinkResponse) GetAsyncOperation() *v11.AsyncOperation {
+	if x != nil {
+		return x.AsyncOperation
+	}
+	return nil
+}
+
 type GetUserGroupsRequest_GoogleGroupFilter struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Filter groups by the google group email - optional.
@@ -6458,7 +6975,7 @@ type GetUserGroupsRequest_GoogleGroupFilter struct {
 
 func (x *GetUserGroupsRequest_GoogleGroupFilter) Reset() {
 	*x = GetUserGroupsRequest_GoogleGroupFilter{}
-	mi := &file_temporal_api_cloud_cloudservice_v1_request_response_proto_msgTypes[117]
+	mi := &file_temporal_api_cloud_cloudservice_v1_request_response_proto_msgTypes[127]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6470,7 +6987,7 @@ func (x *GetUserGroupsRequest_GoogleGroupFilter) String() string {
 func (*GetUserGroupsRequest_GoogleGroupFilter) ProtoMessage() {}
 
 func (x *GetUserGroupsRequest_GoogleGroupFilter) ProtoReflect() protoreflect.Message {
-	mi := &file_temporal_api_cloud_cloudservice_v1_request_response_proto_msgTypes[117]
+	mi := &file_temporal_api_cloud_cloudservice_v1_request_response_proto_msgTypes[127]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6503,7 +7020,7 @@ type GetUserGroupsRequest_SCIMGroupFilter struct {
 
 func (x *GetUserGroupsRequest_SCIMGroupFilter) Reset() {
 	*x = GetUserGroupsRequest_SCIMGroupFilter{}
-	mi := &file_temporal_api_cloud_cloudservice_v1_request_response_proto_msgTypes[118]
+	mi := &file_temporal_api_cloud_cloudservice_v1_request_response_proto_msgTypes[128]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6515,7 +7032,7 @@ func (x *GetUserGroupsRequest_SCIMGroupFilter) String() string {
 func (*GetUserGroupsRequest_SCIMGroupFilter) ProtoMessage() {}
 
 func (x *GetUserGroupsRequest_SCIMGroupFilter) ProtoReflect() protoreflect.Message {
-	mi := &file_temporal_api_cloud_cloudservice_v1_request_response_proto_msgTypes[118]
+	mi := &file_temporal_api_cloud_cloudservice_v1_request_response_proto_msgTypes[128]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7589,20 +8106,99 @@ var file_temporal_api_cloud_cloudservice_v1_request_response_proto_rawDesc = str
 	0x53, 0x70, 0x65, 0x63, 0x52, 0x04, 0x73, 0x70, 0x65, 0x63, 0x22, 0x25, 0x0a, 0x23, 0x56, 0x61,
 	0x6c, 0x69, 0x64, 0x61, 0x74, 0x65, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x41, 0x75, 0x64,
 	0x69, 0x74, 0x4c, 0x6f, 0x67, 0x53, 0x69, 0x6e, 0x6b, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
-	0x65, 0x42, 0xc8, 0x01, 0x0a, 0x25, 0x69, 0x6f, 0x2e, 0x74, 0x65, 0x6d, 0x70, 0x6f, 0x72, 0x61,
-	0x6c, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6c, 0x6f, 0x75,
-	0x64, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x76, 0x31, 0x42, 0x14, 0x52, 0x65, 0x71,
-	0x75, 0x65, 0x73, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x50, 0x72, 0x6f, 0x74,
-	0x6f, 0x50, 0x01, 0x5a, 0x35, 0x67, 0x6f, 0x2e, 0x74, 0x65, 0x6d, 0x70, 0x6f, 0x72, 0x61, 0x6c,
-	0x2e, 0x69, 0x6f, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x63, 0x6c,
-	0x6f, 0x75, 0x64, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2f, 0x76, 0x31, 0x3b, 0x63, 0x6c,
-	0x6f, 0x75, 0x64, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0xaa, 0x02, 0x24, 0x54, 0x65, 0x6d,
-	0x70, 0x6f, 0x72, 0x61, 0x6c, 0x69, 0x6f, 0x2e, 0x41, 0x70, 0x69, 0x2e, 0x43, 0x6c, 0x6f, 0x75,
-	0x64, 0x2e, 0x43, 0x6c, 0x6f, 0x75, 0x64, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x56,
-	0x31, 0xea, 0x02, 0x28, 0x54, 0x65, 0x6d, 0x70, 0x6f, 0x72, 0x61, 0x6c, 0x69, 0x6f, 0x3a, 0x3a,
-	0x41, 0x70, 0x69, 0x3a, 0x3a, 0x43, 0x6c, 0x6f, 0x75, 0x64, 0x3a, 0x3a, 0x43, 0x6c, 0x6f, 0x75,
-	0x64, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x3a, 0x3a, 0x56, 0x31, 0x62, 0x06, 0x70, 0x72,
-	0x6f, 0x74, 0x6f, 0x33,
+	0x65, 0x22, 0x95, 0x01, 0x0a, 0x20, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x41, 0x63, 0x63, 0x6f,
+	0x75, 0x6e, 0x74, 0x41, 0x75, 0x64, 0x69, 0x74, 0x4c, 0x6f, 0x67, 0x53, 0x69, 0x6e, 0x6b, 0x52,
+	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x43, 0x0a, 0x04, 0x73, 0x70, 0x65, 0x63, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x0b, 0x32, 0x2f, 0x2e, 0x74, 0x65, 0x6d, 0x70, 0x6f, 0x72, 0x61, 0x6c, 0x2e,
+	0x61, 0x70, 0x69, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e,
+	0x74, 0x2e, 0x76, 0x31, 0x2e, 0x41, 0x75, 0x64, 0x69, 0x74, 0x4c, 0x6f, 0x67, 0x53, 0x69, 0x6e,
+	0x6b, 0x53, 0x70, 0x65, 0x63, 0x52, 0x04, 0x73, 0x70, 0x65, 0x63, 0x12, 0x2c, 0x0a, 0x12, 0x61,
+	0x73, 0x79, 0x6e, 0x63, 0x5f, 0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x69,
+	0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x10, 0x61, 0x73, 0x79, 0x6e, 0x63, 0x4f, 0x70,
+	0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x64, 0x22, 0x7d, 0x0a, 0x21, 0x43, 0x72, 0x65,
+	0x61, 0x74, 0x65, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x41, 0x75, 0x64, 0x69, 0x74, 0x4c,
+	0x6f, 0x67, 0x53, 0x69, 0x6e, 0x6b, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x58,
+	0x0a, 0x0f, 0x61, 0x73, 0x79, 0x6e, 0x63, 0x5f, 0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f,
+	0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x2f, 0x2e, 0x74, 0x65, 0x6d, 0x70, 0x6f, 0x72,
+	0x61, 0x6c, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x6f, 0x70, 0x65,
+	0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x41, 0x73, 0x79, 0x6e, 0x63, 0x4f,
+	0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x0e, 0x61, 0x73, 0x79, 0x6e, 0x63, 0x4f,
+	0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x22, 0x33, 0x0a, 0x1d, 0x47, 0x65, 0x74, 0x41,
+	0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x41, 0x75, 0x64, 0x69, 0x74, 0x4c, 0x6f, 0x67, 0x53, 0x69,
+	0x6e, 0x6b, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d,
+	0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x22, 0x61, 0x0a,
+	0x1e, 0x47, 0x65, 0x74, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x41, 0x75, 0x64, 0x69, 0x74,
+	0x4c, 0x6f, 0x67, 0x53, 0x69, 0x6e, 0x6b, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12,
+	0x3f, 0x0a, 0x04, 0x73, 0x69, 0x6e, 0x6b, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x2b, 0x2e,
+	0x74, 0x65, 0x6d, 0x70, 0x6f, 0x72, 0x61, 0x6c, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x63, 0x6c, 0x6f,
+	0x75, 0x64, 0x2e, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x2e, 0x76, 0x31, 0x2e, 0x41, 0x75,
+	0x64, 0x69, 0x74, 0x4c, 0x6f, 0x67, 0x53, 0x69, 0x6e, 0x6b, 0x52, 0x04, 0x73, 0x69, 0x6e, 0x6b,
+	0x22, 0x5c, 0x0a, 0x1e, 0x47, 0x65, 0x74, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x41, 0x75,
+	0x64, 0x69, 0x74, 0x4c, 0x6f, 0x67, 0x53, 0x69, 0x6e, 0x6b, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65,
+	0x73, 0x74, 0x12, 0x1b, 0x0a, 0x09, 0x70, 0x61, 0x67, 0x65, 0x5f, 0x73, 0x69, 0x7a, 0x65, 0x18,
+	0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x08, 0x70, 0x61, 0x67, 0x65, 0x53, 0x69, 0x7a, 0x65, 0x12,
+	0x1d, 0x0a, 0x0a, 0x70, 0x61, 0x67, 0x65, 0x5f, 0x74, 0x6f, 0x6b, 0x65, 0x6e, 0x18, 0x02, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x09, 0x70, 0x61, 0x67, 0x65, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x22, 0x8c,
+	0x01, 0x0a, 0x1f, 0x47, 0x65, 0x74, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x41, 0x75, 0x64,
+	0x69, 0x74, 0x4c, 0x6f, 0x67, 0x53, 0x69, 0x6e, 0x6b, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
+	0x73, 0x65, 0x12, 0x41, 0x0a, 0x05, 0x73, 0x69, 0x6e, 0x6b, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28,
+	0x0b, 0x32, 0x2b, 0x2e, 0x74, 0x65, 0x6d, 0x70, 0x6f, 0x72, 0x61, 0x6c, 0x2e, 0x61, 0x70, 0x69,
+	0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x2e, 0x76,
+	0x31, 0x2e, 0x41, 0x75, 0x64, 0x69, 0x74, 0x4c, 0x6f, 0x67, 0x53, 0x69, 0x6e, 0x6b, 0x52, 0x05,
+	0x73, 0x69, 0x6e, 0x6b, 0x73, 0x12, 0x26, 0x0a, 0x0f, 0x6e, 0x65, 0x78, 0x74, 0x5f, 0x70, 0x61,
+	0x67, 0x65, 0x5f, 0x74, 0x6f, 0x6b, 0x65, 0x6e, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0d,
+	0x6e, 0x65, 0x78, 0x74, 0x50, 0x61, 0x67, 0x65, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x22, 0xc0, 0x01,
+	0x0a, 0x20, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x41,
+	0x75, 0x64, 0x69, 0x74, 0x4c, 0x6f, 0x67, 0x53, 0x69, 0x6e, 0x6b, 0x52, 0x65, 0x71, 0x75, 0x65,
+	0x73, 0x74, 0x12, 0x43, 0x0a, 0x04, 0x73, 0x70, 0x65, 0x63, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b,
+	0x32, 0x2f, 0x2e, 0x74, 0x65, 0x6d, 0x70, 0x6f, 0x72, 0x61, 0x6c, 0x2e, 0x61, 0x70, 0x69, 0x2e,
+	0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x2e, 0x76, 0x31,
+	0x2e, 0x41, 0x75, 0x64, 0x69, 0x74, 0x4c, 0x6f, 0x67, 0x53, 0x69, 0x6e, 0x6b, 0x53, 0x70, 0x65,
+	0x63, 0x52, 0x04, 0x73, 0x70, 0x65, 0x63, 0x12, 0x29, 0x0a, 0x10, 0x72, 0x65, 0x73, 0x6f, 0x75,
+	0x72, 0x63, 0x65, 0x5f, 0x76, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x18, 0x02, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x0f, 0x72, 0x65, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x56, 0x65, 0x72, 0x73, 0x69,
+	0x6f, 0x6e, 0x12, 0x2c, 0x0a, 0x12, 0x61, 0x73, 0x79, 0x6e, 0x63, 0x5f, 0x6f, 0x70, 0x65, 0x72,
+	0x61, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x69, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x10,
+	0x61, 0x73, 0x79, 0x6e, 0x63, 0x4f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x64,
+	0x22, 0x7d, 0x0a, 0x21, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e,
+	0x74, 0x41, 0x75, 0x64, 0x69, 0x74, 0x4c, 0x6f, 0x67, 0x53, 0x69, 0x6e, 0x6b, 0x52, 0x65, 0x73,
+	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x58, 0x0a, 0x0f, 0x61, 0x73, 0x79, 0x6e, 0x63, 0x5f, 0x6f,
+	0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x2f,
+	0x2e, 0x74, 0x65, 0x6d, 0x70, 0x6f, 0x72, 0x61, 0x6c, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x63, 0x6c,
+	0x6f, 0x75, 0x64, 0x2e, 0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31,
+	0x2e, 0x41, 0x73, 0x79, 0x6e, 0x63, 0x4f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52,
+	0x0e, 0x61, 0x73, 0x79, 0x6e, 0x63, 0x4f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x22,
+	0x8f, 0x01, 0x0a, 0x20, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e,
+	0x74, 0x41, 0x75, 0x64, 0x69, 0x74, 0x4c, 0x6f, 0x67, 0x53, 0x69, 0x6e, 0x6b, 0x52, 0x65, 0x71,
+	0x75, 0x65, 0x73, 0x74, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x29, 0x0a, 0x10, 0x72, 0x65, 0x73, 0x6f,
+	0x75, 0x72, 0x63, 0x65, 0x5f, 0x76, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x18, 0x02, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x0f, 0x72, 0x65, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x56, 0x65, 0x72, 0x73,
+	0x69, 0x6f, 0x6e, 0x12, 0x2c, 0x0a, 0x12, 0x61, 0x73, 0x79, 0x6e, 0x63, 0x5f, 0x6f, 0x70, 0x65,
+	0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x69, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x10, 0x61, 0x73, 0x79, 0x6e, 0x63, 0x4f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x49,
+	0x64, 0x22, 0x7d, 0x0a, 0x21, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x41, 0x63, 0x63, 0x6f, 0x75,
+	0x6e, 0x74, 0x41, 0x75, 0x64, 0x69, 0x74, 0x4c, 0x6f, 0x67, 0x53, 0x69, 0x6e, 0x6b, 0x52, 0x65,
+	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x58, 0x0a, 0x0f, 0x61, 0x73, 0x79, 0x6e, 0x63, 0x5f,
+	0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32,
+	0x2f, 0x2e, 0x74, 0x65, 0x6d, 0x70, 0x6f, 0x72, 0x61, 0x6c, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x63,
+	0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76,
+	0x31, 0x2e, 0x41, 0x73, 0x79, 0x6e, 0x63, 0x4f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e,
+	0x52, 0x0e, 0x61, 0x73, 0x79, 0x6e, 0x63, 0x4f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e,
+	0x42, 0xc8, 0x01, 0x0a, 0x25, 0x69, 0x6f, 0x2e, 0x74, 0x65, 0x6d, 0x70, 0x6f, 0x72, 0x61, 0x6c,
+	0x2e, 0x61, 0x70, 0x69, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64,
+	0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x76, 0x31, 0x42, 0x14, 0x52, 0x65, 0x71, 0x75,
+	0x65, 0x73, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f,
+	0x50, 0x01, 0x5a, 0x35, 0x67, 0x6f, 0x2e, 0x74, 0x65, 0x6d, 0x70, 0x6f, 0x72, 0x61, 0x6c, 0x2e,
+	0x69, 0x6f, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x63, 0x6c, 0x6f,
+	0x75, 0x64, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2f, 0x76, 0x31, 0x3b, 0x63, 0x6c, 0x6f,
+	0x75, 0x64, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0xaa, 0x02, 0x24, 0x54, 0x65, 0x6d, 0x70,
+	0x6f, 0x72, 0x61, 0x6c, 0x69, 0x6f, 0x2e, 0x41, 0x70, 0x69, 0x2e, 0x43, 0x6c, 0x6f, 0x75, 0x64,
+	0x2e, 0x43, 0x6c, 0x6f, 0x75, 0x64, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x56, 0x31,
+	0xea, 0x02, 0x28, 0x54, 0x65, 0x6d, 0x70, 0x6f, 0x72, 0x61, 0x6c, 0x69, 0x6f, 0x3a, 0x3a, 0x41,
+	0x70, 0x69, 0x3a, 0x3a, 0x43, 0x6c, 0x6f, 0x75, 0x64, 0x3a, 0x3a, 0x43, 0x6c, 0x6f, 0x75, 0x64,
+	0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x3a, 0x3a, 0x56, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f,
+	0x74, 0x6f, 0x33,
 })
 
 var (
@@ -7617,7 +8213,7 @@ func file_temporal_api_cloud_cloudservice_v1_request_response_proto_rawDescGZIP(
 	return file_temporal_api_cloud_cloudservice_v1_request_response_proto_rawDescData
 }
 
-var file_temporal_api_cloud_cloudservice_v1_request_response_proto_msgTypes = make([]protoimpl.MessageInfo, 120)
+var file_temporal_api_cloud_cloudservice_v1_request_response_proto_msgTypes = make([]protoimpl.MessageInfo, 130)
 var file_temporal_api_cloud_cloudservice_v1_request_response_proto_goTypes = []any{
 	(*GetUsersRequest)(nil),                          // 0: temporal.api.cloud.cloudservice.v1.GetUsersRequest
 	(*GetUsersResponse)(nil),                         // 1: temporal.api.cloud.cloudservice.v1.GetUsersResponse
@@ -7735,130 +8331,148 @@ var file_temporal_api_cloud_cloudservice_v1_request_response_proto_goTypes = []a
 	(*DeleteConnectivityRuleResponse)(nil),           // 113: temporal.api.cloud.cloudservice.v1.DeleteConnectivityRuleResponse
 	(*ValidateAccountAuditLogSinkRequest)(nil),       // 114: temporal.api.cloud.cloudservice.v1.ValidateAccountAuditLogSinkRequest
 	(*ValidateAccountAuditLogSinkResponse)(nil),      // 115: temporal.api.cloud.cloudservice.v1.ValidateAccountAuditLogSinkResponse
-	nil, // 116: temporal.api.cloud.cloudservice.v1.CreateNamespaceRequest.TagsEntry
-	(*GetUserGroupsRequest_GoogleGroupFilter)(nil), // 117: temporal.api.cloud.cloudservice.v1.GetUserGroupsRequest.GoogleGroupFilter
-	(*GetUserGroupsRequest_SCIMGroupFilter)(nil),   // 118: temporal.api.cloud.cloudservice.v1.GetUserGroupsRequest.SCIMGroupFilter
-	nil,                              // 119: temporal.api.cloud.cloudservice.v1.UpdateNamespaceTagsRequest.TagsToUpsertEntry
-	(*v1.User)(nil),                  // 120: temporal.api.cloud.identity.v1.User
-	(*v1.UserSpec)(nil),              // 121: temporal.api.cloud.identity.v1.UserSpec
-	(*v11.AsyncOperation)(nil),       // 122: temporal.api.cloud.operation.v1.AsyncOperation
-	(*v1.NamespaceAccess)(nil),       // 123: temporal.api.cloud.identity.v1.NamespaceAccess
-	(*v12.NamespaceSpec)(nil),        // 124: temporal.api.cloud.namespace.v1.NamespaceSpec
-	(*v12.Namespace)(nil),            // 125: temporal.api.cloud.namespace.v1.Namespace
-	(*v13.Region)(nil),               // 126: temporal.api.cloud.region.v1.Region
-	(v1.OwnerType)(0),                // 127: temporal.api.cloud.identity.v1.OwnerType
-	(*v1.ApiKey)(nil),                // 128: temporal.api.cloud.identity.v1.ApiKey
-	(*v1.ApiKeySpec)(nil),            // 129: temporal.api.cloud.identity.v1.ApiKeySpec
-	(*v14.Endpoint)(nil),             // 130: temporal.api.cloud.nexus.v1.Endpoint
-	(*v14.EndpointSpec)(nil),         // 131: temporal.api.cloud.nexus.v1.EndpointSpec
-	(*v1.UserGroup)(nil),             // 132: temporal.api.cloud.identity.v1.UserGroup
-	(*v1.UserGroupSpec)(nil),         // 133: temporal.api.cloud.identity.v1.UserGroupSpec
-	(*v1.UserGroupMemberId)(nil),     // 134: temporal.api.cloud.identity.v1.UserGroupMemberId
-	(*v1.UserGroupMember)(nil),       // 135: temporal.api.cloud.identity.v1.UserGroupMember
-	(*v1.ServiceAccountSpec)(nil),    // 136: temporal.api.cloud.identity.v1.ServiceAccountSpec
-	(*v1.ServiceAccount)(nil),        // 137: temporal.api.cloud.identity.v1.ServiceAccount
-	(*timestamppb.Timestamp)(nil),    // 138: google.protobuf.Timestamp
-	(*v15.Summary)(nil),              // 139: temporal.api.cloud.usage.v1.Summary
-	(*v16.Account)(nil),              // 140: temporal.api.cloud.account.v1.Account
-	(*v16.AccountSpec)(nil),          // 141: temporal.api.cloud.account.v1.AccountSpec
-	(*v12.ExportSinkSpec)(nil),       // 142: temporal.api.cloud.namespace.v1.ExportSinkSpec
-	(*v12.ExportSink)(nil),           // 143: temporal.api.cloud.namespace.v1.ExportSink
-	(*v17.ConnectivityRuleSpec)(nil), // 144: temporal.api.cloud.connectivityrule.v1.ConnectivityRuleSpec
-	(*v17.ConnectivityRule)(nil),     // 145: temporal.api.cloud.connectivityrule.v1.ConnectivityRule
-	(*v16.AuditLogSinkSpec)(nil),     // 146: temporal.api.cloud.account.v1.AuditLogSinkSpec
+	(*CreateAccountAuditLogSinkRequest)(nil),         // 116: temporal.api.cloud.cloudservice.v1.CreateAccountAuditLogSinkRequest
+	(*CreateAccountAuditLogSinkResponse)(nil),        // 117: temporal.api.cloud.cloudservice.v1.CreateAccountAuditLogSinkResponse
+	(*GetAccountAuditLogSinkRequest)(nil),            // 118: temporal.api.cloud.cloudservice.v1.GetAccountAuditLogSinkRequest
+	(*GetAccountAuditLogSinkResponse)(nil),           // 119: temporal.api.cloud.cloudservice.v1.GetAccountAuditLogSinkResponse
+	(*GetAccountAuditLogSinksRequest)(nil),           // 120: temporal.api.cloud.cloudservice.v1.GetAccountAuditLogSinksRequest
+	(*GetAccountAuditLogSinksResponse)(nil),          // 121: temporal.api.cloud.cloudservice.v1.GetAccountAuditLogSinksResponse
+	(*UpdateAccountAuditLogSinkRequest)(nil),         // 122: temporal.api.cloud.cloudservice.v1.UpdateAccountAuditLogSinkRequest
+	(*UpdateAccountAuditLogSinkResponse)(nil),        // 123: temporal.api.cloud.cloudservice.v1.UpdateAccountAuditLogSinkResponse
+	(*DeleteAccountAuditLogSinkRequest)(nil),         // 124: temporal.api.cloud.cloudservice.v1.DeleteAccountAuditLogSinkRequest
+	(*DeleteAccountAuditLogSinkResponse)(nil),        // 125: temporal.api.cloud.cloudservice.v1.DeleteAccountAuditLogSinkResponse
+	nil, // 126: temporal.api.cloud.cloudservice.v1.CreateNamespaceRequest.TagsEntry
+	(*GetUserGroupsRequest_GoogleGroupFilter)(nil), // 127: temporal.api.cloud.cloudservice.v1.GetUserGroupsRequest.GoogleGroupFilter
+	(*GetUserGroupsRequest_SCIMGroupFilter)(nil),   // 128: temporal.api.cloud.cloudservice.v1.GetUserGroupsRequest.SCIMGroupFilter
+	nil,                              // 129: temporal.api.cloud.cloudservice.v1.UpdateNamespaceTagsRequest.TagsToUpsertEntry
+	(*v1.User)(nil),                  // 130: temporal.api.cloud.identity.v1.User
+	(*v1.UserSpec)(nil),              // 131: temporal.api.cloud.identity.v1.UserSpec
+	(*v11.AsyncOperation)(nil),       // 132: temporal.api.cloud.operation.v1.AsyncOperation
+	(*v1.NamespaceAccess)(nil),       // 133: temporal.api.cloud.identity.v1.NamespaceAccess
+	(*v12.NamespaceSpec)(nil),        // 134: temporal.api.cloud.namespace.v1.NamespaceSpec
+	(*v12.Namespace)(nil),            // 135: temporal.api.cloud.namespace.v1.Namespace
+	(*v13.Region)(nil),               // 136: temporal.api.cloud.region.v1.Region
+	(v1.OwnerType)(0),                // 137: temporal.api.cloud.identity.v1.OwnerType
+	(*v1.ApiKey)(nil),                // 138: temporal.api.cloud.identity.v1.ApiKey
+	(*v1.ApiKeySpec)(nil),            // 139: temporal.api.cloud.identity.v1.ApiKeySpec
+	(*v14.Endpoint)(nil),             // 140: temporal.api.cloud.nexus.v1.Endpoint
+	(*v14.EndpointSpec)(nil),         // 141: temporal.api.cloud.nexus.v1.EndpointSpec
+	(*v1.UserGroup)(nil),             // 142: temporal.api.cloud.identity.v1.UserGroup
+	(*v1.UserGroupSpec)(nil),         // 143: temporal.api.cloud.identity.v1.UserGroupSpec
+	(*v1.UserGroupMemberId)(nil),     // 144: temporal.api.cloud.identity.v1.UserGroupMemberId
+	(*v1.UserGroupMember)(nil),       // 145: temporal.api.cloud.identity.v1.UserGroupMember
+	(*v1.ServiceAccountSpec)(nil),    // 146: temporal.api.cloud.identity.v1.ServiceAccountSpec
+	(*v1.ServiceAccount)(nil),        // 147: temporal.api.cloud.identity.v1.ServiceAccount
+	(*timestamppb.Timestamp)(nil),    // 148: google.protobuf.Timestamp
+	(*v15.Summary)(nil),              // 149: temporal.api.cloud.usage.v1.Summary
+	(*v16.Account)(nil),              // 150: temporal.api.cloud.account.v1.Account
+	(*v16.AccountSpec)(nil),          // 151: temporal.api.cloud.account.v1.AccountSpec
+	(*v12.ExportSinkSpec)(nil),       // 152: temporal.api.cloud.namespace.v1.ExportSinkSpec
+	(*v12.ExportSink)(nil),           // 153: temporal.api.cloud.namespace.v1.ExportSink
+	(*v17.ConnectivityRuleSpec)(nil), // 154: temporal.api.cloud.connectivityrule.v1.ConnectivityRuleSpec
+	(*v17.ConnectivityRule)(nil),     // 155: temporal.api.cloud.connectivityrule.v1.ConnectivityRule
+	(*v16.AuditLogSinkSpec)(nil),     // 156: temporal.api.cloud.account.v1.AuditLogSinkSpec
+	(*v16.AuditLogSink)(nil),         // 157: temporal.api.cloud.account.v1.AuditLogSink
 }
 var file_temporal_api_cloud_cloudservice_v1_request_response_proto_depIdxs = []int32{
-	120, // 0: temporal.api.cloud.cloudservice.v1.GetUsersResponse.users:type_name -> temporal.api.cloud.identity.v1.User
-	120, // 1: temporal.api.cloud.cloudservice.v1.GetUserResponse.user:type_name -> temporal.api.cloud.identity.v1.User
-	121, // 2: temporal.api.cloud.cloudservice.v1.CreateUserRequest.spec:type_name -> temporal.api.cloud.identity.v1.UserSpec
-	122, // 3: temporal.api.cloud.cloudservice.v1.CreateUserResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
-	121, // 4: temporal.api.cloud.cloudservice.v1.UpdateUserRequest.spec:type_name -> temporal.api.cloud.identity.v1.UserSpec
-	122, // 5: temporal.api.cloud.cloudservice.v1.UpdateUserResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
-	122, // 6: temporal.api.cloud.cloudservice.v1.DeleteUserResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
-	123, // 7: temporal.api.cloud.cloudservice.v1.SetUserNamespaceAccessRequest.access:type_name -> temporal.api.cloud.identity.v1.NamespaceAccess
-	122, // 8: temporal.api.cloud.cloudservice.v1.SetUserNamespaceAccessResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
-	122, // 9: temporal.api.cloud.cloudservice.v1.GetAsyncOperationResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
-	124, // 10: temporal.api.cloud.cloudservice.v1.CreateNamespaceRequest.spec:type_name -> temporal.api.cloud.namespace.v1.NamespaceSpec
-	116, // 11: temporal.api.cloud.cloudservice.v1.CreateNamespaceRequest.tags:type_name -> temporal.api.cloud.cloudservice.v1.CreateNamespaceRequest.TagsEntry
-	122, // 12: temporal.api.cloud.cloudservice.v1.CreateNamespaceResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
-	125, // 13: temporal.api.cloud.cloudservice.v1.GetNamespacesResponse.namespaces:type_name -> temporal.api.cloud.namespace.v1.Namespace
-	125, // 14: temporal.api.cloud.cloudservice.v1.GetNamespaceResponse.namespace:type_name -> temporal.api.cloud.namespace.v1.Namespace
-	124, // 15: temporal.api.cloud.cloudservice.v1.UpdateNamespaceRequest.spec:type_name -> temporal.api.cloud.namespace.v1.NamespaceSpec
-	122, // 16: temporal.api.cloud.cloudservice.v1.UpdateNamespaceResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
-	122, // 17: temporal.api.cloud.cloudservice.v1.RenameCustomSearchAttributeResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
-	122, // 18: temporal.api.cloud.cloudservice.v1.DeleteNamespaceResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
-	122, // 19: temporal.api.cloud.cloudservice.v1.FailoverNamespaceRegionResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
-	122, // 20: temporal.api.cloud.cloudservice.v1.AddNamespaceRegionResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
-	122, // 21: temporal.api.cloud.cloudservice.v1.DeleteNamespaceRegionResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
-	126, // 22: temporal.api.cloud.cloudservice.v1.GetRegionsResponse.regions:type_name -> temporal.api.cloud.region.v1.Region
-	126, // 23: temporal.api.cloud.cloudservice.v1.GetRegionResponse.region:type_name -> temporal.api.cloud.region.v1.Region
-	127, // 24: temporal.api.cloud.cloudservice.v1.GetApiKeysRequest.owner_type:type_name -> temporal.api.cloud.identity.v1.OwnerType
-	128, // 25: temporal.api.cloud.cloudservice.v1.GetApiKeysResponse.api_keys:type_name -> temporal.api.cloud.identity.v1.ApiKey
-	128, // 26: temporal.api.cloud.cloudservice.v1.GetApiKeyResponse.api_key:type_name -> temporal.api.cloud.identity.v1.ApiKey
-	129, // 27: temporal.api.cloud.cloudservice.v1.CreateApiKeyRequest.spec:type_name -> temporal.api.cloud.identity.v1.ApiKeySpec
-	122, // 28: temporal.api.cloud.cloudservice.v1.CreateApiKeyResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
-	129, // 29: temporal.api.cloud.cloudservice.v1.UpdateApiKeyRequest.spec:type_name -> temporal.api.cloud.identity.v1.ApiKeySpec
-	122, // 30: temporal.api.cloud.cloudservice.v1.UpdateApiKeyResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
-	122, // 31: temporal.api.cloud.cloudservice.v1.DeleteApiKeyResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
-	130, // 32: temporal.api.cloud.cloudservice.v1.GetNexusEndpointsResponse.endpoints:type_name -> temporal.api.cloud.nexus.v1.Endpoint
-	130, // 33: temporal.api.cloud.cloudservice.v1.GetNexusEndpointResponse.endpoint:type_name -> temporal.api.cloud.nexus.v1.Endpoint
-	131, // 34: temporal.api.cloud.cloudservice.v1.CreateNexusEndpointRequest.spec:type_name -> temporal.api.cloud.nexus.v1.EndpointSpec
-	122, // 35: temporal.api.cloud.cloudservice.v1.CreateNexusEndpointResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
-	131, // 36: temporal.api.cloud.cloudservice.v1.UpdateNexusEndpointRequest.spec:type_name -> temporal.api.cloud.nexus.v1.EndpointSpec
-	122, // 37: temporal.api.cloud.cloudservice.v1.UpdateNexusEndpointResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
-	122, // 38: temporal.api.cloud.cloudservice.v1.DeleteNexusEndpointResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
-	117, // 39: temporal.api.cloud.cloudservice.v1.GetUserGroupsRequest.google_group:type_name -> temporal.api.cloud.cloudservice.v1.GetUserGroupsRequest.GoogleGroupFilter
-	118, // 40: temporal.api.cloud.cloudservice.v1.GetUserGroupsRequest.scim_group:type_name -> temporal.api.cloud.cloudservice.v1.GetUserGroupsRequest.SCIMGroupFilter
-	132, // 41: temporal.api.cloud.cloudservice.v1.GetUserGroupsResponse.groups:type_name -> temporal.api.cloud.identity.v1.UserGroup
-	132, // 42: temporal.api.cloud.cloudservice.v1.GetUserGroupResponse.group:type_name -> temporal.api.cloud.identity.v1.UserGroup
-	133, // 43: temporal.api.cloud.cloudservice.v1.CreateUserGroupRequest.spec:type_name -> temporal.api.cloud.identity.v1.UserGroupSpec
-	122, // 44: temporal.api.cloud.cloudservice.v1.CreateUserGroupResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
-	133, // 45: temporal.api.cloud.cloudservice.v1.UpdateUserGroupRequest.spec:type_name -> temporal.api.cloud.identity.v1.UserGroupSpec
-	122, // 46: temporal.api.cloud.cloudservice.v1.UpdateUserGroupResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
-	122, // 47: temporal.api.cloud.cloudservice.v1.DeleteUserGroupResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
-	123, // 48: temporal.api.cloud.cloudservice.v1.SetUserGroupNamespaceAccessRequest.access:type_name -> temporal.api.cloud.identity.v1.NamespaceAccess
-	122, // 49: temporal.api.cloud.cloudservice.v1.SetUserGroupNamespaceAccessResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
-	134, // 50: temporal.api.cloud.cloudservice.v1.AddUserGroupMemberRequest.member_id:type_name -> temporal.api.cloud.identity.v1.UserGroupMemberId
-	122, // 51: temporal.api.cloud.cloudservice.v1.AddUserGroupMemberResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
-	134, // 52: temporal.api.cloud.cloudservice.v1.RemoveUserGroupMemberRequest.member_id:type_name -> temporal.api.cloud.identity.v1.UserGroupMemberId
-	122, // 53: temporal.api.cloud.cloudservice.v1.RemoveUserGroupMemberResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
-	135, // 54: temporal.api.cloud.cloudservice.v1.GetUserGroupMembersResponse.members:type_name -> temporal.api.cloud.identity.v1.UserGroupMember
-	136, // 55: temporal.api.cloud.cloudservice.v1.CreateServiceAccountRequest.spec:type_name -> temporal.api.cloud.identity.v1.ServiceAccountSpec
-	122, // 56: temporal.api.cloud.cloudservice.v1.CreateServiceAccountResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
-	137, // 57: temporal.api.cloud.cloudservice.v1.GetServiceAccountResponse.service_account:type_name -> temporal.api.cloud.identity.v1.ServiceAccount
-	137, // 58: temporal.api.cloud.cloudservice.v1.GetServiceAccountsResponse.service_account:type_name -> temporal.api.cloud.identity.v1.ServiceAccount
-	136, // 59: temporal.api.cloud.cloudservice.v1.UpdateServiceAccountRequest.spec:type_name -> temporal.api.cloud.identity.v1.ServiceAccountSpec
-	122, // 60: temporal.api.cloud.cloudservice.v1.UpdateServiceAccountResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
-	123, // 61: temporal.api.cloud.cloudservice.v1.SetServiceAccountNamespaceAccessRequest.access:type_name -> temporal.api.cloud.identity.v1.NamespaceAccess
-	122, // 62: temporal.api.cloud.cloudservice.v1.SetServiceAccountNamespaceAccessResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
-	122, // 63: temporal.api.cloud.cloudservice.v1.DeleteServiceAccountResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
-	138, // 64: temporal.api.cloud.cloudservice.v1.GetUsageRequest.start_time_inclusive:type_name -> google.protobuf.Timestamp
-	138, // 65: temporal.api.cloud.cloudservice.v1.GetUsageRequest.end_time_exclusive:type_name -> google.protobuf.Timestamp
-	139, // 66: temporal.api.cloud.cloudservice.v1.GetUsageResponse.summaries:type_name -> temporal.api.cloud.usage.v1.Summary
-	140, // 67: temporal.api.cloud.cloudservice.v1.GetAccountResponse.account:type_name -> temporal.api.cloud.account.v1.Account
-	141, // 68: temporal.api.cloud.cloudservice.v1.UpdateAccountRequest.spec:type_name -> temporal.api.cloud.account.v1.AccountSpec
-	122, // 69: temporal.api.cloud.cloudservice.v1.UpdateAccountResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
-	142, // 70: temporal.api.cloud.cloudservice.v1.CreateNamespaceExportSinkRequest.spec:type_name -> temporal.api.cloud.namespace.v1.ExportSinkSpec
-	122, // 71: temporal.api.cloud.cloudservice.v1.CreateNamespaceExportSinkResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
-	143, // 72: temporal.api.cloud.cloudservice.v1.GetNamespaceExportSinkResponse.sink:type_name -> temporal.api.cloud.namespace.v1.ExportSink
-	143, // 73: temporal.api.cloud.cloudservice.v1.GetNamespaceExportSinksResponse.sinks:type_name -> temporal.api.cloud.namespace.v1.ExportSink
-	142, // 74: temporal.api.cloud.cloudservice.v1.UpdateNamespaceExportSinkRequest.spec:type_name -> temporal.api.cloud.namespace.v1.ExportSinkSpec
-	122, // 75: temporal.api.cloud.cloudservice.v1.UpdateNamespaceExportSinkResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
-	122, // 76: temporal.api.cloud.cloudservice.v1.DeleteNamespaceExportSinkResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
-	142, // 77: temporal.api.cloud.cloudservice.v1.ValidateNamespaceExportSinkRequest.spec:type_name -> temporal.api.cloud.namespace.v1.ExportSinkSpec
-	119, // 78: temporal.api.cloud.cloudservice.v1.UpdateNamespaceTagsRequest.tags_to_upsert:type_name -> temporal.api.cloud.cloudservice.v1.UpdateNamespaceTagsRequest.TagsToUpsertEntry
-	122, // 79: temporal.api.cloud.cloudservice.v1.UpdateNamespaceTagsResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
-	144, // 80: temporal.api.cloud.cloudservice.v1.CreateConnectivityRuleRequest.spec:type_name -> temporal.api.cloud.connectivityrule.v1.ConnectivityRuleSpec
-	122, // 81: temporal.api.cloud.cloudservice.v1.CreateConnectivityRuleResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
-	145, // 82: temporal.api.cloud.cloudservice.v1.GetConnectivityRuleResponse.connectivity_rule:type_name -> temporal.api.cloud.connectivityrule.v1.ConnectivityRule
-	145, // 83: temporal.api.cloud.cloudservice.v1.GetConnectivityRulesResponse.connectivity_rules:type_name -> temporal.api.cloud.connectivityrule.v1.ConnectivityRule
-	122, // 84: temporal.api.cloud.cloudservice.v1.DeleteConnectivityRuleResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
-	146, // 85: temporal.api.cloud.cloudservice.v1.ValidateAccountAuditLogSinkRequest.spec:type_name -> temporal.api.cloud.account.v1.AuditLogSinkSpec
-	86,  // [86:86] is the sub-list for method output_type
-	86,  // [86:86] is the sub-list for method input_type
-	86,  // [86:86] is the sub-list for extension type_name
-	86,  // [86:86] is the sub-list for extension extendee
-	0,   // [0:86] is the sub-list for field type_name
+	130, // 0: temporal.api.cloud.cloudservice.v1.GetUsersResponse.users:type_name -> temporal.api.cloud.identity.v1.User
+	130, // 1: temporal.api.cloud.cloudservice.v1.GetUserResponse.user:type_name -> temporal.api.cloud.identity.v1.User
+	131, // 2: temporal.api.cloud.cloudservice.v1.CreateUserRequest.spec:type_name -> temporal.api.cloud.identity.v1.UserSpec
+	132, // 3: temporal.api.cloud.cloudservice.v1.CreateUserResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
+	131, // 4: temporal.api.cloud.cloudservice.v1.UpdateUserRequest.spec:type_name -> temporal.api.cloud.identity.v1.UserSpec
+	132, // 5: temporal.api.cloud.cloudservice.v1.UpdateUserResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
+	132, // 6: temporal.api.cloud.cloudservice.v1.DeleteUserResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
+	133, // 7: temporal.api.cloud.cloudservice.v1.SetUserNamespaceAccessRequest.access:type_name -> temporal.api.cloud.identity.v1.NamespaceAccess
+	132, // 8: temporal.api.cloud.cloudservice.v1.SetUserNamespaceAccessResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
+	132, // 9: temporal.api.cloud.cloudservice.v1.GetAsyncOperationResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
+	134, // 10: temporal.api.cloud.cloudservice.v1.CreateNamespaceRequest.spec:type_name -> temporal.api.cloud.namespace.v1.NamespaceSpec
+	126, // 11: temporal.api.cloud.cloudservice.v1.CreateNamespaceRequest.tags:type_name -> temporal.api.cloud.cloudservice.v1.CreateNamespaceRequest.TagsEntry
+	132, // 12: temporal.api.cloud.cloudservice.v1.CreateNamespaceResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
+	135, // 13: temporal.api.cloud.cloudservice.v1.GetNamespacesResponse.namespaces:type_name -> temporal.api.cloud.namespace.v1.Namespace
+	135, // 14: temporal.api.cloud.cloudservice.v1.GetNamespaceResponse.namespace:type_name -> temporal.api.cloud.namespace.v1.Namespace
+	134, // 15: temporal.api.cloud.cloudservice.v1.UpdateNamespaceRequest.spec:type_name -> temporal.api.cloud.namespace.v1.NamespaceSpec
+	132, // 16: temporal.api.cloud.cloudservice.v1.UpdateNamespaceResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
+	132, // 17: temporal.api.cloud.cloudservice.v1.RenameCustomSearchAttributeResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
+	132, // 18: temporal.api.cloud.cloudservice.v1.DeleteNamespaceResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
+	132, // 19: temporal.api.cloud.cloudservice.v1.FailoverNamespaceRegionResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
+	132, // 20: temporal.api.cloud.cloudservice.v1.AddNamespaceRegionResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
+	132, // 21: temporal.api.cloud.cloudservice.v1.DeleteNamespaceRegionResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
+	136, // 22: temporal.api.cloud.cloudservice.v1.GetRegionsResponse.regions:type_name -> temporal.api.cloud.region.v1.Region
+	136, // 23: temporal.api.cloud.cloudservice.v1.GetRegionResponse.region:type_name -> temporal.api.cloud.region.v1.Region
+	137, // 24: temporal.api.cloud.cloudservice.v1.GetApiKeysRequest.owner_type:type_name -> temporal.api.cloud.identity.v1.OwnerType
+	138, // 25: temporal.api.cloud.cloudservice.v1.GetApiKeysResponse.api_keys:type_name -> temporal.api.cloud.identity.v1.ApiKey
+	138, // 26: temporal.api.cloud.cloudservice.v1.GetApiKeyResponse.api_key:type_name -> temporal.api.cloud.identity.v1.ApiKey
+	139, // 27: temporal.api.cloud.cloudservice.v1.CreateApiKeyRequest.spec:type_name -> temporal.api.cloud.identity.v1.ApiKeySpec
+	132, // 28: temporal.api.cloud.cloudservice.v1.CreateApiKeyResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
+	139, // 29: temporal.api.cloud.cloudservice.v1.UpdateApiKeyRequest.spec:type_name -> temporal.api.cloud.identity.v1.ApiKeySpec
+	132, // 30: temporal.api.cloud.cloudservice.v1.UpdateApiKeyResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
+	132, // 31: temporal.api.cloud.cloudservice.v1.DeleteApiKeyResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
+	140, // 32: temporal.api.cloud.cloudservice.v1.GetNexusEndpointsResponse.endpoints:type_name -> temporal.api.cloud.nexus.v1.Endpoint
+	140, // 33: temporal.api.cloud.cloudservice.v1.GetNexusEndpointResponse.endpoint:type_name -> temporal.api.cloud.nexus.v1.Endpoint
+	141, // 34: temporal.api.cloud.cloudservice.v1.CreateNexusEndpointRequest.spec:type_name -> temporal.api.cloud.nexus.v1.EndpointSpec
+	132, // 35: temporal.api.cloud.cloudservice.v1.CreateNexusEndpointResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
+	141, // 36: temporal.api.cloud.cloudservice.v1.UpdateNexusEndpointRequest.spec:type_name -> temporal.api.cloud.nexus.v1.EndpointSpec
+	132, // 37: temporal.api.cloud.cloudservice.v1.UpdateNexusEndpointResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
+	132, // 38: temporal.api.cloud.cloudservice.v1.DeleteNexusEndpointResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
+	127, // 39: temporal.api.cloud.cloudservice.v1.GetUserGroupsRequest.google_group:type_name -> temporal.api.cloud.cloudservice.v1.GetUserGroupsRequest.GoogleGroupFilter
+	128, // 40: temporal.api.cloud.cloudservice.v1.GetUserGroupsRequest.scim_group:type_name -> temporal.api.cloud.cloudservice.v1.GetUserGroupsRequest.SCIMGroupFilter
+	142, // 41: temporal.api.cloud.cloudservice.v1.GetUserGroupsResponse.groups:type_name -> temporal.api.cloud.identity.v1.UserGroup
+	142, // 42: temporal.api.cloud.cloudservice.v1.GetUserGroupResponse.group:type_name -> temporal.api.cloud.identity.v1.UserGroup
+	143, // 43: temporal.api.cloud.cloudservice.v1.CreateUserGroupRequest.spec:type_name -> temporal.api.cloud.identity.v1.UserGroupSpec
+	132, // 44: temporal.api.cloud.cloudservice.v1.CreateUserGroupResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
+	143, // 45: temporal.api.cloud.cloudservice.v1.UpdateUserGroupRequest.spec:type_name -> temporal.api.cloud.identity.v1.UserGroupSpec
+	132, // 46: temporal.api.cloud.cloudservice.v1.UpdateUserGroupResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
+	132, // 47: temporal.api.cloud.cloudservice.v1.DeleteUserGroupResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
+	133, // 48: temporal.api.cloud.cloudservice.v1.SetUserGroupNamespaceAccessRequest.access:type_name -> temporal.api.cloud.identity.v1.NamespaceAccess
+	132, // 49: temporal.api.cloud.cloudservice.v1.SetUserGroupNamespaceAccessResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
+	144, // 50: temporal.api.cloud.cloudservice.v1.AddUserGroupMemberRequest.member_id:type_name -> temporal.api.cloud.identity.v1.UserGroupMemberId
+	132, // 51: temporal.api.cloud.cloudservice.v1.AddUserGroupMemberResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
+	144, // 52: temporal.api.cloud.cloudservice.v1.RemoveUserGroupMemberRequest.member_id:type_name -> temporal.api.cloud.identity.v1.UserGroupMemberId
+	132, // 53: temporal.api.cloud.cloudservice.v1.RemoveUserGroupMemberResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
+	145, // 54: temporal.api.cloud.cloudservice.v1.GetUserGroupMembersResponse.members:type_name -> temporal.api.cloud.identity.v1.UserGroupMember
+	146, // 55: temporal.api.cloud.cloudservice.v1.CreateServiceAccountRequest.spec:type_name -> temporal.api.cloud.identity.v1.ServiceAccountSpec
+	132, // 56: temporal.api.cloud.cloudservice.v1.CreateServiceAccountResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
+	147, // 57: temporal.api.cloud.cloudservice.v1.GetServiceAccountResponse.service_account:type_name -> temporal.api.cloud.identity.v1.ServiceAccount
+	147, // 58: temporal.api.cloud.cloudservice.v1.GetServiceAccountsResponse.service_account:type_name -> temporal.api.cloud.identity.v1.ServiceAccount
+	146, // 59: temporal.api.cloud.cloudservice.v1.UpdateServiceAccountRequest.spec:type_name -> temporal.api.cloud.identity.v1.ServiceAccountSpec
+	132, // 60: temporal.api.cloud.cloudservice.v1.UpdateServiceAccountResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
+	133, // 61: temporal.api.cloud.cloudservice.v1.SetServiceAccountNamespaceAccessRequest.access:type_name -> temporal.api.cloud.identity.v1.NamespaceAccess
+	132, // 62: temporal.api.cloud.cloudservice.v1.SetServiceAccountNamespaceAccessResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
+	132, // 63: temporal.api.cloud.cloudservice.v1.DeleteServiceAccountResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
+	148, // 64: temporal.api.cloud.cloudservice.v1.GetUsageRequest.start_time_inclusive:type_name -> google.protobuf.Timestamp
+	148, // 65: temporal.api.cloud.cloudservice.v1.GetUsageRequest.end_time_exclusive:type_name -> google.protobuf.Timestamp
+	149, // 66: temporal.api.cloud.cloudservice.v1.GetUsageResponse.summaries:type_name -> temporal.api.cloud.usage.v1.Summary
+	150, // 67: temporal.api.cloud.cloudservice.v1.GetAccountResponse.account:type_name -> temporal.api.cloud.account.v1.Account
+	151, // 68: temporal.api.cloud.cloudservice.v1.UpdateAccountRequest.spec:type_name -> temporal.api.cloud.account.v1.AccountSpec
+	132, // 69: temporal.api.cloud.cloudservice.v1.UpdateAccountResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
+	152, // 70: temporal.api.cloud.cloudservice.v1.CreateNamespaceExportSinkRequest.spec:type_name -> temporal.api.cloud.namespace.v1.ExportSinkSpec
+	132, // 71: temporal.api.cloud.cloudservice.v1.CreateNamespaceExportSinkResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
+	153, // 72: temporal.api.cloud.cloudservice.v1.GetNamespaceExportSinkResponse.sink:type_name -> temporal.api.cloud.namespace.v1.ExportSink
+	153, // 73: temporal.api.cloud.cloudservice.v1.GetNamespaceExportSinksResponse.sinks:type_name -> temporal.api.cloud.namespace.v1.ExportSink
+	152, // 74: temporal.api.cloud.cloudservice.v1.UpdateNamespaceExportSinkRequest.spec:type_name -> temporal.api.cloud.namespace.v1.ExportSinkSpec
+	132, // 75: temporal.api.cloud.cloudservice.v1.UpdateNamespaceExportSinkResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
+	132, // 76: temporal.api.cloud.cloudservice.v1.DeleteNamespaceExportSinkResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
+	152, // 77: temporal.api.cloud.cloudservice.v1.ValidateNamespaceExportSinkRequest.spec:type_name -> temporal.api.cloud.namespace.v1.ExportSinkSpec
+	129, // 78: temporal.api.cloud.cloudservice.v1.UpdateNamespaceTagsRequest.tags_to_upsert:type_name -> temporal.api.cloud.cloudservice.v1.UpdateNamespaceTagsRequest.TagsToUpsertEntry
+	132, // 79: temporal.api.cloud.cloudservice.v1.UpdateNamespaceTagsResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
+	154, // 80: temporal.api.cloud.cloudservice.v1.CreateConnectivityRuleRequest.spec:type_name -> temporal.api.cloud.connectivityrule.v1.ConnectivityRuleSpec
+	132, // 81: temporal.api.cloud.cloudservice.v1.CreateConnectivityRuleResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
+	155, // 82: temporal.api.cloud.cloudservice.v1.GetConnectivityRuleResponse.connectivity_rule:type_name -> temporal.api.cloud.connectivityrule.v1.ConnectivityRule
+	155, // 83: temporal.api.cloud.cloudservice.v1.GetConnectivityRulesResponse.connectivity_rules:type_name -> temporal.api.cloud.connectivityrule.v1.ConnectivityRule
+	132, // 84: temporal.api.cloud.cloudservice.v1.DeleteConnectivityRuleResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
+	156, // 85: temporal.api.cloud.cloudservice.v1.ValidateAccountAuditLogSinkRequest.spec:type_name -> temporal.api.cloud.account.v1.AuditLogSinkSpec
+	156, // 86: temporal.api.cloud.cloudservice.v1.CreateAccountAuditLogSinkRequest.spec:type_name -> temporal.api.cloud.account.v1.AuditLogSinkSpec
+	132, // 87: temporal.api.cloud.cloudservice.v1.CreateAccountAuditLogSinkResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
+	157, // 88: temporal.api.cloud.cloudservice.v1.GetAccountAuditLogSinkResponse.sink:type_name -> temporal.api.cloud.account.v1.AuditLogSink
+	157, // 89: temporal.api.cloud.cloudservice.v1.GetAccountAuditLogSinksResponse.sinks:type_name -> temporal.api.cloud.account.v1.AuditLogSink
+	156, // 90: temporal.api.cloud.cloudservice.v1.UpdateAccountAuditLogSinkRequest.spec:type_name -> temporal.api.cloud.account.v1.AuditLogSinkSpec
+	132, // 91: temporal.api.cloud.cloudservice.v1.UpdateAccountAuditLogSinkResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
+	132, // 92: temporal.api.cloud.cloudservice.v1.DeleteAccountAuditLogSinkResponse.async_operation:type_name -> temporal.api.cloud.operation.v1.AsyncOperation
+	93,  // [93:93] is the sub-list for method output_type
+	93,  // [93:93] is the sub-list for method input_type
+	93,  // [93:93] is the sub-list for extension type_name
+	93,  // [93:93] is the sub-list for extension extendee
+	0,   // [0:93] is the sub-list for field type_name
 }
 
 func init() { file_temporal_api_cloud_cloudservice_v1_request_response_proto_init() }
@@ -7872,7 +8486,7 @@ func file_temporal_api_cloud_cloudservice_v1_request_response_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_temporal_api_cloud_cloudservice_v1_request_response_proto_rawDesc), len(file_temporal_api_cloud_cloudservice_v1_request_response_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   120,
+			NumMessages:   130,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
