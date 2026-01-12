@@ -7,8 +7,8 @@
 package cloudservice
 
 import (
-	v18 "go.temporal.io/api/cloud/auditlog/v1"
 	v16 "go.temporal.io/cloud-sdk/api/account/v1"
+	v18 "go.temporal.io/cloud-sdk/api/auditlog/v1"
 	v17 "go.temporal.io/cloud-sdk/api/connectivityrule/v1"
 	v1 "go.temporal.io/cloud-sdk/api/identity/v1"
 	v12 "go.temporal.io/cloud-sdk/api/namespace/v1"
