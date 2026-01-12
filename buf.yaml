@@ -4,3 +4,4 @@ modules:
 deps:
   - buf.build/googleapis/googleapis
   - buf.build/temporalio/api:v1.43.0
+  - buf.build/grpc-ecosystem/grpc-gateway
