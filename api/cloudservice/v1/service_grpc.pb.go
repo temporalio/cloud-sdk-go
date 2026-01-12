@@ -76,6 +76,7 @@ const (
 	CloudService_GetConnectivityRule_FullMethodName              = "/temporal.api.cloud.cloudservice.v1.CloudService/GetConnectivityRule"
 	CloudService_GetConnectivityRules_FullMethodName             = "/temporal.api.cloud.cloudservice.v1.CloudService/GetConnectivityRules"
 	CloudService_DeleteConnectivityRule_FullMethodName           = "/temporal.api.cloud.cloudservice.v1.CloudService/DeleteConnectivityRule"
+	CloudService_GetAuditLogs_FullMethodName                     = "/temporal.api.cloud.cloudservice.v1.CloudService/GetAuditLogs"
 	CloudService_ValidateAccountAuditLogSink_FullMethodName      = "/temporal.api.cloud.cloudservice.v1.CloudService/ValidateAccountAuditLogSink"
 	CloudService_CreateAccountAuditLogSink_FullMethodName        = "/temporal.api.cloud.cloudservice.v1.CloudService/CreateAccountAuditLogSink"
 	CloudService_GetAccountAuditLogSink_FullMethodName           = "/temporal.api.cloud.cloudservice.v1.CloudService/GetAccountAuditLogSink"
@@ -206,6 +207,8 @@ type CloudServiceClient interface {
 	GetConnectivityRules(ctx context.Context, in *GetConnectivityRulesRequest, opts ...grpc.CallOption) (*GetConnectivityRulesResponse, error)
 	// Deletes a connectivity rule by id
 	DeleteConnectivityRule(ctx context.Context, in *DeleteConnectivityRuleRequest, opts ...grpc.CallOption) (*DeleteConnectivityRuleResponse, error)
+	// Get audit logs
+	GetAuditLogs(ctx context.Context, in *GetAuditLogsRequest, opts ...grpc.CallOption) (*GetAuditLogsResponse, error)
 	// Validate customer audit log sink is accessible from Temporal's workflow by delivering an empty file to the specified sink.
 	// The operation verifies that the sink is correctly configured, accessible and ready to receive audit logs.
 	ValidateAccountAuditLogSink(ctx context.Context, in *ValidateAccountAuditLogSinkRequest, opts ...grpc.CallOption) (*ValidateAccountAuditLogSinkResponse, error)
@@ -799,6 +802,16 @@ func (c *cloudServiceClient) DeleteConnectivityRule(ctx context.Context, in *Del
 	return out, nil
 }
 
+func (c *cloudServiceClient) GetAuditLogs(ctx context.Context, in *GetAuditLogsRequest, opts ...grpc.CallOption) (*GetAuditLogsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAuditLogsResponse)
+	err := c.cc.Invoke(ctx, CloudService_GetAuditLogs_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *cloudServiceClient) ValidateAccountAuditLogSink(ctx context.Context, in *ValidateAccountAuditLogSinkRequest, opts ...grpc.CallOption) (*ValidateAccountAuditLogSinkResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ValidateAccountAuditLogSinkResponse)
@@ -981,6 +994,8 @@ type CloudServiceServer interface {
 	GetConnectivityRules(context.Context, *GetConnectivityRulesRequest) (*GetConnectivityRulesResponse, error)
 	// Deletes a connectivity rule by id
 	DeleteConnectivityRule(context.Context, *DeleteConnectivityRuleRequest) (*DeleteConnectivityRuleResponse, error)
+	// Get audit logs
+	GetAuditLogs(context.Context, *GetAuditLogsRequest) (*GetAuditLogsResponse, error)
 	// Validate customer audit log sink is accessible from Temporal's workflow by delivering an empty file to the specified sink.
 	// The operation verifies that the sink is correctly configured, accessible and ready to receive audit logs.
 	ValidateAccountAuditLogSink(context.Context, *ValidateAccountAuditLogSinkRequest) (*ValidateAccountAuditLogSinkResponse, error)
@@ -1174,6 +1189,9 @@ func (UnimplementedCloudServiceServer) GetConnectivityRules(context.Context, *Ge
 }
 func (UnimplementedCloudServiceServer) DeleteConnectivityRule(context.Context, *DeleteConnectivityRuleRequest) (*DeleteConnectivityRuleResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteConnectivityRule not implemented")
+}
+func (UnimplementedCloudServiceServer) GetAuditLogs(context.Context, *GetAuditLogsRequest) (*GetAuditLogsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAuditLogs not implemented")
 }
 func (UnimplementedCloudServiceServer) ValidateAccountAuditLogSink(context.Context, *ValidateAccountAuditLogSinkRequest) (*ValidateAccountAuditLogSinkResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ValidateAccountAuditLogSink not implemented")
@@ -2240,6 +2258,24 @@ func _CloudService_DeleteConnectivityRule_Handler(srv interface{}, ctx context.C
 	return interceptor(ctx, in, info, handler)
 }
 
+func _CloudService_GetAuditLogs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAuditLogsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CloudServiceServer).GetAuditLogs(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CloudService_GetAuditLogs_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CloudServiceServer).GetAuditLogs(ctx, req.(*GetAuditLogsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _CloudService_ValidateAccountAuditLogSink_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ValidateAccountAuditLogSinkRequest)
 	if err := dec(in); err != nil {
@@ -2582,6 +2618,10 @@ var CloudService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteConnectivityRule",
 			Handler:    _CloudService_DeleteConnectivityRule_Handler,
+		},
+		{
+			MethodName: "GetAuditLogs",
+			Handler:    _CloudService_GetAuditLogs_Handler,
 		},
 		{
 			MethodName: "ValidateAccountAuditLogSink",
