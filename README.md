@@ -10,7 +10,7 @@ The APIs that Temporal Cloud provides are accessible via the `Temporal Cloud Ops
 ## How to use
 
 ```bash
-go get go.temporal.io/cloud-sdk
+go get go.temporal.io/cloud-sdk@latest
 ```
 
 See [samples](https://github.com/temporalio/cloud-samples-go) to get started.

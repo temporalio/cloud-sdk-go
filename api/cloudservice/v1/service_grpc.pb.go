@@ -19,6 +19,7 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
+	CloudService_GetCurrentIdentity_FullMethodName               = "/temporal.api.cloud.cloudservice.v1.CloudService/GetCurrentIdentity"
 	CloudService_GetUsers_FullMethodName                         = "/temporal.api.cloud.cloudservice.v1.CloudService/GetUsers"
 	CloudService_GetUser_FullMethodName                          = "/temporal.api.cloud.cloudservice.v1.CloudService/GetUser"
 	CloudService_CreateUser_FullMethodName                       = "/temporal.api.cloud.cloudservice.v1.CloudService/CreateUser"
@@ -83,6 +84,7 @@ const (
 	CloudService_GetAccountAuditLogSinks_FullMethodName          = "/temporal.api.cloud.cloudservice.v1.CloudService/GetAccountAuditLogSinks"
 	CloudService_UpdateAccountAuditLogSink_FullMethodName        = "/temporal.api.cloud.cloudservice.v1.CloudService/UpdateAccountAuditLogSink"
 	CloudService_DeleteAccountAuditLogSink_FullMethodName        = "/temporal.api.cloud.cloudservice.v1.CloudService/DeleteAccountAuditLogSink"
+	CloudService_GetNamespaceCapacityInfo_FullMethodName         = "/temporal.api.cloud.cloudservice.v1.CloudService/GetNamespaceCapacityInfo"
 )
 
 // CloudServiceClient is the client API for CloudService service.
@@ -92,6 +94,8 @@ const (
 // WARNING: This service is currently experimental and may change in
 // incompatible ways.
 type CloudServiceClient interface {
+	// Get information about the current authenticated user or service account principal
+	GetCurrentIdentity(ctx context.Context, in *GetCurrentIdentityRequest, opts ...grpc.CallOption) (*GetCurrentIdentityResponse, error)
 	// Gets all known users
 	GetUsers(ctx context.Context, in *GetUsersRequest, opts ...grpc.CallOption) (*GetUsersResponse, error)
 	// Get a user
@@ -222,6 +226,9 @@ type CloudServiceClient interface {
 	UpdateAccountAuditLogSink(ctx context.Context, in *UpdateAccountAuditLogSinkRequest, opts ...grpc.CallOption) (*UpdateAccountAuditLogSinkResponse, error)
 	// Delete an audit log sink
 	DeleteAccountAuditLogSink(ctx context.Context, in *DeleteAccountAuditLogSinkRequest, opts ...grpc.CallOption) (*DeleteAccountAuditLogSinkResponse, error)
+	// GetNamespaceCapacityInfo returns capacity information for a namespace.
+	// This includes provisioned capacity options, on-demand limits, and 7 day historical APS statistics useful for capacity planning.
+	GetNamespaceCapacityInfo(ctx context.Context, in *GetNamespaceCapacityInfoRequest, opts ...grpc.CallOption) (*GetNamespaceCapacityInfoResponse, error)
 }
 
 type cloudServiceClient struct {
@@ -230,6 +237,16 @@ type cloudServiceClient struct {
 
 func NewCloudServiceClient(cc grpc.ClientConnInterface) CloudServiceClient {
 	return &cloudServiceClient{cc}
+}
+
+func (c *cloudServiceClient) GetCurrentIdentity(ctx context.Context, in *GetCurrentIdentityRequest, opts ...grpc.CallOption) (*GetCurrentIdentityResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetCurrentIdentityResponse)
+	err := c.cc.Invoke(ctx, CloudService_GetCurrentIdentity_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *cloudServiceClient) GetUsers(ctx context.Context, in *GetUsersRequest, opts ...grpc.CallOption) (*GetUsersResponse, error) {
@@ -872,6 +889,16 @@ func (c *cloudServiceClient) DeleteAccountAuditLogSink(ctx context.Context, in *
 	return out, nil
 }
 
+func (c *cloudServiceClient) GetNamespaceCapacityInfo(ctx context.Context, in *GetNamespaceCapacityInfoRequest, opts ...grpc.CallOption) (*GetNamespaceCapacityInfoResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetNamespaceCapacityInfoResponse)
+	err := c.cc.Invoke(ctx, CloudService_GetNamespaceCapacityInfo_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CloudServiceServer is the server API for CloudService service.
 // All implementations must embed UnimplementedCloudServiceServer
 // for forward compatibility.
@@ -879,6 +906,8 @@ func (c *cloudServiceClient) DeleteAccountAuditLogSink(ctx context.Context, in *
 // WARNING: This service is currently experimental and may change in
 // incompatible ways.
 type CloudServiceServer interface {
+	// Get information about the current authenticated user or service account principal
+	GetCurrentIdentity(context.Context, *GetCurrentIdentityRequest) (*GetCurrentIdentityResponse, error)
 	// Gets all known users
 	GetUsers(context.Context, *GetUsersRequest) (*GetUsersResponse, error)
 	// Get a user
@@ -1009,6 +1038,9 @@ type CloudServiceServer interface {
 	UpdateAccountAuditLogSink(context.Context, *UpdateAccountAuditLogSinkRequest) (*UpdateAccountAuditLogSinkResponse, error)
 	// Delete an audit log sink
 	DeleteAccountAuditLogSink(context.Context, *DeleteAccountAuditLogSinkRequest) (*DeleteAccountAuditLogSinkResponse, error)
+	// GetNamespaceCapacityInfo returns capacity information for a namespace.
+	// This includes provisioned capacity options, on-demand limits, and 7 day historical APS statistics useful for capacity planning.
+	GetNamespaceCapacityInfo(context.Context, *GetNamespaceCapacityInfoRequest) (*GetNamespaceCapacityInfoResponse, error)
 	mustEmbedUnimplementedCloudServiceServer()
 }
 
@@ -1019,6 +1051,9 @@ type CloudServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedCloudServiceServer struct{}
 
+func (UnimplementedCloudServiceServer) GetCurrentIdentity(context.Context, *GetCurrentIdentityRequest) (*GetCurrentIdentityResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetCurrentIdentity not implemented")
+}
 func (UnimplementedCloudServiceServer) GetUsers(context.Context, *GetUsersRequest) (*GetUsersResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUsers not implemented")
 }
@@ -1211,6 +1246,9 @@ func (UnimplementedCloudServiceServer) UpdateAccountAuditLogSink(context.Context
 func (UnimplementedCloudServiceServer) DeleteAccountAuditLogSink(context.Context, *DeleteAccountAuditLogSinkRequest) (*DeleteAccountAuditLogSinkResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteAccountAuditLogSink not implemented")
 }
+func (UnimplementedCloudServiceServer) GetNamespaceCapacityInfo(context.Context, *GetNamespaceCapacityInfoRequest) (*GetNamespaceCapacityInfoResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetNamespaceCapacityInfo not implemented")
+}
 func (UnimplementedCloudServiceServer) mustEmbedUnimplementedCloudServiceServer() {}
 func (UnimplementedCloudServiceServer) testEmbeddedByValue()                      {}
 
@@ -1230,6 +1268,24 @@ func RegisterCloudServiceServer(s grpc.ServiceRegistrar, srv CloudServiceServer)
 		t.testEmbeddedByValue()
 	}
 	s.RegisterService(&CloudService_ServiceDesc, srv)
+}
+
+func _CloudService_GetCurrentIdentity_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCurrentIdentityRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CloudServiceServer).GetCurrentIdentity(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CloudService_GetCurrentIdentity_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CloudServiceServer).GetCurrentIdentity(ctx, req.(*GetCurrentIdentityRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _CloudService_GetUsers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -2384,6 +2440,24 @@ func _CloudService_DeleteAccountAuditLogSink_Handler(srv interface{}, ctx contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _CloudService_GetNamespaceCapacityInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetNamespaceCapacityInfoRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CloudServiceServer).GetNamespaceCapacityInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CloudService_GetNamespaceCapacityInfo_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CloudServiceServer).GetNamespaceCapacityInfo(ctx, req.(*GetNamespaceCapacityInfoRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // CloudService_ServiceDesc is the grpc.ServiceDesc for CloudService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -2391,6 +2465,10 @@ var CloudService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "temporal.api.cloud.cloudservice.v1.CloudService",
 	HandlerType: (*CloudServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "GetCurrentIdentity",
+			Handler:    _CloudService_GetCurrentIdentity_Handler,
+		},
 		{
 			MethodName: "GetUsers",
 			Handler:    _CloudService_GetUsers_Handler,
@@ -2646,6 +2724,10 @@ var CloudService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteAccountAuditLogSink",
 			Handler:    _CloudService_DeleteAccountAuditLogSink_Handler,
+		},
+		{
+			MethodName: "GetNamespaceCapacityInfo",
+			Handler:    _CloudService_GetNamespaceCapacityInfo_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -1644,6 +1644,92 @@ func (x *ExportSink) GetLastHealthCheckTime() *timestamppb.Timestamp {
 	return nil
 }
 
+// NamespaceCapacityInfo contains detailed capacity information for a namespace.
+type NamespaceCapacityInfo struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The namespace identifier.
+	Namespace string `protobuf:"bytes,1,opt,name=namespace,proto3" json:"namespace,omitempty"`
+	// Whether the namespace's APS limit was set by Temporal Support.
+	// When true, adjusting the namespace's capacity will reset this limit.
+	HasLegacyLimits bool `protobuf:"varint,2,opt,name=has_legacy_limits,json=hasLegacyLimits,proto3" json:"has_legacy_limits,omitempty"`
+	// The current capacity of the namespace.
+	// Includes the current mode (on-demand or provisioned) and latest request status.
+	CurrentCapacity *Capacity `protobuf:"bytes,3,opt,name=current_capacity,json=currentCapacity,proto3" json:"current_capacity,omitempty"`
+	// Available capacity mode options for this namespace.
+	// Contains configuration limits for both provisioned and on-demand modes.
+	ModeOptions *NamespaceCapacityInfo_CapacityModeOptions `protobuf:"bytes,4,opt,name=mode_options,json=modeOptions,proto3" json:"mode_options,omitempty"`
+	// Usage statistics for the namespace over the last 7 days.
+	// Used to calculate On-Demand capacity limits, also useful for capacity planning.
+	Stats         *NamespaceCapacityInfo_Stats `protobuf:"bytes,5,opt,name=stats,proto3" json:"stats,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *NamespaceCapacityInfo) Reset() {
+	*x = NamespaceCapacityInfo{}
+	mi := &file_temporal_api_cloud_namespace_v1_message_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *NamespaceCapacityInfo) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*NamespaceCapacityInfo) ProtoMessage() {}
+
+func (x *NamespaceCapacityInfo) ProtoReflect() protoreflect.Message {
+	mi := &file_temporal_api_cloud_namespace_v1_message_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use NamespaceCapacityInfo.ProtoReflect.Descriptor instead.
+func (*NamespaceCapacityInfo) Descriptor() ([]byte, []int) {
+	return file_temporal_api_cloud_namespace_v1_message_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *NamespaceCapacityInfo) GetNamespace() string {
+	if x != nil {
+		return x.Namespace
+	}
+	return ""
+}
+
+func (x *NamespaceCapacityInfo) GetHasLegacyLimits() bool {
+	if x != nil {
+		return x.HasLegacyLimits
+	}
+	return false
+}
+
+func (x *NamespaceCapacityInfo) GetCurrentCapacity() *Capacity {
+	if x != nil {
+		return x.CurrentCapacity
+	}
+	return nil
+}
+
+func (x *NamespaceCapacityInfo) GetModeOptions() *NamespaceCapacityInfo_CapacityModeOptions {
+	if x != nil {
+		return x.ModeOptions
+	}
+	return nil
+}
+
+func (x *NamespaceCapacityInfo) GetStats() *NamespaceCapacityInfo_Stats {
+	if x != nil {
+		return x.Stats
+	}
+	return nil
+}
+
 type CodecServerSpec_CustomErrorMessage struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The error message to display by default for any remote codec server errors.
@@ -1654,7 +1740,7 @@ type CodecServerSpec_CustomErrorMessage struct {
 
 func (x *CodecServerSpec_CustomErrorMessage) Reset() {
 	*x = CodecServerSpec_CustomErrorMessage{}
-	mi := &file_temporal_api_cloud_namespace_v1_message_proto_msgTypes[17]
+	mi := &file_temporal_api_cloud_namespace_v1_message_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1666,7 +1752,7 @@ func (x *CodecServerSpec_CustomErrorMessage) String() string {
 func (*CodecServerSpec_CustomErrorMessage) ProtoMessage() {}
 
 func (x *CodecServerSpec_CustomErrorMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_temporal_api_cloud_namespace_v1_message_proto_msgTypes[17]
+	mi := &file_temporal_api_cloud_namespace_v1_message_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1701,7 +1787,7 @@ type CodecServerSpec_CustomErrorMessage_ErrorMessage struct {
 
 func (x *CodecServerSpec_CustomErrorMessage_ErrorMessage) Reset() {
 	*x = CodecServerSpec_CustomErrorMessage_ErrorMessage{}
-	mi := &file_temporal_api_cloud_namespace_v1_message_proto_msgTypes[18]
+	mi := &file_temporal_api_cloud_namespace_v1_message_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1713,7 +1799,7 @@ func (x *CodecServerSpec_CustomErrorMessage_ErrorMessage) String() string {
 func (*CodecServerSpec_CustomErrorMessage_ErrorMessage) ProtoMessage() {}
 
 func (x *CodecServerSpec_CustomErrorMessage_ErrorMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_temporal_api_cloud_namespace_v1_message_proto_msgTypes[18]
+	mi := &file_temporal_api_cloud_namespace_v1_message_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1751,7 +1837,7 @@ type CapacitySpec_OnDemand struct {
 
 func (x *CapacitySpec_OnDemand) Reset() {
 	*x = CapacitySpec_OnDemand{}
-	mi := &file_temporal_api_cloud_namespace_v1_message_proto_msgTypes[19]
+	mi := &file_temporal_api_cloud_namespace_v1_message_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1763,7 +1849,7 @@ func (x *CapacitySpec_OnDemand) String() string {
 func (*CapacitySpec_OnDemand) ProtoMessage() {}
 
 func (x *CapacitySpec_OnDemand) ProtoReflect() protoreflect.Message {
-	mi := &file_temporal_api_cloud_namespace_v1_message_proto_msgTypes[19]
+	mi := &file_temporal_api_cloud_namespace_v1_message_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1790,7 +1876,7 @@ type CapacitySpec_Provisioned struct {
 
 func (x *CapacitySpec_Provisioned) Reset() {
 	*x = CapacitySpec_Provisioned{}
-	mi := &file_temporal_api_cloud_namespace_v1_message_proto_msgTypes[20]
+	mi := &file_temporal_api_cloud_namespace_v1_message_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1802,7 +1888,7 @@ func (x *CapacitySpec_Provisioned) String() string {
 func (*CapacitySpec_Provisioned) ProtoMessage() {}
 
 func (x *CapacitySpec_Provisioned) ProtoReflect() protoreflect.Message {
-	mi := &file_temporal_api_cloud_namespace_v1_message_proto_msgTypes[20]
+	mi := &file_temporal_api_cloud_namespace_v1_message_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1833,7 +1919,7 @@ type Capacity_OnDemand struct {
 
 func (x *Capacity_OnDemand) Reset() {
 	*x = Capacity_OnDemand{}
-	mi := &file_temporal_api_cloud_namespace_v1_message_proto_msgTypes[21]
+	mi := &file_temporal_api_cloud_namespace_v1_message_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1845,7 +1931,7 @@ func (x *Capacity_OnDemand) String() string {
 func (*Capacity_OnDemand) ProtoMessage() {}
 
 func (x *Capacity_OnDemand) ProtoReflect() protoreflect.Message {
-	mi := &file_temporal_api_cloud_namespace_v1_message_proto_msgTypes[21]
+	mi := &file_temporal_api_cloud_namespace_v1_message_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1872,7 +1958,7 @@ type Capacity_Provisioned struct {
 
 func (x *Capacity_Provisioned) Reset() {
 	*x = Capacity_Provisioned{}
-	mi := &file_temporal_api_cloud_namespace_v1_message_proto_msgTypes[22]
+	mi := &file_temporal_api_cloud_namespace_v1_message_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1884,7 +1970,7 @@ func (x *Capacity_Provisioned) String() string {
 func (*Capacity_Provisioned) ProtoMessage() {}
 
 func (x *Capacity_Provisioned) ProtoReflect() protoreflect.Message {
-	mi := &file_temporal_api_cloud_namespace_v1_message_proto_msgTypes[22]
+	mi := &file_temporal_api_cloud_namespace_v1_message_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1925,7 +2011,7 @@ type Capacity_Request struct {
 
 func (x *Capacity_Request) Reset() {
 	*x = Capacity_Request{}
-	mi := &file_temporal_api_cloud_namespace_v1_message_proto_msgTypes[23]
+	mi := &file_temporal_api_cloud_namespace_v1_message_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1937,7 +2023,7 @@ func (x *Capacity_Request) String() string {
 func (*Capacity_Request) ProtoMessage() {}
 
 func (x *Capacity_Request) ProtoReflect() protoreflect.Message {
-	mi := &file_temporal_api_cloud_namespace_v1_message_proto_msgTypes[23]
+	mi := &file_temporal_api_cloud_namespace_v1_message_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1986,6 +2072,268 @@ func (x *Capacity_Request) GetSpec() *CapacitySpec {
 		return x.Spec
 	}
 	return nil
+}
+
+type NamespaceCapacityInfo_CapacityModeOptions struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Provisioned capacity options and entitlements.
+	Provisioned *NamespaceCapacityInfo_CapacityModeOptions_Provisioned `protobuf:"bytes,1,opt,name=provisioned,proto3" json:"provisioned,omitempty"`
+	// On-Demand capacity information.
+	OnDemand      *NamespaceCapacityInfo_CapacityModeOptions_OnDemand `protobuf:"bytes,2,opt,name=on_demand,json=onDemand,proto3" json:"on_demand,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *NamespaceCapacityInfo_CapacityModeOptions) Reset() {
+	*x = NamespaceCapacityInfo_CapacityModeOptions{}
+	mi := &file_temporal_api_cloud_namespace_v1_message_proto_msgTypes[29]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *NamespaceCapacityInfo_CapacityModeOptions) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*NamespaceCapacityInfo_CapacityModeOptions) ProtoMessage() {}
+
+func (x *NamespaceCapacityInfo_CapacityModeOptions) ProtoReflect() protoreflect.Message {
+	mi := &file_temporal_api_cloud_namespace_v1_message_proto_msgTypes[29]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use NamespaceCapacityInfo_CapacityModeOptions.ProtoReflect.Descriptor instead.
+func (*NamespaceCapacityInfo_CapacityModeOptions) Descriptor() ([]byte, []int) {
+	return file_temporal_api_cloud_namespace_v1_message_proto_rawDescGZIP(), []int{17, 0}
+}
+
+func (x *NamespaceCapacityInfo_CapacityModeOptions) GetProvisioned() *NamespaceCapacityInfo_CapacityModeOptions_Provisioned {
+	if x != nil {
+		return x.Provisioned
+	}
+	return nil
+}
+
+func (x *NamespaceCapacityInfo_CapacityModeOptions) GetOnDemand() *NamespaceCapacityInfo_CapacityModeOptions_OnDemand {
+	if x != nil {
+		return x.OnDemand
+	}
+	return nil
+}
+
+type NamespaceCapacityInfo_Stats struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Actions-per-second measurements summarized over the last 7 days.
+	Aps           *NamespaceCapacityInfo_Stats_Summary `protobuf:"bytes,1,opt,name=aps,proto3" json:"aps,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *NamespaceCapacityInfo_Stats) Reset() {
+	*x = NamespaceCapacityInfo_Stats{}
+	mi := &file_temporal_api_cloud_namespace_v1_message_proto_msgTypes[30]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *NamespaceCapacityInfo_Stats) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*NamespaceCapacityInfo_Stats) ProtoMessage() {}
+
+func (x *NamespaceCapacityInfo_Stats) ProtoReflect() protoreflect.Message {
+	mi := &file_temporal_api_cloud_namespace_v1_message_proto_msgTypes[30]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use NamespaceCapacityInfo_Stats.ProtoReflect.Descriptor instead.
+func (*NamespaceCapacityInfo_Stats) Descriptor() ([]byte, []int) {
+	return file_temporal_api_cloud_namespace_v1_message_proto_rawDescGZIP(), []int{17, 1}
+}
+
+func (x *NamespaceCapacityInfo_Stats) GetAps() *NamespaceCapacityInfo_Stats_Summary {
+	if x != nil {
+		return x.Aps
+	}
+	return nil
+}
+
+type NamespaceCapacityInfo_CapacityModeOptions_Provisioned struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The valid TRU (Temporal Resource Unit) values that can be set.
+	// These are the discrete capacity tiers available for selection.
+	ValidTruValues []float64 `protobuf:"fixed64,1,rep,packed,name=valid_tru_values,json=validTruValues,proto3" json:"valid_tru_values,omitempty"`
+	// The maximum TRU value that can currently be set for this namespace.
+	// This may be lower than the highest value in valid_tru_values due to
+	// inventory constraints.
+	MaxAvailableTruValue float64 `protobuf:"fixed64,2,opt,name=max_available_tru_value,json=maxAvailableTruValue,proto3" json:"max_available_tru_value,omitempty"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
+}
+
+func (x *NamespaceCapacityInfo_CapacityModeOptions_Provisioned) Reset() {
+	*x = NamespaceCapacityInfo_CapacityModeOptions_Provisioned{}
+	mi := &file_temporal_api_cloud_namespace_v1_message_proto_msgTypes[31]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *NamespaceCapacityInfo_CapacityModeOptions_Provisioned) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*NamespaceCapacityInfo_CapacityModeOptions_Provisioned) ProtoMessage() {}
+
+func (x *NamespaceCapacityInfo_CapacityModeOptions_Provisioned) ProtoReflect() protoreflect.Message {
+	mi := &file_temporal_api_cloud_namespace_v1_message_proto_msgTypes[31]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use NamespaceCapacityInfo_CapacityModeOptions_Provisioned.ProtoReflect.Descriptor instead.
+func (*NamespaceCapacityInfo_CapacityModeOptions_Provisioned) Descriptor() ([]byte, []int) {
+	return file_temporal_api_cloud_namespace_v1_message_proto_rawDescGZIP(), []int{17, 0, 0}
+}
+
+func (x *NamespaceCapacityInfo_CapacityModeOptions_Provisioned) GetValidTruValues() []float64 {
+	if x != nil {
+		return x.ValidTruValues
+	}
+	return nil
+}
+
+func (x *NamespaceCapacityInfo_CapacityModeOptions_Provisioned) GetMaxAvailableTruValue() float64 {
+	if x != nil {
+		return x.MaxAvailableTruValue
+	}
+	return 0
+}
+
+type NamespaceCapacityInfo_CapacityModeOptions_OnDemand struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The APS limit that would apply to this namespace in on-demand mode.
+	// See: https://docs.temporal.io/cloud/limits#actions-per-second
+	ApsLimit      float64 `protobuf:"fixed64,1,opt,name=aps_limit,json=apsLimit,proto3" json:"aps_limit,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *NamespaceCapacityInfo_CapacityModeOptions_OnDemand) Reset() {
+	*x = NamespaceCapacityInfo_CapacityModeOptions_OnDemand{}
+	mi := &file_temporal_api_cloud_namespace_v1_message_proto_msgTypes[32]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *NamespaceCapacityInfo_CapacityModeOptions_OnDemand) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*NamespaceCapacityInfo_CapacityModeOptions_OnDemand) ProtoMessage() {}
+
+func (x *NamespaceCapacityInfo_CapacityModeOptions_OnDemand) ProtoReflect() protoreflect.Message {
+	mi := &file_temporal_api_cloud_namespace_v1_message_proto_msgTypes[32]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use NamespaceCapacityInfo_CapacityModeOptions_OnDemand.ProtoReflect.Descriptor instead.
+func (*NamespaceCapacityInfo_CapacityModeOptions_OnDemand) Descriptor() ([]byte, []int) {
+	return file_temporal_api_cloud_namespace_v1_message_proto_rawDescGZIP(), []int{17, 0, 1}
+}
+
+func (x *NamespaceCapacityInfo_CapacityModeOptions_OnDemand) GetApsLimit() float64 {
+	if x != nil {
+		return x.ApsLimit
+	}
+	return 0
+}
+
+type NamespaceCapacityInfo_Stats_Summary struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Mean          float64                `protobuf:"fixed64,1,opt,name=mean,proto3" json:"mean,omitempty"`
+	P90           float64                `protobuf:"fixed64,2,opt,name=p90,proto3" json:"p90,omitempty"`
+	P99           float64                `protobuf:"fixed64,3,opt,name=p99,proto3" json:"p99,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *NamespaceCapacityInfo_Stats_Summary) Reset() {
+	*x = NamespaceCapacityInfo_Stats_Summary{}
+	mi := &file_temporal_api_cloud_namespace_v1_message_proto_msgTypes[33]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *NamespaceCapacityInfo_Stats_Summary) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*NamespaceCapacityInfo_Stats_Summary) ProtoMessage() {}
+
+func (x *NamespaceCapacityInfo_Stats_Summary) ProtoReflect() protoreflect.Message {
+	mi := &file_temporal_api_cloud_namespace_v1_message_proto_msgTypes[33]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use NamespaceCapacityInfo_Stats_Summary.ProtoReflect.Descriptor instead.
+func (*NamespaceCapacityInfo_Stats_Summary) Descriptor() ([]byte, []int) {
+	return file_temporal_api_cloud_namespace_v1_message_proto_rawDescGZIP(), []int{17, 1, 0}
+}
+
+func (x *NamespaceCapacityInfo_Stats_Summary) GetMean() float64 {
+	if x != nil {
+		return x.Mean
+	}
+	return 0
+}
+
+func (x *NamespaceCapacityInfo_Stats_Summary) GetP90() float64 {
+	if x != nil {
+		return x.P90
+	}
+	return 0
+}
+
+func (x *NamespaceCapacityInfo_Stats_Summary) GetP99() float64 {
+	if x != nil {
+		return x.P99
+	}
+	return 0
 }
 
 var File_temporal_api_cloud_namespace_v1_message_proto protoreflect.FileDescriptor
@@ -2414,18 +2762,78 @@ var file_temporal_api_cloud_namespace_v1_message_proto_rawDesc = string([]byte{
 	0x4f, 0x52, 0x5f, 0x49, 0x4e, 0x54, 0x45, 0x52, 0x4e, 0x41, 0x4c, 0x10, 0x02, 0x12, 0x23, 0x0a,
 	0x1f, 0x48, 0x45, 0x41, 0x4c, 0x54, 0x48, 0x5f, 0x45, 0x52, 0x52, 0x4f, 0x52, 0x5f, 0x55, 0x53,
 	0x45, 0x52, 0x5f, 0x43, 0x4f, 0x4e, 0x46, 0x49, 0x47, 0x55, 0x52, 0x41, 0x54, 0x49, 0x4f, 0x4e,
-	0x10, 0x03, 0x42, 0xb1, 0x01, 0x0a, 0x22, 0x69, 0x6f, 0x2e, 0x74, 0x65, 0x6d, 0x70, 0x6f, 0x72,
-	0x61, 0x6c, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x6e, 0x61, 0x6d,
-	0x65, 0x73, 0x70, 0x61, 0x63, 0x65, 0x2e, 0x76, 0x31, 0x42, 0x0c, 0x4d, 0x65, 0x73, 0x73, 0x61,
-	0x67, 0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x2f, 0x67, 0x6f, 0x2e, 0x74, 0x65,
-	0x6d, 0x70, 0x6f, 0x72, 0x61, 0x6c, 0x2e, 0x69, 0x6f, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x63, 0x6c,
-	0x6f, 0x75, 0x64, 0x2f, 0x6e, 0x61, 0x6d, 0x65, 0x73, 0x70, 0x61, 0x63, 0x65, 0x2f, 0x76, 0x31,
-	0x3b, 0x6e, 0x61, 0x6d, 0x65, 0x73, 0x70, 0x61, 0x63, 0x65, 0xaa, 0x02, 0x21, 0x54, 0x65, 0x6d,
-	0x70, 0x6f, 0x72, 0x61, 0x6c, 0x69, 0x6f, 0x2e, 0x41, 0x70, 0x69, 0x2e, 0x43, 0x6c, 0x6f, 0x75,
-	0x64, 0x2e, 0x4e, 0x61, 0x6d, 0x65, 0x73, 0x70, 0x61, 0x63, 0x65, 0x2e, 0x56, 0x31, 0xea, 0x02,
-	0x25, 0x54, 0x65, 0x6d, 0x70, 0x6f, 0x72, 0x61, 0x6c, 0x69, 0x6f, 0x3a, 0x3a, 0x41, 0x70, 0x69,
-	0x3a, 0x3a, 0x43, 0x6c, 0x6f, 0x75, 0x64, 0x3a, 0x3a, 0x4e, 0x61, 0x6d, 0x65, 0x73, 0x70, 0x61,
-	0x63, 0x65, 0x3a, 0x3a, 0x56, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x10, 0x03, 0x22, 0xbc, 0x07, 0x0a, 0x15, 0x4e, 0x61, 0x6d, 0x65, 0x73, 0x70, 0x61, 0x63, 0x65,
+	0x43, 0x61, 0x70, 0x61, 0x63, 0x69, 0x74, 0x79, 0x49, 0x6e, 0x66, 0x6f, 0x12, 0x1c, 0x0a, 0x09,
+	0x6e, 0x61, 0x6d, 0x65, 0x73, 0x70, 0x61, 0x63, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x09, 0x6e, 0x61, 0x6d, 0x65, 0x73, 0x70, 0x61, 0x63, 0x65, 0x12, 0x2a, 0x0a, 0x11, 0x68, 0x61,
+	0x73, 0x5f, 0x6c, 0x65, 0x67, 0x61, 0x63, 0x79, 0x5f, 0x6c, 0x69, 0x6d, 0x69, 0x74, 0x73, 0x18,
+	0x02, 0x20, 0x01, 0x28, 0x08, 0x52, 0x0f, 0x68, 0x61, 0x73, 0x4c, 0x65, 0x67, 0x61, 0x63, 0x79,
+	0x4c, 0x69, 0x6d, 0x69, 0x74, 0x73, 0x12, 0x54, 0x0a, 0x10, 0x63, 0x75, 0x72, 0x72, 0x65, 0x6e,
+	0x74, 0x5f, 0x63, 0x61, 0x70, 0x61, 0x63, 0x69, 0x74, 0x79, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b,
+	0x32, 0x29, 0x2e, 0x74, 0x65, 0x6d, 0x70, 0x6f, 0x72, 0x61, 0x6c, 0x2e, 0x61, 0x70, 0x69, 0x2e,
+	0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x6e, 0x61, 0x6d, 0x65, 0x73, 0x70, 0x61, 0x63, 0x65, 0x2e,
+	0x76, 0x31, 0x2e, 0x43, 0x61, 0x70, 0x61, 0x63, 0x69, 0x74, 0x79, 0x52, 0x0f, 0x63, 0x75, 0x72,
+	0x72, 0x65, 0x6e, 0x74, 0x43, 0x61, 0x70, 0x61, 0x63, 0x69, 0x74, 0x79, 0x12, 0x6d, 0x0a, 0x0c,
+	0x6d, 0x6f, 0x64, 0x65, 0x5f, 0x6f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x18, 0x04, 0x20, 0x01,
+	0x28, 0x0b, 0x32, 0x4a, 0x2e, 0x74, 0x65, 0x6d, 0x70, 0x6f, 0x72, 0x61, 0x6c, 0x2e, 0x61, 0x70,
+	0x69, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x6e, 0x61, 0x6d, 0x65, 0x73, 0x70, 0x61, 0x63,
+	0x65, 0x2e, 0x76, 0x31, 0x2e, 0x4e, 0x61, 0x6d, 0x65, 0x73, 0x70, 0x61, 0x63, 0x65, 0x43, 0x61,
+	0x70, 0x61, 0x63, 0x69, 0x74, 0x79, 0x49, 0x6e, 0x66, 0x6f, 0x2e, 0x43, 0x61, 0x70, 0x61, 0x63,
+	0x69, 0x74, 0x79, 0x4d, 0x6f, 0x64, 0x65, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x52, 0x0b,
+	0x6d, 0x6f, 0x64, 0x65, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x12, 0x52, 0x0a, 0x05, 0x73,
+	0x74, 0x61, 0x74, 0x73, 0x18, 0x05, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x3c, 0x2e, 0x74, 0x65, 0x6d,
+	0x70, 0x6f, 0x72, 0x61, 0x6c, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e,
+	0x6e, 0x61, 0x6d, 0x65, 0x73, 0x70, 0x61, 0x63, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x4e, 0x61, 0x6d,
+	0x65, 0x73, 0x70, 0x61, 0x63, 0x65, 0x43, 0x61, 0x70, 0x61, 0x63, 0x69, 0x74, 0x79, 0x49, 0x6e,
+	0x66, 0x6f, 0x2e, 0x53, 0x74, 0x61, 0x74, 0x73, 0x52, 0x05, 0x73, 0x74, 0x61, 0x74, 0x73, 0x1a,
+	0x9a, 0x03, 0x0a, 0x13, 0x43, 0x61, 0x70, 0x61, 0x63, 0x69, 0x74, 0x79, 0x4d, 0x6f, 0x64, 0x65,
+	0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x12, 0x78, 0x0a, 0x0b, 0x70, 0x72, 0x6f, 0x76, 0x69,
+	0x73, 0x69, 0x6f, 0x6e, 0x65, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x56, 0x2e, 0x74,
+	0x65, 0x6d, 0x70, 0x6f, 0x72, 0x61, 0x6c, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x63, 0x6c, 0x6f, 0x75,
+	0x64, 0x2e, 0x6e, 0x61, 0x6d, 0x65, 0x73, 0x70, 0x61, 0x63, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x4e,
+	0x61, 0x6d, 0x65, 0x73, 0x70, 0x61, 0x63, 0x65, 0x43, 0x61, 0x70, 0x61, 0x63, 0x69, 0x74, 0x79,
+	0x49, 0x6e, 0x66, 0x6f, 0x2e, 0x43, 0x61, 0x70, 0x61, 0x63, 0x69, 0x74, 0x79, 0x4d, 0x6f, 0x64,
+	0x65, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x2e, 0x50, 0x72, 0x6f, 0x76, 0x69, 0x73, 0x69,
+	0x6f, 0x6e, 0x65, 0x64, 0x52, 0x0b, 0x70, 0x72, 0x6f, 0x76, 0x69, 0x73, 0x69, 0x6f, 0x6e, 0x65,
+	0x64, 0x12, 0x70, 0x0a, 0x09, 0x6f, 0x6e, 0x5f, 0x64, 0x65, 0x6d, 0x61, 0x6e, 0x64, 0x18, 0x02,
+	0x20, 0x01, 0x28, 0x0b, 0x32, 0x53, 0x2e, 0x74, 0x65, 0x6d, 0x70, 0x6f, 0x72, 0x61, 0x6c, 0x2e,
+	0x61, 0x70, 0x69, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x6e, 0x61, 0x6d, 0x65, 0x73, 0x70,
+	0x61, 0x63, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x4e, 0x61, 0x6d, 0x65, 0x73, 0x70, 0x61, 0x63, 0x65,
+	0x43, 0x61, 0x70, 0x61, 0x63, 0x69, 0x74, 0x79, 0x49, 0x6e, 0x66, 0x6f, 0x2e, 0x43, 0x61, 0x70,
+	0x61, 0x63, 0x69, 0x74, 0x79, 0x4d, 0x6f, 0x64, 0x65, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73,
+	0x2e, 0x4f, 0x6e, 0x44, 0x65, 0x6d, 0x61, 0x6e, 0x64, 0x52, 0x08, 0x6f, 0x6e, 0x44, 0x65, 0x6d,
+	0x61, 0x6e, 0x64, 0x1a, 0x6e, 0x0a, 0x0b, 0x50, 0x72, 0x6f, 0x76, 0x69, 0x73, 0x69, 0x6f, 0x6e,
+	0x65, 0x64, 0x12, 0x28, 0x0a, 0x10, 0x76, 0x61, 0x6c, 0x69, 0x64, 0x5f, 0x74, 0x72, 0x75, 0x5f,
+	0x76, 0x61, 0x6c, 0x75, 0x65, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x01, 0x52, 0x0e, 0x76, 0x61,
+	0x6c, 0x69, 0x64, 0x54, 0x72, 0x75, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x73, 0x12, 0x35, 0x0a, 0x17,
+	0x6d, 0x61, 0x78, 0x5f, 0x61, 0x76, 0x61, 0x69, 0x6c, 0x61, 0x62, 0x6c, 0x65, 0x5f, 0x74, 0x72,
+	0x75, 0x5f, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x01, 0x52, 0x14, 0x6d,
+	0x61, 0x78, 0x41, 0x76, 0x61, 0x69, 0x6c, 0x61, 0x62, 0x6c, 0x65, 0x54, 0x72, 0x75, 0x56, 0x61,
+	0x6c, 0x75, 0x65, 0x1a, 0x27, 0x0a, 0x08, 0x4f, 0x6e, 0x44, 0x65, 0x6d, 0x61, 0x6e, 0x64, 0x12,
+	0x1b, 0x0a, 0x09, 0x61, 0x70, 0x73, 0x5f, 0x6c, 0x69, 0x6d, 0x69, 0x74, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x01, 0x52, 0x08, 0x61, 0x70, 0x73, 0x4c, 0x69, 0x6d, 0x69, 0x74, 0x1a, 0xa2, 0x01, 0x0a,
+	0x05, 0x53, 0x74, 0x61, 0x74, 0x73, 0x12, 0x56, 0x0a, 0x03, 0x61, 0x70, 0x73, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x0b, 0x32, 0x44, 0x2e, 0x74, 0x65, 0x6d, 0x70, 0x6f, 0x72, 0x61, 0x6c, 0x2e, 0x61,
+	0x70, 0x69, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x6e, 0x61, 0x6d, 0x65, 0x73, 0x70, 0x61,
+	0x63, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x4e, 0x61, 0x6d, 0x65, 0x73, 0x70, 0x61, 0x63, 0x65, 0x43,
+	0x61, 0x70, 0x61, 0x63, 0x69, 0x74, 0x79, 0x49, 0x6e, 0x66, 0x6f, 0x2e, 0x53, 0x74, 0x61, 0x74,
+	0x73, 0x2e, 0x53, 0x75, 0x6d, 0x6d, 0x61, 0x72, 0x79, 0x52, 0x03, 0x61, 0x70, 0x73, 0x1a, 0x41,
+	0x0a, 0x07, 0x53, 0x75, 0x6d, 0x6d, 0x61, 0x72, 0x79, 0x12, 0x12, 0x0a, 0x04, 0x6d, 0x65, 0x61,
+	0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x01, 0x52, 0x04, 0x6d, 0x65, 0x61, 0x6e, 0x12, 0x10, 0x0a,
+	0x03, 0x70, 0x39, 0x30, 0x18, 0x02, 0x20, 0x01, 0x28, 0x01, 0x52, 0x03, 0x70, 0x39, 0x30, 0x12,
+	0x10, 0x0a, 0x03, 0x70, 0x39, 0x39, 0x18, 0x03, 0x20, 0x01, 0x28, 0x01, 0x52, 0x03, 0x70, 0x39,
+	0x39, 0x42, 0xb1, 0x01, 0x0a, 0x22, 0x69, 0x6f, 0x2e, 0x74, 0x65, 0x6d, 0x70, 0x6f, 0x72, 0x61,
+	0x6c, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x6e, 0x61, 0x6d, 0x65,
+	0x73, 0x70, 0x61, 0x63, 0x65, 0x2e, 0x76, 0x31, 0x42, 0x0c, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67,
+	0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x2f, 0x67, 0x6f, 0x2e, 0x74, 0x65, 0x6d,
+	0x70, 0x6f, 0x72, 0x61, 0x6c, 0x2e, 0x69, 0x6f, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x63, 0x6c, 0x6f,
+	0x75, 0x64, 0x2f, 0x6e, 0x61, 0x6d, 0x65, 0x73, 0x70, 0x61, 0x63, 0x65, 0x2f, 0x76, 0x31, 0x3b,
+	0x6e, 0x61, 0x6d, 0x65, 0x73, 0x70, 0x61, 0x63, 0x65, 0xaa, 0x02, 0x21, 0x54, 0x65, 0x6d, 0x70,
+	0x6f, 0x72, 0x61, 0x6c, 0x69, 0x6f, 0x2e, 0x41, 0x70, 0x69, 0x2e, 0x43, 0x6c, 0x6f, 0x75, 0x64,
+	0x2e, 0x4e, 0x61, 0x6d, 0x65, 0x73, 0x70, 0x61, 0x63, 0x65, 0x2e, 0x56, 0x31, 0xea, 0x02, 0x25,
+	0x54, 0x65, 0x6d, 0x70, 0x6f, 0x72, 0x61, 0x6c, 0x69, 0x6f, 0x3a, 0x3a, 0x41, 0x70, 0x69, 0x3a,
+	0x3a, 0x43, 0x6c, 0x6f, 0x75, 0x64, 0x3a, 0x3a, 0x4e, 0x61, 0x6d, 0x65, 0x73, 0x70, 0x61, 0x63,
+	0x65, 0x3a, 0x3a, 0x56, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 })
 
 var (
@@ -2441,7 +2849,7 @@ func file_temporal_api_cloud_namespace_v1_message_proto_rawDescGZIP() []byte {
 }
 
 var file_temporal_api_cloud_namespace_v1_message_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
-var file_temporal_api_cloud_namespace_v1_message_proto_msgTypes = make([]protoimpl.MessageInfo, 28)
+var file_temporal_api_cloud_namespace_v1_message_proto_msgTypes = make([]protoimpl.MessageInfo, 34)
 var file_temporal_api_cloud_namespace_v1_message_proto_goTypes = []any{
 	(Capacity_Request_State)(0),                             // 0: temporal.api.cloud.namespace.v1.Capacity.Request.State
 	(NamespaceSpec_SearchAttributeType)(0),                  // 1: temporal.api.cloud.namespace.v1.NamespaceSpec.SearchAttributeType
@@ -2464,71 +2872,83 @@ var file_temporal_api_cloud_namespace_v1_message_proto_goTypes = []any{
 	(*NamespaceRegionStatus)(nil),                           // 18: temporal.api.cloud.namespace.v1.NamespaceRegionStatus
 	(*ExportSinkSpec)(nil),                                  // 19: temporal.api.cloud.namespace.v1.ExportSinkSpec
 	(*ExportSink)(nil),                                      // 20: temporal.api.cloud.namespace.v1.ExportSink
-	(*CodecServerSpec_CustomErrorMessage)(nil),              // 21: temporal.api.cloud.namespace.v1.CodecServerSpec.CustomErrorMessage
-	(*CodecServerSpec_CustomErrorMessage_ErrorMessage)(nil), // 22: temporal.api.cloud.namespace.v1.CodecServerSpec.CustomErrorMessage.ErrorMessage
-	(*CapacitySpec_OnDemand)(nil),                           // 23: temporal.api.cloud.namespace.v1.CapacitySpec.OnDemand
-	(*CapacitySpec_Provisioned)(nil),                        // 24: temporal.api.cloud.namespace.v1.CapacitySpec.Provisioned
-	(*Capacity_OnDemand)(nil),                               // 25: temporal.api.cloud.namespace.v1.Capacity.OnDemand
-	(*Capacity_Provisioned)(nil),                            // 26: temporal.api.cloud.namespace.v1.Capacity.Provisioned
-	(*Capacity_Request)(nil),                                // 27: temporal.api.cloud.namespace.v1.Capacity.Request
-	nil,                                                     // 28: temporal.api.cloud.namespace.v1.NamespaceSpec.CustomSearchAttributesEntry
-	nil,                                                     // 29: temporal.api.cloud.namespace.v1.NamespaceSpec.SearchAttributesEntry
-	nil,                                                     // 30: temporal.api.cloud.namespace.v1.Namespace.RegionStatusEntry
-	nil,                                                     // 31: temporal.api.cloud.namespace.v1.Namespace.TagsEntry
-	(v1.ResourceState)(0),                                   // 32: temporal.api.cloud.resource.v1.ResourceState
-	(*timestamppb.Timestamp)(nil),                           // 33: google.protobuf.Timestamp
-	(*v11.ConnectivityRule)(nil),                            // 34: temporal.api.cloud.connectivityrule.v1.ConnectivityRule
-	(*v12.S3Spec)(nil),                                      // 35: temporal.api.cloud.sink.v1.S3Spec
-	(*v12.GCSSpec)(nil),                                     // 36: temporal.api.cloud.sink.v1.GCSSpec
+	(*NamespaceCapacityInfo)(nil),                           // 21: temporal.api.cloud.namespace.v1.NamespaceCapacityInfo
+	(*CodecServerSpec_CustomErrorMessage)(nil),              // 22: temporal.api.cloud.namespace.v1.CodecServerSpec.CustomErrorMessage
+	(*CodecServerSpec_CustomErrorMessage_ErrorMessage)(nil), // 23: temporal.api.cloud.namespace.v1.CodecServerSpec.CustomErrorMessage.ErrorMessage
+	(*CapacitySpec_OnDemand)(nil),                           // 24: temporal.api.cloud.namespace.v1.CapacitySpec.OnDemand
+	(*CapacitySpec_Provisioned)(nil),                        // 25: temporal.api.cloud.namespace.v1.CapacitySpec.Provisioned
+	(*Capacity_OnDemand)(nil),                               // 26: temporal.api.cloud.namespace.v1.Capacity.OnDemand
+	(*Capacity_Provisioned)(nil),                            // 27: temporal.api.cloud.namespace.v1.Capacity.Provisioned
+	(*Capacity_Request)(nil),                                // 28: temporal.api.cloud.namespace.v1.Capacity.Request
+	nil,                                                     // 29: temporal.api.cloud.namespace.v1.NamespaceSpec.CustomSearchAttributesEntry
+	nil,                                                     // 30: temporal.api.cloud.namespace.v1.NamespaceSpec.SearchAttributesEntry
+	nil,                                                     // 31: temporal.api.cloud.namespace.v1.Namespace.RegionStatusEntry
+	nil,                                                     // 32: temporal.api.cloud.namespace.v1.Namespace.TagsEntry
+	(*NamespaceCapacityInfo_CapacityModeOptions)(nil),             // 33: temporal.api.cloud.namespace.v1.NamespaceCapacityInfo.CapacityModeOptions
+	(*NamespaceCapacityInfo_Stats)(nil),                           // 34: temporal.api.cloud.namespace.v1.NamespaceCapacityInfo.Stats
+	(*NamespaceCapacityInfo_CapacityModeOptions_Provisioned)(nil), // 35: temporal.api.cloud.namespace.v1.NamespaceCapacityInfo.CapacityModeOptions.Provisioned
+	(*NamespaceCapacityInfo_CapacityModeOptions_OnDemand)(nil),    // 36: temporal.api.cloud.namespace.v1.NamespaceCapacityInfo.CapacityModeOptions.OnDemand
+	(*NamespaceCapacityInfo_Stats_Summary)(nil),                   // 37: temporal.api.cloud.namespace.v1.NamespaceCapacityInfo.Stats.Summary
+	(v1.ResourceState)(0),                                         // 38: temporal.api.cloud.resource.v1.ResourceState
+	(*timestamppb.Timestamp)(nil),                                 // 39: google.protobuf.Timestamp
+	(*v11.ConnectivityRule)(nil),                                  // 40: temporal.api.cloud.connectivityrule.v1.ConnectivityRule
+	(*v12.S3Spec)(nil),                                            // 41: temporal.api.cloud.sink.v1.S3Spec
+	(*v12.GCSSpec)(nil),                                           // 42: temporal.api.cloud.sink.v1.GCSSpec
 }
 var file_temporal_api_cloud_namespace_v1_message_proto_depIdxs = []int32{
 	4,  // 0: temporal.api.cloud.namespace.v1.MtlsAuthSpec.certificate_filters:type_name -> temporal.api.cloud.namespace.v1.CertificateFilterSpec
-	21, // 1: temporal.api.cloud.namespace.v1.CodecServerSpec.custom_error_message:type_name -> temporal.api.cloud.namespace.v1.CodecServerSpec.CustomErrorMessage
-	23, // 2: temporal.api.cloud.namespace.v1.CapacitySpec.on_demand:type_name -> temporal.api.cloud.namespace.v1.CapacitySpec.OnDemand
-	24, // 3: temporal.api.cloud.namespace.v1.CapacitySpec.provisioned:type_name -> temporal.api.cloud.namespace.v1.CapacitySpec.Provisioned
-	25, // 4: temporal.api.cloud.namespace.v1.Capacity.on_demand:type_name -> temporal.api.cloud.namespace.v1.Capacity.OnDemand
-	26, // 5: temporal.api.cloud.namespace.v1.Capacity.provisioned:type_name -> temporal.api.cloud.namespace.v1.Capacity.Provisioned
-	27, // 6: temporal.api.cloud.namespace.v1.Capacity.latest_request:type_name -> temporal.api.cloud.namespace.v1.Capacity.Request
+	22, // 1: temporal.api.cloud.namespace.v1.CodecServerSpec.custom_error_message:type_name -> temporal.api.cloud.namespace.v1.CodecServerSpec.CustomErrorMessage
+	24, // 2: temporal.api.cloud.namespace.v1.CapacitySpec.on_demand:type_name -> temporal.api.cloud.namespace.v1.CapacitySpec.OnDemand
+	25, // 3: temporal.api.cloud.namespace.v1.CapacitySpec.provisioned:type_name -> temporal.api.cloud.namespace.v1.CapacitySpec.Provisioned
+	26, // 4: temporal.api.cloud.namespace.v1.Capacity.on_demand:type_name -> temporal.api.cloud.namespace.v1.Capacity.OnDemand
+	27, // 5: temporal.api.cloud.namespace.v1.Capacity.provisioned:type_name -> temporal.api.cloud.namespace.v1.Capacity.Provisioned
+	28, // 6: temporal.api.cloud.namespace.v1.Capacity.latest_request:type_name -> temporal.api.cloud.namespace.v1.Capacity.Request
 	5,  // 7: temporal.api.cloud.namespace.v1.NamespaceSpec.mtls_auth:type_name -> temporal.api.cloud.namespace.v1.MtlsAuthSpec
 	6,  // 8: temporal.api.cloud.namespace.v1.NamespaceSpec.api_key_auth:type_name -> temporal.api.cloud.namespace.v1.ApiKeyAuthSpec
-	28, // 9: temporal.api.cloud.namespace.v1.NamespaceSpec.custom_search_attributes:type_name -> temporal.api.cloud.namespace.v1.NamespaceSpec.CustomSearchAttributesEntry
-	29, // 10: temporal.api.cloud.namespace.v1.NamespaceSpec.search_attributes:type_name -> temporal.api.cloud.namespace.v1.NamespaceSpec.SearchAttributesEntry
+	29, // 9: temporal.api.cloud.namespace.v1.NamespaceSpec.custom_search_attributes:type_name -> temporal.api.cloud.namespace.v1.NamespaceSpec.CustomSearchAttributesEntry
+	30, // 10: temporal.api.cloud.namespace.v1.NamespaceSpec.search_attributes:type_name -> temporal.api.cloud.namespace.v1.NamespaceSpec.SearchAttributesEntry
 	8,  // 11: temporal.api.cloud.namespace.v1.NamespaceSpec.codec_server:type_name -> temporal.api.cloud.namespace.v1.CodecServerSpec
 	7,  // 12: temporal.api.cloud.namespace.v1.NamespaceSpec.lifecycle:type_name -> temporal.api.cloud.namespace.v1.LifecycleSpec
 	9,  // 13: temporal.api.cloud.namespace.v1.NamespaceSpec.high_availability:type_name -> temporal.api.cloud.namespace.v1.HighAvailabilitySpec
 	10, // 14: temporal.api.cloud.namespace.v1.NamespaceSpec.capacity_spec:type_name -> temporal.api.cloud.namespace.v1.CapacitySpec
 	15, // 15: temporal.api.cloud.namespace.v1.PrivateConnectivity.aws_private_link:type_name -> temporal.api.cloud.namespace.v1.AWSPrivateLinkInfo
 	12, // 16: temporal.api.cloud.namespace.v1.Namespace.spec:type_name -> temporal.api.cloud.namespace.v1.NamespaceSpec
-	32, // 17: temporal.api.cloud.namespace.v1.Namespace.state:type_name -> temporal.api.cloud.resource.v1.ResourceState
+	38, // 17: temporal.api.cloud.namespace.v1.Namespace.state:type_name -> temporal.api.cloud.resource.v1.ResourceState
 	13, // 18: temporal.api.cloud.namespace.v1.Namespace.endpoints:type_name -> temporal.api.cloud.namespace.v1.Endpoints
 	14, // 19: temporal.api.cloud.namespace.v1.Namespace.limits:type_name -> temporal.api.cloud.namespace.v1.Limits
 	16, // 20: temporal.api.cloud.namespace.v1.Namespace.private_connectivities:type_name -> temporal.api.cloud.namespace.v1.PrivateConnectivity
-	33, // 21: temporal.api.cloud.namespace.v1.Namespace.created_time:type_name -> google.protobuf.Timestamp
-	33, // 22: temporal.api.cloud.namespace.v1.Namespace.last_modified_time:type_name -> google.protobuf.Timestamp
-	30, // 23: temporal.api.cloud.namespace.v1.Namespace.region_status:type_name -> temporal.api.cloud.namespace.v1.Namespace.RegionStatusEntry
-	34, // 24: temporal.api.cloud.namespace.v1.Namespace.connectivity_rules:type_name -> temporal.api.cloud.connectivityrule.v1.ConnectivityRule
-	31, // 25: temporal.api.cloud.namespace.v1.Namespace.tags:type_name -> temporal.api.cloud.namespace.v1.Namespace.TagsEntry
+	39, // 21: temporal.api.cloud.namespace.v1.Namespace.created_time:type_name -> google.protobuf.Timestamp
+	39, // 22: temporal.api.cloud.namespace.v1.Namespace.last_modified_time:type_name -> google.protobuf.Timestamp
+	31, // 23: temporal.api.cloud.namespace.v1.Namespace.region_status:type_name -> temporal.api.cloud.namespace.v1.Namespace.RegionStatusEntry
+	40, // 24: temporal.api.cloud.namespace.v1.Namespace.connectivity_rules:type_name -> temporal.api.cloud.connectivityrule.v1.ConnectivityRule
+	32, // 25: temporal.api.cloud.namespace.v1.Namespace.tags:type_name -> temporal.api.cloud.namespace.v1.Namespace.TagsEntry
 	11, // 26: temporal.api.cloud.namespace.v1.Namespace.capacity:type_name -> temporal.api.cloud.namespace.v1.Capacity
 	2,  // 27: temporal.api.cloud.namespace.v1.NamespaceRegionStatus.state:type_name -> temporal.api.cloud.namespace.v1.NamespaceRegionStatus.State
-	35, // 28: temporal.api.cloud.namespace.v1.ExportSinkSpec.s3:type_name -> temporal.api.cloud.sink.v1.S3Spec
-	36, // 29: temporal.api.cloud.namespace.v1.ExportSinkSpec.gcs:type_name -> temporal.api.cloud.sink.v1.GCSSpec
-	32, // 30: temporal.api.cloud.namespace.v1.ExportSink.state:type_name -> temporal.api.cloud.resource.v1.ResourceState
+	41, // 28: temporal.api.cloud.namespace.v1.ExportSinkSpec.s3:type_name -> temporal.api.cloud.sink.v1.S3Spec
+	42, // 29: temporal.api.cloud.namespace.v1.ExportSinkSpec.gcs:type_name -> temporal.api.cloud.sink.v1.GCSSpec
+	38, // 30: temporal.api.cloud.namespace.v1.ExportSink.state:type_name -> temporal.api.cloud.resource.v1.ResourceState
 	19, // 31: temporal.api.cloud.namespace.v1.ExportSink.spec:type_name -> temporal.api.cloud.namespace.v1.ExportSinkSpec
 	3,  // 32: temporal.api.cloud.namespace.v1.ExportSink.health:type_name -> temporal.api.cloud.namespace.v1.ExportSink.Health
-	33, // 33: temporal.api.cloud.namespace.v1.ExportSink.latest_data_export_time:type_name -> google.protobuf.Timestamp
-	33, // 34: temporal.api.cloud.namespace.v1.ExportSink.last_health_check_time:type_name -> google.protobuf.Timestamp
-	22, // 35: temporal.api.cloud.namespace.v1.CodecServerSpec.CustomErrorMessage.default:type_name -> temporal.api.cloud.namespace.v1.CodecServerSpec.CustomErrorMessage.ErrorMessage
-	0,  // 36: temporal.api.cloud.namespace.v1.Capacity.Request.state:type_name -> temporal.api.cloud.namespace.v1.Capacity.Request.State
-	33, // 37: temporal.api.cloud.namespace.v1.Capacity.Request.start_time:type_name -> google.protobuf.Timestamp
-	33, // 38: temporal.api.cloud.namespace.v1.Capacity.Request.end_time:type_name -> google.protobuf.Timestamp
-	10, // 39: temporal.api.cloud.namespace.v1.Capacity.Request.spec:type_name -> temporal.api.cloud.namespace.v1.CapacitySpec
-	1,  // 40: temporal.api.cloud.namespace.v1.NamespaceSpec.SearchAttributesEntry.value:type_name -> temporal.api.cloud.namespace.v1.NamespaceSpec.SearchAttributeType
-	18, // 41: temporal.api.cloud.namespace.v1.Namespace.RegionStatusEntry.value:type_name -> temporal.api.cloud.namespace.v1.NamespaceRegionStatus
-	42, // [42:42] is the sub-list for method output_type
-	42, // [42:42] is the sub-list for method input_type
-	42, // [42:42] is the sub-list for extension type_name
-	42, // [42:42] is the sub-list for extension extendee
-	0,  // [0:42] is the sub-list for field type_name
+	39, // 33: temporal.api.cloud.namespace.v1.ExportSink.latest_data_export_time:type_name -> google.protobuf.Timestamp
+	39, // 34: temporal.api.cloud.namespace.v1.ExportSink.last_health_check_time:type_name -> google.protobuf.Timestamp
+	11, // 35: temporal.api.cloud.namespace.v1.NamespaceCapacityInfo.current_capacity:type_name -> temporal.api.cloud.namespace.v1.Capacity
+	33, // 36: temporal.api.cloud.namespace.v1.NamespaceCapacityInfo.mode_options:type_name -> temporal.api.cloud.namespace.v1.NamespaceCapacityInfo.CapacityModeOptions
+	34, // 37: temporal.api.cloud.namespace.v1.NamespaceCapacityInfo.stats:type_name -> temporal.api.cloud.namespace.v1.NamespaceCapacityInfo.Stats
+	23, // 38: temporal.api.cloud.namespace.v1.CodecServerSpec.CustomErrorMessage.default:type_name -> temporal.api.cloud.namespace.v1.CodecServerSpec.CustomErrorMessage.ErrorMessage
+	0,  // 39: temporal.api.cloud.namespace.v1.Capacity.Request.state:type_name -> temporal.api.cloud.namespace.v1.Capacity.Request.State
+	39, // 40: temporal.api.cloud.namespace.v1.Capacity.Request.start_time:type_name -> google.protobuf.Timestamp
+	39, // 41: temporal.api.cloud.namespace.v1.Capacity.Request.end_time:type_name -> google.protobuf.Timestamp
+	10, // 42: temporal.api.cloud.namespace.v1.Capacity.Request.spec:type_name -> temporal.api.cloud.namespace.v1.CapacitySpec
+	1,  // 43: temporal.api.cloud.namespace.v1.NamespaceSpec.SearchAttributesEntry.value:type_name -> temporal.api.cloud.namespace.v1.NamespaceSpec.SearchAttributeType
+	18, // 44: temporal.api.cloud.namespace.v1.Namespace.RegionStatusEntry.value:type_name -> temporal.api.cloud.namespace.v1.NamespaceRegionStatus
+	35, // 45: temporal.api.cloud.namespace.v1.NamespaceCapacityInfo.CapacityModeOptions.provisioned:type_name -> temporal.api.cloud.namespace.v1.NamespaceCapacityInfo.CapacityModeOptions.Provisioned
+	36, // 46: temporal.api.cloud.namespace.v1.NamespaceCapacityInfo.CapacityModeOptions.on_demand:type_name -> temporal.api.cloud.namespace.v1.NamespaceCapacityInfo.CapacityModeOptions.OnDemand
+	37, // 47: temporal.api.cloud.namespace.v1.NamespaceCapacityInfo.Stats.aps:type_name -> temporal.api.cloud.namespace.v1.NamespaceCapacityInfo.Stats.Summary
+	48, // [48:48] is the sub-list for method output_type
+	48, // [48:48] is the sub-list for method input_type
+	48, // [48:48] is the sub-list for extension type_name
+	48, // [48:48] is the sub-list for extension extendee
+	0,  // [0:48] is the sub-list for field type_name
 }
 
 func init() { file_temporal_api_cloud_namespace_v1_message_proto_init() }
@@ -2550,7 +2970,7 @@ func file_temporal_api_cloud_namespace_v1_message_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_temporal_api_cloud_namespace_v1_message_proto_rawDesc), len(file_temporal_api_cloud_namespace_v1_message_proto_rawDesc)),
 			NumEnums:      4,
-			NumMessages:   28,
+			NumMessages:   34,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
