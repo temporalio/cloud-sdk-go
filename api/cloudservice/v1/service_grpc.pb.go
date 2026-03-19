@@ -85,6 +85,8 @@ const (
 	CloudService_UpdateAccountAuditLogSink_FullMethodName        = "/temporal.api.cloud.cloudservice.v1.CloudService/UpdateAccountAuditLogSink"
 	CloudService_DeleteAccountAuditLogSink_FullMethodName        = "/temporal.api.cloud.cloudservice.v1.CloudService/DeleteAccountAuditLogSink"
 	CloudService_GetNamespaceCapacityInfo_FullMethodName         = "/temporal.api.cloud.cloudservice.v1.CloudService/GetNamespaceCapacityInfo"
+	CloudService_CreateBillingReport_FullMethodName              = "/temporal.api.cloud.cloudservice.v1.CloudService/CreateBillingReport"
+	CloudService_GetBillingReport_FullMethodName                 = "/temporal.api.cloud.cloudservice.v1.CloudService/GetBillingReport"
 )
 
 // CloudServiceClient is the client API for CloudService service.
@@ -226,9 +228,12 @@ type CloudServiceClient interface {
 	UpdateAccountAuditLogSink(ctx context.Context, in *UpdateAccountAuditLogSinkRequest, opts ...grpc.CallOption) (*UpdateAccountAuditLogSinkResponse, error)
 	// Delete an audit log sink
 	DeleteAccountAuditLogSink(ctx context.Context, in *DeleteAccountAuditLogSinkRequest, opts ...grpc.CallOption) (*DeleteAccountAuditLogSinkResponse, error)
-	// GetNamespaceCapacityInfo returns capacity information for a namespace.
-	// This includes provisioned capacity options, on-demand limits, and 7 day historical APS statistics useful for capacity planning.
+	// Get namespace capacity information
 	GetNamespaceCapacityInfo(ctx context.Context, in *GetNamespaceCapacityInfoRequest, opts ...grpc.CallOption) (*GetNamespaceCapacityInfoResponse, error)
+	// Create a billing report
+	CreateBillingReport(ctx context.Context, in *CreateBillingReportRequest, opts ...grpc.CallOption) (*CreateBillingReportResponse, error)
+	// Get a billing report
+	GetBillingReport(ctx context.Context, in *GetBillingReportRequest, opts ...grpc.CallOption) (*GetBillingReportResponse, error)
 }
 
 type cloudServiceClient struct {
@@ -899,6 +904,26 @@ func (c *cloudServiceClient) GetNamespaceCapacityInfo(ctx context.Context, in *G
 	return out, nil
 }
 
+func (c *cloudServiceClient) CreateBillingReport(ctx context.Context, in *CreateBillingReportRequest, opts ...grpc.CallOption) (*CreateBillingReportResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateBillingReportResponse)
+	err := c.cc.Invoke(ctx, CloudService_CreateBillingReport_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cloudServiceClient) GetBillingReport(ctx context.Context, in *GetBillingReportRequest, opts ...grpc.CallOption) (*GetBillingReportResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetBillingReportResponse)
+	err := c.cc.Invoke(ctx, CloudService_GetBillingReport_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CloudServiceServer is the server API for CloudService service.
 // All implementations must embed UnimplementedCloudServiceServer
 // for forward compatibility.
@@ -1038,9 +1063,12 @@ type CloudServiceServer interface {
 	UpdateAccountAuditLogSink(context.Context, *UpdateAccountAuditLogSinkRequest) (*UpdateAccountAuditLogSinkResponse, error)
 	// Delete an audit log sink
 	DeleteAccountAuditLogSink(context.Context, *DeleteAccountAuditLogSinkRequest) (*DeleteAccountAuditLogSinkResponse, error)
-	// GetNamespaceCapacityInfo returns capacity information for a namespace.
-	// This includes provisioned capacity options, on-demand limits, and 7 day historical APS statistics useful for capacity planning.
+	// Get namespace capacity information
 	GetNamespaceCapacityInfo(context.Context, *GetNamespaceCapacityInfoRequest) (*GetNamespaceCapacityInfoResponse, error)
+	// Create a billing report
+	CreateBillingReport(context.Context, *CreateBillingReportRequest) (*CreateBillingReportResponse, error)
+	// Get a billing report
+	GetBillingReport(context.Context, *GetBillingReportRequest) (*GetBillingReportResponse, error)
 	mustEmbedUnimplementedCloudServiceServer()
 }
 
@@ -1248,6 +1276,12 @@ func (UnimplementedCloudServiceServer) DeleteAccountAuditLogSink(context.Context
 }
 func (UnimplementedCloudServiceServer) GetNamespaceCapacityInfo(context.Context, *GetNamespaceCapacityInfoRequest) (*GetNamespaceCapacityInfoResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetNamespaceCapacityInfo not implemented")
+}
+func (UnimplementedCloudServiceServer) CreateBillingReport(context.Context, *CreateBillingReportRequest) (*CreateBillingReportResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateBillingReport not implemented")
+}
+func (UnimplementedCloudServiceServer) GetBillingReport(context.Context, *GetBillingReportRequest) (*GetBillingReportResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetBillingReport not implemented")
 }
 func (UnimplementedCloudServiceServer) mustEmbedUnimplementedCloudServiceServer() {}
 func (UnimplementedCloudServiceServer) testEmbeddedByValue()                      {}
@@ -2458,6 +2492,42 @@ func _CloudService_GetNamespaceCapacityInfo_Handler(srv interface{}, ctx context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _CloudService_CreateBillingReport_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateBillingReportRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CloudServiceServer).CreateBillingReport(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CloudService_CreateBillingReport_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CloudServiceServer).CreateBillingReport(ctx, req.(*CreateBillingReportRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CloudService_GetBillingReport_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetBillingReportRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CloudServiceServer).GetBillingReport(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CloudService_GetBillingReport_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CloudServiceServer).GetBillingReport(ctx, req.(*GetBillingReportRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // CloudService_ServiceDesc is the grpc.ServiceDesc for CloudService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -2728,6 +2798,14 @@ var CloudService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetNamespaceCapacityInfo",
 			Handler:    _CloudService_GetNamespaceCapacityInfo_Handler,
+		},
+		{
+			MethodName: "CreateBillingReport",
+			Handler:    _CloudService_CreateBillingReport_Handler,
+		},
+		{
+			MethodName: "GetBillingReport",
+			Handler:    _CloudService_GetBillingReport_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
