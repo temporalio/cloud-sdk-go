@@ -87,6 +87,11 @@ const (
 	CloudService_GetNamespaceCapacityInfo_FullMethodName         = "/temporal.api.cloud.cloudservice.v1.CloudService/GetNamespaceCapacityInfo"
 	CloudService_CreateBillingReport_FullMethodName              = "/temporal.api.cloud.cloudservice.v1.CloudService/CreateBillingReport"
 	CloudService_GetBillingReport_FullMethodName                 = "/temporal.api.cloud.cloudservice.v1.CloudService/GetBillingReport"
+	CloudService_GetCustomRoles_FullMethodName                   = "/temporal.api.cloud.cloudservice.v1.CloudService/GetCustomRoles"
+	CloudService_GetCustomRole_FullMethodName                    = "/temporal.api.cloud.cloudservice.v1.CloudService/GetCustomRole"
+	CloudService_CreateCustomRole_FullMethodName                 = "/temporal.api.cloud.cloudservice.v1.CloudService/CreateCustomRole"
+	CloudService_UpdateCustomRole_FullMethodName                 = "/temporal.api.cloud.cloudservice.v1.CloudService/UpdateCustomRole"
+	CloudService_DeleteCustomRole_FullMethodName                 = "/temporal.api.cloud.cloudservice.v1.CloudService/DeleteCustomRole"
 )
 
 // CloudServiceClient is the client API for CloudService service.
@@ -126,9 +131,13 @@ type CloudServiceClient interface {
 	DeleteNamespace(ctx context.Context, in *DeleteNamespaceRequest, opts ...grpc.CallOption) (*DeleteNamespaceResponse, error)
 	// Failover a multi-region namespace
 	FailoverNamespaceRegion(ctx context.Context, in *FailoverNamespaceRegionRequest, opts ...grpc.CallOption) (*FailoverNamespaceRegionResponse, error)
+	// Deprecated: Do not use.
 	// Add a new region to a namespace
+	// Deprecated: Use the UpdateNamespace() to add new replica in the namespace spec instead.
 	AddNamespaceRegion(ctx context.Context, in *AddNamespaceRegionRequest, opts ...grpc.CallOption) (*AddNamespaceRegionResponse, error)
+	// Deprecated: Do not use.
 	// Delete a region from a namespace
+	// Deprecated: Use the UpdateNamespace() to delete a replica in the namespace spec instead.
 	DeleteNamespaceRegion(ctx context.Context, in *DeleteNamespaceRegionRequest, opts ...grpc.CallOption) (*DeleteNamespaceRegionResponse, error)
 	// Get all regions
 	GetRegions(ctx context.Context, in *GetRegionsRequest, opts ...grpc.CallOption) (*GetRegionsResponse, error)
@@ -234,6 +243,21 @@ type CloudServiceClient interface {
 	CreateBillingReport(ctx context.Context, in *CreateBillingReportRequest, opts ...grpc.CallOption) (*CreateBillingReportResponse, error)
 	// Get a billing report
 	GetBillingReport(ctx context.Context, in *GetBillingReportRequest, opts ...grpc.CallOption) (*GetBillingReportResponse, error)
+	// Get custom roles
+	// temporal:versioning:min_version=v0.13.0
+	GetCustomRoles(ctx context.Context, in *GetCustomRolesRequest, opts ...grpc.CallOption) (*GetCustomRolesResponse, error)
+	// Get a custom role
+	// temporal:versioning:min_version=v0.13.0
+	GetCustomRole(ctx context.Context, in *GetCustomRoleRequest, opts ...grpc.CallOption) (*GetCustomRoleResponse, error)
+	// Create a custom role
+	// temporal:versioning:min_version=v0.13.0
+	CreateCustomRole(ctx context.Context, in *CreateCustomRoleRequest, opts ...grpc.CallOption) (*CreateCustomRoleResponse, error)
+	// Update a custom role
+	// temporal:versioning:min_version=v0.13.0
+	UpdateCustomRole(ctx context.Context, in *UpdateCustomRoleRequest, opts ...grpc.CallOption) (*UpdateCustomRoleResponse, error)
+	// Delete a custom role
+	// temporal:versioning:min_version=v0.13.0
+	DeleteCustomRole(ctx context.Context, in *DeleteCustomRoleRequest, opts ...grpc.CallOption) (*DeleteCustomRoleResponse, error)
 }
 
 type cloudServiceClient struct {
@@ -394,6 +418,7 @@ func (c *cloudServiceClient) FailoverNamespaceRegion(ctx context.Context, in *Fa
 	return out, nil
 }
 
+// Deprecated: Do not use.
 func (c *cloudServiceClient) AddNamespaceRegion(ctx context.Context, in *AddNamespaceRegionRequest, opts ...grpc.CallOption) (*AddNamespaceRegionResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(AddNamespaceRegionResponse)
@@ -404,6 +429,7 @@ func (c *cloudServiceClient) AddNamespaceRegion(ctx context.Context, in *AddName
 	return out, nil
 }
 
+// Deprecated: Do not use.
 func (c *cloudServiceClient) DeleteNamespaceRegion(ctx context.Context, in *DeleteNamespaceRegionRequest, opts ...grpc.CallOption) (*DeleteNamespaceRegionResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(DeleteNamespaceRegionResponse)
@@ -924,6 +950,56 @@ func (c *cloudServiceClient) GetBillingReport(ctx context.Context, in *GetBillin
 	return out, nil
 }
 
+func (c *cloudServiceClient) GetCustomRoles(ctx context.Context, in *GetCustomRolesRequest, opts ...grpc.CallOption) (*GetCustomRolesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetCustomRolesResponse)
+	err := c.cc.Invoke(ctx, CloudService_GetCustomRoles_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cloudServiceClient) GetCustomRole(ctx context.Context, in *GetCustomRoleRequest, opts ...grpc.CallOption) (*GetCustomRoleResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetCustomRoleResponse)
+	err := c.cc.Invoke(ctx, CloudService_GetCustomRole_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cloudServiceClient) CreateCustomRole(ctx context.Context, in *CreateCustomRoleRequest, opts ...grpc.CallOption) (*CreateCustomRoleResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateCustomRoleResponse)
+	err := c.cc.Invoke(ctx, CloudService_CreateCustomRole_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cloudServiceClient) UpdateCustomRole(ctx context.Context, in *UpdateCustomRoleRequest, opts ...grpc.CallOption) (*UpdateCustomRoleResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateCustomRoleResponse)
+	err := c.cc.Invoke(ctx, CloudService_UpdateCustomRole_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cloudServiceClient) DeleteCustomRole(ctx context.Context, in *DeleteCustomRoleRequest, opts ...grpc.CallOption) (*DeleteCustomRoleResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteCustomRoleResponse)
+	err := c.cc.Invoke(ctx, CloudService_DeleteCustomRole_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CloudServiceServer is the server API for CloudService service.
 // All implementations must embed UnimplementedCloudServiceServer
 // for forward compatibility.
@@ -961,9 +1037,13 @@ type CloudServiceServer interface {
 	DeleteNamespace(context.Context, *DeleteNamespaceRequest) (*DeleteNamespaceResponse, error)
 	// Failover a multi-region namespace
 	FailoverNamespaceRegion(context.Context, *FailoverNamespaceRegionRequest) (*FailoverNamespaceRegionResponse, error)
+	// Deprecated: Do not use.
 	// Add a new region to a namespace
+	// Deprecated: Use the UpdateNamespace() to add new replica in the namespace spec instead.
 	AddNamespaceRegion(context.Context, *AddNamespaceRegionRequest) (*AddNamespaceRegionResponse, error)
+	// Deprecated: Do not use.
 	// Delete a region from a namespace
+	// Deprecated: Use the UpdateNamespace() to delete a replica in the namespace spec instead.
 	DeleteNamespaceRegion(context.Context, *DeleteNamespaceRegionRequest) (*DeleteNamespaceRegionResponse, error)
 	// Get all regions
 	GetRegions(context.Context, *GetRegionsRequest) (*GetRegionsResponse, error)
@@ -1069,6 +1149,21 @@ type CloudServiceServer interface {
 	CreateBillingReport(context.Context, *CreateBillingReportRequest) (*CreateBillingReportResponse, error)
 	// Get a billing report
 	GetBillingReport(context.Context, *GetBillingReportRequest) (*GetBillingReportResponse, error)
+	// Get custom roles
+	// temporal:versioning:min_version=v0.13.0
+	GetCustomRoles(context.Context, *GetCustomRolesRequest) (*GetCustomRolesResponse, error)
+	// Get a custom role
+	// temporal:versioning:min_version=v0.13.0
+	GetCustomRole(context.Context, *GetCustomRoleRequest) (*GetCustomRoleResponse, error)
+	// Create a custom role
+	// temporal:versioning:min_version=v0.13.0
+	CreateCustomRole(context.Context, *CreateCustomRoleRequest) (*CreateCustomRoleResponse, error)
+	// Update a custom role
+	// temporal:versioning:min_version=v0.13.0
+	UpdateCustomRole(context.Context, *UpdateCustomRoleRequest) (*UpdateCustomRoleResponse, error)
+	// Delete a custom role
+	// temporal:versioning:min_version=v0.13.0
+	DeleteCustomRole(context.Context, *DeleteCustomRoleRequest) (*DeleteCustomRoleResponse, error)
 	mustEmbedUnimplementedCloudServiceServer()
 }
 
@@ -1282,6 +1377,21 @@ func (UnimplementedCloudServiceServer) CreateBillingReport(context.Context, *Cre
 }
 func (UnimplementedCloudServiceServer) GetBillingReport(context.Context, *GetBillingReportRequest) (*GetBillingReportResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetBillingReport not implemented")
+}
+func (UnimplementedCloudServiceServer) GetCustomRoles(context.Context, *GetCustomRolesRequest) (*GetCustomRolesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetCustomRoles not implemented")
+}
+func (UnimplementedCloudServiceServer) GetCustomRole(context.Context, *GetCustomRoleRequest) (*GetCustomRoleResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetCustomRole not implemented")
+}
+func (UnimplementedCloudServiceServer) CreateCustomRole(context.Context, *CreateCustomRoleRequest) (*CreateCustomRoleResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateCustomRole not implemented")
+}
+func (UnimplementedCloudServiceServer) UpdateCustomRole(context.Context, *UpdateCustomRoleRequest) (*UpdateCustomRoleResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateCustomRole not implemented")
+}
+func (UnimplementedCloudServiceServer) DeleteCustomRole(context.Context, *DeleteCustomRoleRequest) (*DeleteCustomRoleResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteCustomRole not implemented")
 }
 func (UnimplementedCloudServiceServer) mustEmbedUnimplementedCloudServiceServer() {}
 func (UnimplementedCloudServiceServer) testEmbeddedByValue()                      {}
@@ -2528,6 +2638,96 @@ func _CloudService_GetBillingReport_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _CloudService_GetCustomRoles_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCustomRolesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CloudServiceServer).GetCustomRoles(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CloudService_GetCustomRoles_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CloudServiceServer).GetCustomRoles(ctx, req.(*GetCustomRolesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CloudService_GetCustomRole_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCustomRoleRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CloudServiceServer).GetCustomRole(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CloudService_GetCustomRole_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CloudServiceServer).GetCustomRole(ctx, req.(*GetCustomRoleRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CloudService_CreateCustomRole_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateCustomRoleRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CloudServiceServer).CreateCustomRole(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CloudService_CreateCustomRole_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CloudServiceServer).CreateCustomRole(ctx, req.(*CreateCustomRoleRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CloudService_UpdateCustomRole_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateCustomRoleRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CloudServiceServer).UpdateCustomRole(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CloudService_UpdateCustomRole_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CloudServiceServer).UpdateCustomRole(ctx, req.(*UpdateCustomRoleRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CloudService_DeleteCustomRole_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteCustomRoleRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CloudServiceServer).DeleteCustomRole(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CloudService_DeleteCustomRole_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CloudServiceServer).DeleteCustomRole(ctx, req.(*DeleteCustomRoleRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // CloudService_ServiceDesc is the grpc.ServiceDesc for CloudService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -2806,6 +3006,26 @@ var CloudService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetBillingReport",
 			Handler:    _CloudService_GetBillingReport_Handler,
+		},
+		{
+			MethodName: "GetCustomRoles",
+			Handler:    _CloudService_GetCustomRoles_Handler,
+		},
+		{
+			MethodName: "GetCustomRole",
+			Handler:    _CloudService_GetCustomRole_Handler,
+		},
+		{
+			MethodName: "CreateCustomRole",
+			Handler:    _CloudService_CreateCustomRole_Handler,
+		},
+		{
+			MethodName: "UpdateCustomRole",
+			Handler:    _CloudService_UpdateCustomRole_Handler,
+		},
+		{
+			MethodName: "DeleteCustomRole",
+			Handler:    _CloudService_DeleteCustomRole_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
