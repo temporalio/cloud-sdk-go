@@ -22,8 +22,8 @@ const (
 	authorizationBearer           = "Bearer"
 	temporalCloudAPIVersionHeader = "temporal-cloud-api-version"
 
-	sdkVersion        = "0.9.0"
-	defaultAPIVersion = "v0.12.0"
+	sdkVersion        = "0.10.0"
+	defaultAPIVersion = "v0.13.0"
 )
 
 func DefaultAPIVersion() string {
