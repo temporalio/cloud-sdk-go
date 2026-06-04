@@ -19,79 +19,82 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	CloudService_GetCurrentIdentity_FullMethodName               = "/temporal.api.cloud.cloudservice.v1.CloudService/GetCurrentIdentity"
-	CloudService_GetUsers_FullMethodName                         = "/temporal.api.cloud.cloudservice.v1.CloudService/GetUsers"
-	CloudService_GetUser_FullMethodName                          = "/temporal.api.cloud.cloudservice.v1.CloudService/GetUser"
-	CloudService_CreateUser_FullMethodName                       = "/temporal.api.cloud.cloudservice.v1.CloudService/CreateUser"
-	CloudService_UpdateUser_FullMethodName                       = "/temporal.api.cloud.cloudservice.v1.CloudService/UpdateUser"
-	CloudService_DeleteUser_FullMethodName                       = "/temporal.api.cloud.cloudservice.v1.CloudService/DeleteUser"
-	CloudService_SetUserNamespaceAccess_FullMethodName           = "/temporal.api.cloud.cloudservice.v1.CloudService/SetUserNamespaceAccess"
-	CloudService_GetAsyncOperation_FullMethodName                = "/temporal.api.cloud.cloudservice.v1.CloudService/GetAsyncOperation"
-	CloudService_CreateNamespace_FullMethodName                  = "/temporal.api.cloud.cloudservice.v1.CloudService/CreateNamespace"
-	CloudService_GetNamespaces_FullMethodName                    = "/temporal.api.cloud.cloudservice.v1.CloudService/GetNamespaces"
-	CloudService_GetNamespace_FullMethodName                     = "/temporal.api.cloud.cloudservice.v1.CloudService/GetNamespace"
-	CloudService_UpdateNamespace_FullMethodName                  = "/temporal.api.cloud.cloudservice.v1.CloudService/UpdateNamespace"
-	CloudService_RenameCustomSearchAttribute_FullMethodName      = "/temporal.api.cloud.cloudservice.v1.CloudService/RenameCustomSearchAttribute"
-	CloudService_DeleteNamespace_FullMethodName                  = "/temporal.api.cloud.cloudservice.v1.CloudService/DeleteNamespace"
-	CloudService_FailoverNamespaceRegion_FullMethodName          = "/temporal.api.cloud.cloudservice.v1.CloudService/FailoverNamespaceRegion"
-	CloudService_AddNamespaceRegion_FullMethodName               = "/temporal.api.cloud.cloudservice.v1.CloudService/AddNamespaceRegion"
-	CloudService_DeleteNamespaceRegion_FullMethodName            = "/temporal.api.cloud.cloudservice.v1.CloudService/DeleteNamespaceRegion"
-	CloudService_GetRegions_FullMethodName                       = "/temporal.api.cloud.cloudservice.v1.CloudService/GetRegions"
-	CloudService_GetRegion_FullMethodName                        = "/temporal.api.cloud.cloudservice.v1.CloudService/GetRegion"
-	CloudService_GetApiKeys_FullMethodName                       = "/temporal.api.cloud.cloudservice.v1.CloudService/GetApiKeys"
-	CloudService_GetApiKey_FullMethodName                        = "/temporal.api.cloud.cloudservice.v1.CloudService/GetApiKey"
-	CloudService_CreateApiKey_FullMethodName                     = "/temporal.api.cloud.cloudservice.v1.CloudService/CreateApiKey"
-	CloudService_UpdateApiKey_FullMethodName                     = "/temporal.api.cloud.cloudservice.v1.CloudService/UpdateApiKey"
-	CloudService_DeleteApiKey_FullMethodName                     = "/temporal.api.cloud.cloudservice.v1.CloudService/DeleteApiKey"
-	CloudService_GetNexusEndpoints_FullMethodName                = "/temporal.api.cloud.cloudservice.v1.CloudService/GetNexusEndpoints"
-	CloudService_GetNexusEndpoint_FullMethodName                 = "/temporal.api.cloud.cloudservice.v1.CloudService/GetNexusEndpoint"
-	CloudService_CreateNexusEndpoint_FullMethodName              = "/temporal.api.cloud.cloudservice.v1.CloudService/CreateNexusEndpoint"
-	CloudService_UpdateNexusEndpoint_FullMethodName              = "/temporal.api.cloud.cloudservice.v1.CloudService/UpdateNexusEndpoint"
-	CloudService_DeleteNexusEndpoint_FullMethodName              = "/temporal.api.cloud.cloudservice.v1.CloudService/DeleteNexusEndpoint"
-	CloudService_GetUserGroups_FullMethodName                    = "/temporal.api.cloud.cloudservice.v1.CloudService/GetUserGroups"
-	CloudService_GetUserGroup_FullMethodName                     = "/temporal.api.cloud.cloudservice.v1.CloudService/GetUserGroup"
-	CloudService_CreateUserGroup_FullMethodName                  = "/temporal.api.cloud.cloudservice.v1.CloudService/CreateUserGroup"
-	CloudService_UpdateUserGroup_FullMethodName                  = "/temporal.api.cloud.cloudservice.v1.CloudService/UpdateUserGroup"
-	CloudService_DeleteUserGroup_FullMethodName                  = "/temporal.api.cloud.cloudservice.v1.CloudService/DeleteUserGroup"
-	CloudService_SetUserGroupNamespaceAccess_FullMethodName      = "/temporal.api.cloud.cloudservice.v1.CloudService/SetUserGroupNamespaceAccess"
-	CloudService_AddUserGroupMember_FullMethodName               = "/temporal.api.cloud.cloudservice.v1.CloudService/AddUserGroupMember"
-	CloudService_RemoveUserGroupMember_FullMethodName            = "/temporal.api.cloud.cloudservice.v1.CloudService/RemoveUserGroupMember"
-	CloudService_GetUserGroupMembers_FullMethodName              = "/temporal.api.cloud.cloudservice.v1.CloudService/GetUserGroupMembers"
-	CloudService_CreateServiceAccount_FullMethodName             = "/temporal.api.cloud.cloudservice.v1.CloudService/CreateServiceAccount"
-	CloudService_GetServiceAccount_FullMethodName                = "/temporal.api.cloud.cloudservice.v1.CloudService/GetServiceAccount"
-	CloudService_GetServiceAccounts_FullMethodName               = "/temporal.api.cloud.cloudservice.v1.CloudService/GetServiceAccounts"
-	CloudService_UpdateServiceAccount_FullMethodName             = "/temporal.api.cloud.cloudservice.v1.CloudService/UpdateServiceAccount"
-	CloudService_SetServiceAccountNamespaceAccess_FullMethodName = "/temporal.api.cloud.cloudservice.v1.CloudService/SetServiceAccountNamespaceAccess"
-	CloudService_DeleteServiceAccount_FullMethodName             = "/temporal.api.cloud.cloudservice.v1.CloudService/DeleteServiceAccount"
-	CloudService_GetUsage_FullMethodName                         = "/temporal.api.cloud.cloudservice.v1.CloudService/GetUsage"
-	CloudService_GetAccount_FullMethodName                       = "/temporal.api.cloud.cloudservice.v1.CloudService/GetAccount"
-	CloudService_UpdateAccount_FullMethodName                    = "/temporal.api.cloud.cloudservice.v1.CloudService/UpdateAccount"
-	CloudService_CreateNamespaceExportSink_FullMethodName        = "/temporal.api.cloud.cloudservice.v1.CloudService/CreateNamespaceExportSink"
-	CloudService_GetNamespaceExportSink_FullMethodName           = "/temporal.api.cloud.cloudservice.v1.CloudService/GetNamespaceExportSink"
-	CloudService_GetNamespaceExportSinks_FullMethodName          = "/temporal.api.cloud.cloudservice.v1.CloudService/GetNamespaceExportSinks"
-	CloudService_UpdateNamespaceExportSink_FullMethodName        = "/temporal.api.cloud.cloudservice.v1.CloudService/UpdateNamespaceExportSink"
-	CloudService_DeleteNamespaceExportSink_FullMethodName        = "/temporal.api.cloud.cloudservice.v1.CloudService/DeleteNamespaceExportSink"
-	CloudService_ValidateNamespaceExportSink_FullMethodName      = "/temporal.api.cloud.cloudservice.v1.CloudService/ValidateNamespaceExportSink"
-	CloudService_UpdateNamespaceTags_FullMethodName              = "/temporal.api.cloud.cloudservice.v1.CloudService/UpdateNamespaceTags"
-	CloudService_CreateConnectivityRule_FullMethodName           = "/temporal.api.cloud.cloudservice.v1.CloudService/CreateConnectivityRule"
-	CloudService_GetConnectivityRule_FullMethodName              = "/temporal.api.cloud.cloudservice.v1.CloudService/GetConnectivityRule"
-	CloudService_GetConnectivityRules_FullMethodName             = "/temporal.api.cloud.cloudservice.v1.CloudService/GetConnectivityRules"
-	CloudService_DeleteConnectivityRule_FullMethodName           = "/temporal.api.cloud.cloudservice.v1.CloudService/DeleteConnectivityRule"
-	CloudService_GetAuditLogs_FullMethodName                     = "/temporal.api.cloud.cloudservice.v1.CloudService/GetAuditLogs"
-	CloudService_ValidateAccountAuditLogSink_FullMethodName      = "/temporal.api.cloud.cloudservice.v1.CloudService/ValidateAccountAuditLogSink"
-	CloudService_CreateAccountAuditLogSink_FullMethodName        = "/temporal.api.cloud.cloudservice.v1.CloudService/CreateAccountAuditLogSink"
-	CloudService_GetAccountAuditLogSink_FullMethodName           = "/temporal.api.cloud.cloudservice.v1.CloudService/GetAccountAuditLogSink"
-	CloudService_GetAccountAuditLogSinks_FullMethodName          = "/temporal.api.cloud.cloudservice.v1.CloudService/GetAccountAuditLogSinks"
-	CloudService_UpdateAccountAuditLogSink_FullMethodName        = "/temporal.api.cloud.cloudservice.v1.CloudService/UpdateAccountAuditLogSink"
-	CloudService_DeleteAccountAuditLogSink_FullMethodName        = "/temporal.api.cloud.cloudservice.v1.CloudService/DeleteAccountAuditLogSink"
-	CloudService_GetNamespaceCapacityInfo_FullMethodName         = "/temporal.api.cloud.cloudservice.v1.CloudService/GetNamespaceCapacityInfo"
-	CloudService_CreateBillingReport_FullMethodName              = "/temporal.api.cloud.cloudservice.v1.CloudService/CreateBillingReport"
-	CloudService_GetBillingReport_FullMethodName                 = "/temporal.api.cloud.cloudservice.v1.CloudService/GetBillingReport"
-	CloudService_GetCustomRoles_FullMethodName                   = "/temporal.api.cloud.cloudservice.v1.CloudService/GetCustomRoles"
-	CloudService_GetCustomRole_FullMethodName                    = "/temporal.api.cloud.cloudservice.v1.CloudService/GetCustomRole"
-	CloudService_CreateCustomRole_FullMethodName                 = "/temporal.api.cloud.cloudservice.v1.CloudService/CreateCustomRole"
-	CloudService_UpdateCustomRole_FullMethodName                 = "/temporal.api.cloud.cloudservice.v1.CloudService/UpdateCustomRole"
-	CloudService_DeleteCustomRole_FullMethodName                 = "/temporal.api.cloud.cloudservice.v1.CloudService/DeleteCustomRole"
+	CloudService_GetCurrentIdentity_FullMethodName                    = "/temporal.api.cloud.cloudservice.v1.CloudService/GetCurrentIdentity"
+	CloudService_GetUsers_FullMethodName                              = "/temporal.api.cloud.cloudservice.v1.CloudService/GetUsers"
+	CloudService_GetUser_FullMethodName                               = "/temporal.api.cloud.cloudservice.v1.CloudService/GetUser"
+	CloudService_CreateUser_FullMethodName                            = "/temporal.api.cloud.cloudservice.v1.CloudService/CreateUser"
+	CloudService_UpdateUser_FullMethodName                            = "/temporal.api.cloud.cloudservice.v1.CloudService/UpdateUser"
+	CloudService_DeleteUser_FullMethodName                            = "/temporal.api.cloud.cloudservice.v1.CloudService/DeleteUser"
+	CloudService_SetUserNamespaceAccess_FullMethodName                = "/temporal.api.cloud.cloudservice.v1.CloudService/SetUserNamespaceAccess"
+	CloudService_GetAsyncOperation_FullMethodName                     = "/temporal.api.cloud.cloudservice.v1.CloudService/GetAsyncOperation"
+	CloudService_CreateNamespace_FullMethodName                       = "/temporal.api.cloud.cloudservice.v1.CloudService/CreateNamespace"
+	CloudService_GetNamespaces_FullMethodName                         = "/temporal.api.cloud.cloudservice.v1.CloudService/GetNamespaces"
+	CloudService_GetNamespace_FullMethodName                          = "/temporal.api.cloud.cloudservice.v1.CloudService/GetNamespace"
+	CloudService_UpdateNamespace_FullMethodName                       = "/temporal.api.cloud.cloudservice.v1.CloudService/UpdateNamespace"
+	CloudService_RenameCustomSearchAttribute_FullMethodName           = "/temporal.api.cloud.cloudservice.v1.CloudService/RenameCustomSearchAttribute"
+	CloudService_DeleteNamespace_FullMethodName                       = "/temporal.api.cloud.cloudservice.v1.CloudService/DeleteNamespace"
+	CloudService_FailoverNamespaceRegion_FullMethodName               = "/temporal.api.cloud.cloudservice.v1.CloudService/FailoverNamespaceRegion"
+	CloudService_AddNamespaceRegion_FullMethodName                    = "/temporal.api.cloud.cloudservice.v1.CloudService/AddNamespaceRegion"
+	CloudService_DeleteNamespaceRegion_FullMethodName                 = "/temporal.api.cloud.cloudservice.v1.CloudService/DeleteNamespaceRegion"
+	CloudService_GetRegions_FullMethodName                            = "/temporal.api.cloud.cloudservice.v1.CloudService/GetRegions"
+	CloudService_GetRegion_FullMethodName                             = "/temporal.api.cloud.cloudservice.v1.CloudService/GetRegion"
+	CloudService_GetApiKeys_FullMethodName                            = "/temporal.api.cloud.cloudservice.v1.CloudService/GetApiKeys"
+	CloudService_GetApiKey_FullMethodName                             = "/temporal.api.cloud.cloudservice.v1.CloudService/GetApiKey"
+	CloudService_CreateApiKey_FullMethodName                          = "/temporal.api.cloud.cloudservice.v1.CloudService/CreateApiKey"
+	CloudService_UpdateApiKey_FullMethodName                          = "/temporal.api.cloud.cloudservice.v1.CloudService/UpdateApiKey"
+	CloudService_DeleteApiKey_FullMethodName                          = "/temporal.api.cloud.cloudservice.v1.CloudService/DeleteApiKey"
+	CloudService_GetNexusEndpoints_FullMethodName                     = "/temporal.api.cloud.cloudservice.v1.CloudService/GetNexusEndpoints"
+	CloudService_GetNexusEndpoint_FullMethodName                      = "/temporal.api.cloud.cloudservice.v1.CloudService/GetNexusEndpoint"
+	CloudService_CreateNexusEndpoint_FullMethodName                   = "/temporal.api.cloud.cloudservice.v1.CloudService/CreateNexusEndpoint"
+	CloudService_UpdateNexusEndpoint_FullMethodName                   = "/temporal.api.cloud.cloudservice.v1.CloudService/UpdateNexusEndpoint"
+	CloudService_DeleteNexusEndpoint_FullMethodName                   = "/temporal.api.cloud.cloudservice.v1.CloudService/DeleteNexusEndpoint"
+	CloudService_GetUserGroups_FullMethodName                         = "/temporal.api.cloud.cloudservice.v1.CloudService/GetUserGroups"
+	CloudService_GetUserGroup_FullMethodName                          = "/temporal.api.cloud.cloudservice.v1.CloudService/GetUserGroup"
+	CloudService_CreateUserGroup_FullMethodName                       = "/temporal.api.cloud.cloudservice.v1.CloudService/CreateUserGroup"
+	CloudService_UpdateUserGroup_FullMethodName                       = "/temporal.api.cloud.cloudservice.v1.CloudService/UpdateUserGroup"
+	CloudService_DeleteUserGroup_FullMethodName                       = "/temporal.api.cloud.cloudservice.v1.CloudService/DeleteUserGroup"
+	CloudService_SetUserGroupNamespaceAccess_FullMethodName           = "/temporal.api.cloud.cloudservice.v1.CloudService/SetUserGroupNamespaceAccess"
+	CloudService_AddUserGroupMember_FullMethodName                    = "/temporal.api.cloud.cloudservice.v1.CloudService/AddUserGroupMember"
+	CloudService_RemoveUserGroupMember_FullMethodName                 = "/temporal.api.cloud.cloudservice.v1.CloudService/RemoveUserGroupMember"
+	CloudService_GetUserGroupMembers_FullMethodName                   = "/temporal.api.cloud.cloudservice.v1.CloudService/GetUserGroupMembers"
+	CloudService_CreateServiceAccount_FullMethodName                  = "/temporal.api.cloud.cloudservice.v1.CloudService/CreateServiceAccount"
+	CloudService_GetServiceAccount_FullMethodName                     = "/temporal.api.cloud.cloudservice.v1.CloudService/GetServiceAccount"
+	CloudService_GetServiceAccounts_FullMethodName                    = "/temporal.api.cloud.cloudservice.v1.CloudService/GetServiceAccounts"
+	CloudService_UpdateServiceAccount_FullMethodName                  = "/temporal.api.cloud.cloudservice.v1.CloudService/UpdateServiceAccount"
+	CloudService_SetServiceAccountNamespaceAccess_FullMethodName      = "/temporal.api.cloud.cloudservice.v1.CloudService/SetServiceAccountNamespaceAccess"
+	CloudService_DeleteServiceAccount_FullMethodName                  = "/temporal.api.cloud.cloudservice.v1.CloudService/DeleteServiceAccount"
+	CloudService_GetUsage_FullMethodName                              = "/temporal.api.cloud.cloudservice.v1.CloudService/GetUsage"
+	CloudService_GetAccount_FullMethodName                            = "/temporal.api.cloud.cloudservice.v1.CloudService/GetAccount"
+	CloudService_UpdateAccount_FullMethodName                         = "/temporal.api.cloud.cloudservice.v1.CloudService/UpdateAccount"
+	CloudService_CreateNamespaceExportSink_FullMethodName             = "/temporal.api.cloud.cloudservice.v1.CloudService/CreateNamespaceExportSink"
+	CloudService_GetNamespaceExportSink_FullMethodName                = "/temporal.api.cloud.cloudservice.v1.CloudService/GetNamespaceExportSink"
+	CloudService_GetNamespaceExportSinks_FullMethodName               = "/temporal.api.cloud.cloudservice.v1.CloudService/GetNamespaceExportSinks"
+	CloudService_UpdateNamespaceExportSink_FullMethodName             = "/temporal.api.cloud.cloudservice.v1.CloudService/UpdateNamespaceExportSink"
+	CloudService_DeleteNamespaceExportSink_FullMethodName             = "/temporal.api.cloud.cloudservice.v1.CloudService/DeleteNamespaceExportSink"
+	CloudService_ValidateNamespaceExportSink_FullMethodName           = "/temporal.api.cloud.cloudservice.v1.CloudService/ValidateNamespaceExportSink"
+	CloudService_UpdateNamespaceTags_FullMethodName                   = "/temporal.api.cloud.cloudservice.v1.CloudService/UpdateNamespaceTags"
+	CloudService_CreateConnectivityRule_FullMethodName                = "/temporal.api.cloud.cloudservice.v1.CloudService/CreateConnectivityRule"
+	CloudService_GetConnectivityRule_FullMethodName                   = "/temporal.api.cloud.cloudservice.v1.CloudService/GetConnectivityRule"
+	CloudService_GetConnectivityRules_FullMethodName                  = "/temporal.api.cloud.cloudservice.v1.CloudService/GetConnectivityRules"
+	CloudService_DeleteConnectivityRule_FullMethodName                = "/temporal.api.cloud.cloudservice.v1.CloudService/DeleteConnectivityRule"
+	CloudService_GetAuditLogs_FullMethodName                          = "/temporal.api.cloud.cloudservice.v1.CloudService/GetAuditLogs"
+	CloudService_ValidateAccountAuditLogSink_FullMethodName           = "/temporal.api.cloud.cloudservice.v1.CloudService/ValidateAccountAuditLogSink"
+	CloudService_CreateAccountAuditLogSink_FullMethodName             = "/temporal.api.cloud.cloudservice.v1.CloudService/CreateAccountAuditLogSink"
+	CloudService_GetAccountAuditLogSink_FullMethodName                = "/temporal.api.cloud.cloudservice.v1.CloudService/GetAccountAuditLogSink"
+	CloudService_GetAccountAuditLogSinks_FullMethodName               = "/temporal.api.cloud.cloudservice.v1.CloudService/GetAccountAuditLogSinks"
+	CloudService_UpdateAccountAuditLogSink_FullMethodName             = "/temporal.api.cloud.cloudservice.v1.CloudService/UpdateAccountAuditLogSink"
+	CloudService_DeleteAccountAuditLogSink_FullMethodName             = "/temporal.api.cloud.cloudservice.v1.CloudService/DeleteAccountAuditLogSink"
+	CloudService_GetNamespaceCapacityInfo_FullMethodName              = "/temporal.api.cloud.cloudservice.v1.CloudService/GetNamespaceCapacityInfo"
+	CloudService_CreateBillingReport_FullMethodName                   = "/temporal.api.cloud.cloudservice.v1.CloudService/CreateBillingReport"
+	CloudService_GetBillingReport_FullMethodName                      = "/temporal.api.cloud.cloudservice.v1.CloudService/GetBillingReport"
+	CloudService_GetCustomRoles_FullMethodName                        = "/temporal.api.cloud.cloudservice.v1.CloudService/GetCustomRoles"
+	CloudService_GetCustomRole_FullMethodName                         = "/temporal.api.cloud.cloudservice.v1.CloudService/GetCustomRole"
+	CloudService_CreateCustomRole_FullMethodName                      = "/temporal.api.cloud.cloudservice.v1.CloudService/CreateCustomRole"
+	CloudService_UpdateCustomRole_FullMethodName                      = "/temporal.api.cloud.cloudservice.v1.CloudService/UpdateCustomRole"
+	CloudService_DeleteCustomRole_FullMethodName                      = "/temporal.api.cloud.cloudservice.v1.CloudService/DeleteCustomRole"
+	CloudService_GetUserNamespaceAssignments_FullMethodName           = "/temporal.api.cloud.cloudservice.v1.CloudService/GetUserNamespaceAssignments"
+	CloudService_GetServiceAccountNamespaceAssignments_FullMethodName = "/temporal.api.cloud.cloudservice.v1.CloudService/GetServiceAccountNamespaceAssignments"
+	CloudService_GetUserGroupNamespaceAssignments_FullMethodName      = "/temporal.api.cloud.cloudservice.v1.CloudService/GetUserGroupNamespaceAssignments"
 )
 
 // CloudServiceClient is the client API for CloudService service.
@@ -253,6 +256,12 @@ type CloudServiceClient interface {
 	UpdateCustomRole(ctx context.Context, in *UpdateCustomRoleRequest, opts ...grpc.CallOption) (*UpdateCustomRoleResponse, error)
 	// Delete a custom role
 	DeleteCustomRole(ctx context.Context, in *DeleteCustomRoleRequest, opts ...grpc.CallOption) (*DeleteCustomRoleResponse, error)
+	// Get users with access to a namespace
+	GetUserNamespaceAssignments(ctx context.Context, in *GetUserNamespaceAssignmentsRequest, opts ...grpc.CallOption) (*GetUserNamespaceAssignmentsResponse, error)
+	// Get service accounts with access to a namespace
+	GetServiceAccountNamespaceAssignments(ctx context.Context, in *GetServiceAccountNamespaceAssignmentsRequest, opts ...grpc.CallOption) (*GetServiceAccountNamespaceAssignmentsResponse, error)
+	// Get user groups with access to a namespace
+	GetUserGroupNamespaceAssignments(ctx context.Context, in *GetUserGroupNamespaceAssignmentsRequest, opts ...grpc.CallOption) (*GetUserGroupNamespaceAssignmentsResponse, error)
 }
 
 type cloudServiceClient struct {
@@ -995,6 +1004,36 @@ func (c *cloudServiceClient) DeleteCustomRole(ctx context.Context, in *DeleteCus
 	return out, nil
 }
 
+func (c *cloudServiceClient) GetUserNamespaceAssignments(ctx context.Context, in *GetUserNamespaceAssignmentsRequest, opts ...grpc.CallOption) (*GetUserNamespaceAssignmentsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUserNamespaceAssignmentsResponse)
+	err := c.cc.Invoke(ctx, CloudService_GetUserNamespaceAssignments_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cloudServiceClient) GetServiceAccountNamespaceAssignments(ctx context.Context, in *GetServiceAccountNamespaceAssignmentsRequest, opts ...grpc.CallOption) (*GetServiceAccountNamespaceAssignmentsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetServiceAccountNamespaceAssignmentsResponse)
+	err := c.cc.Invoke(ctx, CloudService_GetServiceAccountNamespaceAssignments_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cloudServiceClient) GetUserGroupNamespaceAssignments(ctx context.Context, in *GetUserGroupNamespaceAssignmentsRequest, opts ...grpc.CallOption) (*GetUserGroupNamespaceAssignmentsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUserGroupNamespaceAssignmentsResponse)
+	err := c.cc.Invoke(ctx, CloudService_GetUserGroupNamespaceAssignments_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CloudServiceServer is the server API for CloudService service.
 // All implementations must embed UnimplementedCloudServiceServer
 // for forward compatibility.
@@ -1154,6 +1193,12 @@ type CloudServiceServer interface {
 	UpdateCustomRole(context.Context, *UpdateCustomRoleRequest) (*UpdateCustomRoleResponse, error)
 	// Delete a custom role
 	DeleteCustomRole(context.Context, *DeleteCustomRoleRequest) (*DeleteCustomRoleResponse, error)
+	// Get users with access to a namespace
+	GetUserNamespaceAssignments(context.Context, *GetUserNamespaceAssignmentsRequest) (*GetUserNamespaceAssignmentsResponse, error)
+	// Get service accounts with access to a namespace
+	GetServiceAccountNamespaceAssignments(context.Context, *GetServiceAccountNamespaceAssignmentsRequest) (*GetServiceAccountNamespaceAssignmentsResponse, error)
+	// Get user groups with access to a namespace
+	GetUserGroupNamespaceAssignments(context.Context, *GetUserGroupNamespaceAssignmentsRequest) (*GetUserGroupNamespaceAssignmentsResponse, error)
 	mustEmbedUnimplementedCloudServiceServer()
 }
 
@@ -1382,6 +1427,15 @@ func (UnimplementedCloudServiceServer) UpdateCustomRole(context.Context, *Update
 }
 func (UnimplementedCloudServiceServer) DeleteCustomRole(context.Context, *DeleteCustomRoleRequest) (*DeleteCustomRoleResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteCustomRole not implemented")
+}
+func (UnimplementedCloudServiceServer) GetUserNamespaceAssignments(context.Context, *GetUserNamespaceAssignmentsRequest) (*GetUserNamespaceAssignmentsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserNamespaceAssignments not implemented")
+}
+func (UnimplementedCloudServiceServer) GetServiceAccountNamespaceAssignments(context.Context, *GetServiceAccountNamespaceAssignmentsRequest) (*GetServiceAccountNamespaceAssignmentsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetServiceAccountNamespaceAssignments not implemented")
+}
+func (UnimplementedCloudServiceServer) GetUserGroupNamespaceAssignments(context.Context, *GetUserGroupNamespaceAssignmentsRequest) (*GetUserGroupNamespaceAssignmentsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserGroupNamespaceAssignments not implemented")
 }
 func (UnimplementedCloudServiceServer) mustEmbedUnimplementedCloudServiceServer() {}
 func (UnimplementedCloudServiceServer) testEmbeddedByValue()                      {}
@@ -2718,6 +2772,60 @@ func _CloudService_DeleteCustomRole_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _CloudService_GetUserNamespaceAssignments_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserNamespaceAssignmentsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CloudServiceServer).GetUserNamespaceAssignments(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CloudService_GetUserNamespaceAssignments_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CloudServiceServer).GetUserNamespaceAssignments(ctx, req.(*GetUserNamespaceAssignmentsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CloudService_GetServiceAccountNamespaceAssignments_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetServiceAccountNamespaceAssignmentsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CloudServiceServer).GetServiceAccountNamespaceAssignments(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CloudService_GetServiceAccountNamespaceAssignments_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CloudServiceServer).GetServiceAccountNamespaceAssignments(ctx, req.(*GetServiceAccountNamespaceAssignmentsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CloudService_GetUserGroupNamespaceAssignments_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserGroupNamespaceAssignmentsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CloudServiceServer).GetUserGroupNamespaceAssignments(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CloudService_GetUserGroupNamespaceAssignments_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CloudServiceServer).GetUserGroupNamespaceAssignments(ctx, req.(*GetUserGroupNamespaceAssignmentsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // CloudService_ServiceDesc is the grpc.ServiceDesc for CloudService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -3016,6 +3124,18 @@ var CloudService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteCustomRole",
 			Handler:    _CloudService_DeleteCustomRole_Handler,
+		},
+		{
+			MethodName: "GetUserNamespaceAssignments",
+			Handler:    _CloudService_GetUserNamespaceAssignments_Handler,
+		},
+		{
+			MethodName: "GetServiceAccountNamespaceAssignments",
+			Handler:    _CloudService_GetServiceAccountNamespaceAssignments_Handler,
+		},
+		{
+			MethodName: "GetUserGroupNamespaceAssignments",
+			Handler:    _CloudService_GetUserGroupNamespaceAssignments_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -1763,6 +1763,249 @@ func (x *CustomRole) GetLastModifiedTime() *timestamppb.Timestamp {
 	return nil
 }
 
+type UserNamespaceAssignment struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The ID of the user.
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// The email of the user.
+	Email string `protobuf:"bytes,2,opt,name=email,proto3" json:"email,omitempty"`
+	// The access assigned to the user at the namespace level.
+	NamespaceAccess *NamespaceAccess `protobuf:"bytes,3,opt,name=namespace_access,json=namespaceAccess,proto3" json:"namespace_access,omitempty"`
+	// True if the user has inherited access to the namespace through an account or project role.
+	InheritedAccess bool `protobuf:"varint,4,opt,name=inherited_access,json=inheritedAccess,proto3" json:"inherited_access,omitempty"`
+	// The current resource version of the user.
+	ResourceVersion string `protobuf:"bytes,5,opt,name=resource_version,json=resourceVersion,proto3" json:"resource_version,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *UserNamespaceAssignment) Reset() {
+	*x = UserNamespaceAssignment{}
+	mi := &file_temporal_api_cloud_identity_v1_message_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UserNamespaceAssignment) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserNamespaceAssignment) ProtoMessage() {}
+
+func (x *UserNamespaceAssignment) ProtoReflect() protoreflect.Message {
+	mi := &file_temporal_api_cloud_identity_v1_message_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UserNamespaceAssignment.ProtoReflect.Descriptor instead.
+func (*UserNamespaceAssignment) Descriptor() ([]byte, []int) {
+	return file_temporal_api_cloud_identity_v1_message_proto_rawDescGZIP(), []int{20}
+}
+
+func (x *UserNamespaceAssignment) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *UserNamespaceAssignment) GetEmail() string {
+	if x != nil {
+		return x.Email
+	}
+	return ""
+}
+
+func (x *UserNamespaceAssignment) GetNamespaceAccess() *NamespaceAccess {
+	if x != nil {
+		return x.NamespaceAccess
+	}
+	return nil
+}
+
+func (x *UserNamespaceAssignment) GetInheritedAccess() bool {
+	if x != nil {
+		return x.InheritedAccess
+	}
+	return false
+}
+
+func (x *UserNamespaceAssignment) GetResourceVersion() string {
+	if x != nil {
+		return x.ResourceVersion
+	}
+	return ""
+}
+
+type ServiceAccountNamespaceAssignment struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The ID of the service account.
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// The name of the service account.
+	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	// The access assigned to the service account at the namespace level.
+	NamespaceAccess *NamespaceAccess `protobuf:"bytes,3,opt,name=namespace_access,json=namespaceAccess,proto3" json:"namespace_access,omitempty"`
+	// True if the service account has inherited access to the namespace through an account or project role.
+	InheritedAccess bool `protobuf:"varint,4,opt,name=inherited_access,json=inheritedAccess,proto3" json:"inherited_access,omitempty"`
+	// The current resource version of the service account.
+	ResourceVersion string `protobuf:"bytes,5,opt,name=resource_version,json=resourceVersion,proto3" json:"resource_version,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *ServiceAccountNamespaceAssignment) Reset() {
+	*x = ServiceAccountNamespaceAssignment{}
+	mi := &file_temporal_api_cloud_identity_v1_message_proto_msgTypes[21]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ServiceAccountNamespaceAssignment) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ServiceAccountNamespaceAssignment) ProtoMessage() {}
+
+func (x *ServiceAccountNamespaceAssignment) ProtoReflect() protoreflect.Message {
+	mi := &file_temporal_api_cloud_identity_v1_message_proto_msgTypes[21]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ServiceAccountNamespaceAssignment.ProtoReflect.Descriptor instead.
+func (*ServiceAccountNamespaceAssignment) Descriptor() ([]byte, []int) {
+	return file_temporal_api_cloud_identity_v1_message_proto_rawDescGZIP(), []int{21}
+}
+
+func (x *ServiceAccountNamespaceAssignment) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *ServiceAccountNamespaceAssignment) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *ServiceAccountNamespaceAssignment) GetNamespaceAccess() *NamespaceAccess {
+	if x != nil {
+		return x.NamespaceAccess
+	}
+	return nil
+}
+
+func (x *ServiceAccountNamespaceAssignment) GetInheritedAccess() bool {
+	if x != nil {
+		return x.InheritedAccess
+	}
+	return false
+}
+
+func (x *ServiceAccountNamespaceAssignment) GetResourceVersion() string {
+	if x != nil {
+		return x.ResourceVersion
+	}
+	return ""
+}
+
+type UserGroupNamespaceAssignment struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The ID of the group.
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// The display name of the group.
+	DisplayName string `protobuf:"bytes,2,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`
+	// The access assigned to the group at the namespace level.
+	NamespaceAccess *NamespaceAccess `protobuf:"bytes,3,opt,name=namespace_access,json=namespaceAccess,proto3" json:"namespace_access,omitempty"`
+	// True if the group has inherited access to the namespace through an account or project role.
+	InheritedAccess bool `protobuf:"varint,4,opt,name=inherited_access,json=inheritedAccess,proto3" json:"inherited_access,omitempty"`
+	// The current resource version of the group.
+	ResourceVersion string `protobuf:"bytes,5,opt,name=resource_version,json=resourceVersion,proto3" json:"resource_version,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *UserGroupNamespaceAssignment) Reset() {
+	*x = UserGroupNamespaceAssignment{}
+	mi := &file_temporal_api_cloud_identity_v1_message_proto_msgTypes[22]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UserGroupNamespaceAssignment) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserGroupNamespaceAssignment) ProtoMessage() {}
+
+func (x *UserGroupNamespaceAssignment) ProtoReflect() protoreflect.Message {
+	mi := &file_temporal_api_cloud_identity_v1_message_proto_msgTypes[22]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UserGroupNamespaceAssignment.ProtoReflect.Descriptor instead.
+func (*UserGroupNamespaceAssignment) Descriptor() ([]byte, []int) {
+	return file_temporal_api_cloud_identity_v1_message_proto_rawDescGZIP(), []int{22}
+}
+
+func (x *UserGroupNamespaceAssignment) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *UserGroupNamespaceAssignment) GetDisplayName() string {
+	if x != nil {
+		return x.DisplayName
+	}
+	return ""
+}
+
+func (x *UserGroupNamespaceAssignment) GetNamespaceAccess() *NamespaceAccess {
+	if x != nil {
+		return x.NamespaceAccess
+	}
+	return nil
+}
+
+func (x *UserGroupNamespaceAssignment) GetInheritedAccess() bool {
+	if x != nil {
+		return x.InheritedAccess
+	}
+	return false
+}
+
+func (x *UserGroupNamespaceAssignment) GetResourceVersion() string {
+	if x != nil {
+		return x.ResourceVersion
+	}
+	return ""
+}
+
 type CustomRoleSpec_Resources struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The resource type the permission applies to.
@@ -1777,7 +2020,7 @@ type CustomRoleSpec_Resources struct {
 
 func (x *CustomRoleSpec_Resources) Reset() {
 	*x = CustomRoleSpec_Resources{}
-	mi := &file_temporal_api_cloud_identity_v1_message_proto_msgTypes[21]
+	mi := &file_temporal_api_cloud_identity_v1_message_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1789,7 +2032,7 @@ func (x *CustomRoleSpec_Resources) String() string {
 func (*CustomRoleSpec_Resources) ProtoMessage() {}
 
 func (x *CustomRoleSpec_Resources) ProtoReflect() protoreflect.Message {
-	mi := &file_temporal_api_cloud_identity_v1_message_proto_msgTypes[21]
+	mi := &file_temporal_api_cloud_identity_v1_message_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1838,7 +2081,7 @@ type CustomRoleSpec_Permission struct {
 
 func (x *CustomRoleSpec_Permission) Reset() {
 	*x = CustomRoleSpec_Permission{}
-	mi := &file_temporal_api_cloud_identity_v1_message_proto_msgTypes[22]
+	mi := &file_temporal_api_cloud_identity_v1_message_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1850,7 +2093,7 @@ func (x *CustomRoleSpec_Permission) String() string {
 func (*CustomRoleSpec_Permission) ProtoMessage() {}
 
 func (x *CustomRoleSpec_Permission) ProtoReflect() protoreflect.Message {
-	mi := &file_temporal_api_cloud_identity_v1_message_proto_msgTypes[22]
+	mi := &file_temporal_api_cloud_identity_v1_message_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2222,24 +2465,72 @@ var file_temporal_api_cloud_identity_v1_message_proto_rawDesc = string([]byte{
 	0x69, 0x6d, 0x65, 0x18, 0x07, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x67, 0x6f, 0x6f, 0x67,
 	0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x54, 0x69, 0x6d, 0x65,
 	0x73, 0x74, 0x61, 0x6d, 0x70, 0x52, 0x10, 0x6c, 0x61, 0x73, 0x74, 0x4d, 0x6f, 0x64, 0x69, 0x66,
-	0x69, 0x65, 0x64, 0x54, 0x69, 0x6d, 0x65, 0x2a, 0x5c, 0x0a, 0x09, 0x4f, 0x77, 0x6e, 0x65, 0x72,
-	0x54, 0x79, 0x70, 0x65, 0x12, 0x1a, 0x0a, 0x16, 0x4f, 0x57, 0x4e, 0x45, 0x52, 0x5f, 0x54, 0x59,
-	0x50, 0x45, 0x5f, 0x55, 0x4e, 0x53, 0x50, 0x45, 0x43, 0x49, 0x46, 0x49, 0x45, 0x44, 0x10, 0x00,
-	0x12, 0x13, 0x0a, 0x0f, 0x4f, 0x57, 0x4e, 0x45, 0x52, 0x5f, 0x54, 0x59, 0x50, 0x45, 0x5f, 0x55,
-	0x53, 0x45, 0x52, 0x10, 0x01, 0x12, 0x1e, 0x0a, 0x1a, 0x4f, 0x57, 0x4e, 0x45, 0x52, 0x5f, 0x54,
-	0x59, 0x50, 0x45, 0x5f, 0x53, 0x45, 0x52, 0x56, 0x49, 0x43, 0x45, 0x5f, 0x41, 0x43, 0x43, 0x4f,
-	0x55, 0x4e, 0x54, 0x10, 0x02, 0x42, 0xac, 0x01, 0x0a, 0x21, 0x69, 0x6f, 0x2e, 0x74, 0x65, 0x6d,
-	0x70, 0x6f, 0x72, 0x61, 0x6c, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e,
-	0x69, 0x64, 0x65, 0x6e, 0x74, 0x69, 0x74, 0x79, 0x2e, 0x76, 0x31, 0x42, 0x0c, 0x4d, 0x65, 0x73,
-	0x73, 0x61, 0x67, 0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x2d, 0x67, 0x6f, 0x2e,
-	0x74, 0x65, 0x6d, 0x70, 0x6f, 0x72, 0x61, 0x6c, 0x2e, 0x69, 0x6f, 0x2f, 0x61, 0x70, 0x69, 0x2f,
-	0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x69, 0x64, 0x65, 0x6e, 0x74, 0x69, 0x74, 0x79, 0x2f, 0x76,
-	0x31, 0x3b, 0x69, 0x64, 0x65, 0x6e, 0x74, 0x69, 0x74, 0x79, 0xaa, 0x02, 0x20, 0x54, 0x65, 0x6d,
-	0x70, 0x6f, 0x72, 0x61, 0x6c, 0x69, 0x6f, 0x2e, 0x41, 0x70, 0x69, 0x2e, 0x43, 0x6c, 0x6f, 0x75,
-	0x64, 0x2e, 0x49, 0x64, 0x65, 0x6e, 0x74, 0x69, 0x74, 0x79, 0x2e, 0x56, 0x31, 0xea, 0x02, 0x24,
-	0x54, 0x65, 0x6d, 0x70, 0x6f, 0x72, 0x61, 0x6c, 0x69, 0x6f, 0x3a, 0x3a, 0x41, 0x70, 0x69, 0x3a,
-	0x3a, 0x43, 0x6c, 0x6f, 0x75, 0x64, 0x3a, 0x3a, 0x49, 0x64, 0x65, 0x6e, 0x74, 0x69, 0x74, 0x79,
-	0x3a, 0x3a, 0x56, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x69, 0x65, 0x64, 0x54, 0x69, 0x6d, 0x65, 0x22, 0xf1, 0x01, 0x0a, 0x17, 0x55, 0x73, 0x65, 0x72,
+	0x4e, 0x61, 0x6d, 0x65, 0x73, 0x70, 0x61, 0x63, 0x65, 0x41, 0x73, 0x73, 0x69, 0x67, 0x6e, 0x6d,
+	0x65, 0x6e, 0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x02, 0x69, 0x64, 0x12, 0x14, 0x0a, 0x05, 0x65, 0x6d, 0x61, 0x69, 0x6c, 0x18, 0x02, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x05, 0x65, 0x6d, 0x61, 0x69, 0x6c, 0x12, 0x5a, 0x0a, 0x10, 0x6e, 0x61, 0x6d,
+	0x65, 0x73, 0x70, 0x61, 0x63, 0x65, 0x5f, 0x61, 0x63, 0x63, 0x65, 0x73, 0x73, 0x18, 0x03, 0x20,
+	0x01, 0x28, 0x0b, 0x32, 0x2f, 0x2e, 0x74, 0x65, 0x6d, 0x70, 0x6f, 0x72, 0x61, 0x6c, 0x2e, 0x61,
+	0x70, 0x69, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x69, 0x64, 0x65, 0x6e, 0x74, 0x69, 0x74,
+	0x79, 0x2e, 0x76, 0x31, 0x2e, 0x4e, 0x61, 0x6d, 0x65, 0x73, 0x70, 0x61, 0x63, 0x65, 0x41, 0x63,
+	0x63, 0x65, 0x73, 0x73, 0x52, 0x0f, 0x6e, 0x61, 0x6d, 0x65, 0x73, 0x70, 0x61, 0x63, 0x65, 0x41,
+	0x63, 0x63, 0x65, 0x73, 0x73, 0x12, 0x29, 0x0a, 0x10, 0x69, 0x6e, 0x68, 0x65, 0x72, 0x69, 0x74,
+	0x65, 0x64, 0x5f, 0x61, 0x63, 0x63, 0x65, 0x73, 0x73, 0x18, 0x04, 0x20, 0x01, 0x28, 0x08, 0x52,
+	0x0f, 0x69, 0x6e, 0x68, 0x65, 0x72, 0x69, 0x74, 0x65, 0x64, 0x41, 0x63, 0x63, 0x65, 0x73, 0x73,
+	0x12, 0x29, 0x0a, 0x10, 0x72, 0x65, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x5f, 0x76, 0x65, 0x72,
+	0x73, 0x69, 0x6f, 0x6e, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0f, 0x72, 0x65, 0x73, 0x6f,
+	0x75, 0x72, 0x63, 0x65, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x22, 0xf9, 0x01, 0x0a, 0x21,
+	0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x4e, 0x61,
+	0x6d, 0x65, 0x73, 0x70, 0x61, 0x63, 0x65, 0x41, 0x73, 0x73, 0x69, 0x67, 0x6e, 0x6d, 0x65, 0x6e,
+	0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69,
+	0x64, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x5a, 0x0a, 0x10, 0x6e, 0x61, 0x6d, 0x65, 0x73, 0x70, 0x61,
+	0x63, 0x65, 0x5f, 0x61, 0x63, 0x63, 0x65, 0x73, 0x73, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32,
+	0x2f, 0x2e, 0x74, 0x65, 0x6d, 0x70, 0x6f, 0x72, 0x61, 0x6c, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x63,
+	0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x69, 0x64, 0x65, 0x6e, 0x74, 0x69, 0x74, 0x79, 0x2e, 0x76, 0x31,
+	0x2e, 0x4e, 0x61, 0x6d, 0x65, 0x73, 0x70, 0x61, 0x63, 0x65, 0x41, 0x63, 0x63, 0x65, 0x73, 0x73,
+	0x52, 0x0f, 0x6e, 0x61, 0x6d, 0x65, 0x73, 0x70, 0x61, 0x63, 0x65, 0x41, 0x63, 0x63, 0x65, 0x73,
+	0x73, 0x12, 0x29, 0x0a, 0x10, 0x69, 0x6e, 0x68, 0x65, 0x72, 0x69, 0x74, 0x65, 0x64, 0x5f, 0x61,
+	0x63, 0x63, 0x65, 0x73, 0x73, 0x18, 0x04, 0x20, 0x01, 0x28, 0x08, 0x52, 0x0f, 0x69, 0x6e, 0x68,
+	0x65, 0x72, 0x69, 0x74, 0x65, 0x64, 0x41, 0x63, 0x63, 0x65, 0x73, 0x73, 0x12, 0x29, 0x0a, 0x10,
+	0x72, 0x65, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x5f, 0x76, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e,
+	0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0f, 0x72, 0x65, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65,
+	0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x22, 0x83, 0x02, 0x0a, 0x1c, 0x55, 0x73, 0x65, 0x72,
+	0x47, 0x72, 0x6f, 0x75, 0x70, 0x4e, 0x61, 0x6d, 0x65, 0x73, 0x70, 0x61, 0x63, 0x65, 0x41, 0x73,
+	0x73, 0x69, 0x67, 0x6e, 0x6d, 0x65, 0x6e, 0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x12, 0x21, 0x0a, 0x0c, 0x64, 0x69, 0x73, 0x70,
+	0x6c, 0x61, 0x79, 0x5f, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b,
+	0x64, 0x69, 0x73, 0x70, 0x6c, 0x61, 0x79, 0x4e, 0x61, 0x6d, 0x65, 0x12, 0x5a, 0x0a, 0x10, 0x6e,
+	0x61, 0x6d, 0x65, 0x73, 0x70, 0x61, 0x63, 0x65, 0x5f, 0x61, 0x63, 0x63, 0x65, 0x73, 0x73, 0x18,
+	0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x2f, 0x2e, 0x74, 0x65, 0x6d, 0x70, 0x6f, 0x72, 0x61, 0x6c,
+	0x2e, 0x61, 0x70, 0x69, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x69, 0x64, 0x65, 0x6e, 0x74,
+	0x69, 0x74, 0x79, 0x2e, 0x76, 0x31, 0x2e, 0x4e, 0x61, 0x6d, 0x65, 0x73, 0x70, 0x61, 0x63, 0x65,
+	0x41, 0x63, 0x63, 0x65, 0x73, 0x73, 0x52, 0x0f, 0x6e, 0x61, 0x6d, 0x65, 0x73, 0x70, 0x61, 0x63,
+	0x65, 0x41, 0x63, 0x63, 0x65, 0x73, 0x73, 0x12, 0x29, 0x0a, 0x10, 0x69, 0x6e, 0x68, 0x65, 0x72,
+	0x69, 0x74, 0x65, 0x64, 0x5f, 0x61, 0x63, 0x63, 0x65, 0x73, 0x73, 0x18, 0x04, 0x20, 0x01, 0x28,
+	0x08, 0x52, 0x0f, 0x69, 0x6e, 0x68, 0x65, 0x72, 0x69, 0x74, 0x65, 0x64, 0x41, 0x63, 0x63, 0x65,
+	0x73, 0x73, 0x12, 0x29, 0x0a, 0x10, 0x72, 0x65, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x5f, 0x76,
+	0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0f, 0x72, 0x65,
+	0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x2a, 0x5c, 0x0a,
+	0x09, 0x4f, 0x77, 0x6e, 0x65, 0x72, 0x54, 0x79, 0x70, 0x65, 0x12, 0x1a, 0x0a, 0x16, 0x4f, 0x57,
+	0x4e, 0x45, 0x52, 0x5f, 0x54, 0x59, 0x50, 0x45, 0x5f, 0x55, 0x4e, 0x53, 0x50, 0x45, 0x43, 0x49,
+	0x46, 0x49, 0x45, 0x44, 0x10, 0x00, 0x12, 0x13, 0x0a, 0x0f, 0x4f, 0x57, 0x4e, 0x45, 0x52, 0x5f,
+	0x54, 0x59, 0x50, 0x45, 0x5f, 0x55, 0x53, 0x45, 0x52, 0x10, 0x01, 0x12, 0x1e, 0x0a, 0x1a, 0x4f,
+	0x57, 0x4e, 0x45, 0x52, 0x5f, 0x54, 0x59, 0x50, 0x45, 0x5f, 0x53, 0x45, 0x52, 0x56, 0x49, 0x43,
+	0x45, 0x5f, 0x41, 0x43, 0x43, 0x4f, 0x55, 0x4e, 0x54, 0x10, 0x02, 0x42, 0xac, 0x01, 0x0a, 0x21,
+	0x69, 0x6f, 0x2e, 0x74, 0x65, 0x6d, 0x70, 0x6f, 0x72, 0x61, 0x6c, 0x2e, 0x61, 0x70, 0x69, 0x2e,
+	0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x69, 0x64, 0x65, 0x6e, 0x74, 0x69, 0x74, 0x79, 0x2e, 0x76,
+	0x31, 0x42, 0x0c, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50,
+	0x01, 0x5a, 0x2d, 0x67, 0x6f, 0x2e, 0x74, 0x65, 0x6d, 0x70, 0x6f, 0x72, 0x61, 0x6c, 0x2e, 0x69,
+	0x6f, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x69, 0x64, 0x65, 0x6e,
+	0x74, 0x69, 0x74, 0x79, 0x2f, 0x76, 0x31, 0x3b, 0x69, 0x64, 0x65, 0x6e, 0x74, 0x69, 0x74, 0x79,
+	0xaa, 0x02, 0x20, 0x54, 0x65, 0x6d, 0x70, 0x6f, 0x72, 0x61, 0x6c, 0x69, 0x6f, 0x2e, 0x41, 0x70,
+	0x69, 0x2e, 0x43, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x49, 0x64, 0x65, 0x6e, 0x74, 0x69, 0x74, 0x79,
+	0x2e, 0x56, 0x31, 0xea, 0x02, 0x24, 0x54, 0x65, 0x6d, 0x70, 0x6f, 0x72, 0x61, 0x6c, 0x69, 0x6f,
+	0x3a, 0x3a, 0x41, 0x70, 0x69, 0x3a, 0x3a, 0x43, 0x6c, 0x6f, 0x75, 0x64, 0x3a, 0x3a, 0x49, 0x64,
+	0x65, 0x6e, 0x74, 0x69, 0x74, 0x79, 0x3a, 0x3a, 0x56, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74,
+	0x6f, 0x33,
 })
 
 var (
@@ -2255,85 +2546,91 @@ func file_temporal_api_cloud_identity_v1_message_proto_rawDescGZIP() []byte {
 }
 
 var file_temporal_api_cloud_identity_v1_message_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_temporal_api_cloud_identity_v1_message_proto_msgTypes = make([]protoimpl.MessageInfo, 23)
+var file_temporal_api_cloud_identity_v1_message_proto_msgTypes = make([]protoimpl.MessageInfo, 26)
 var file_temporal_api_cloud_identity_v1_message_proto_goTypes = []any{
-	(OwnerType)(0),                    // 0: temporal.api.cloud.identity.v1.OwnerType
-	(AccountAccess_Role)(0),           // 1: temporal.api.cloud.identity.v1.AccountAccess.Role
-	(NamespaceAccess_Permission)(0),   // 2: temporal.api.cloud.identity.v1.NamespaceAccess.Permission
-	(*AccountAccess)(nil),             // 3: temporal.api.cloud.identity.v1.AccountAccess
-	(*NamespaceAccess)(nil),           // 4: temporal.api.cloud.identity.v1.NamespaceAccess
-	(*Access)(nil),                    // 5: temporal.api.cloud.identity.v1.Access
-	(*NamespaceScopedAccess)(nil),     // 6: temporal.api.cloud.identity.v1.NamespaceScopedAccess
-	(*UserSpec)(nil),                  // 7: temporal.api.cloud.identity.v1.UserSpec
-	(*Invitation)(nil),                // 8: temporal.api.cloud.identity.v1.Invitation
-	(*User)(nil),                      // 9: temporal.api.cloud.identity.v1.User
-	(*GoogleGroupSpec)(nil),           // 10: temporal.api.cloud.identity.v1.GoogleGroupSpec
-	(*SCIMGroupSpec)(nil),             // 11: temporal.api.cloud.identity.v1.SCIMGroupSpec
-	(*CloudGroupSpec)(nil),            // 12: temporal.api.cloud.identity.v1.CloudGroupSpec
-	(*UserGroupSpec)(nil),             // 13: temporal.api.cloud.identity.v1.UserGroupSpec
-	(*UserGroup)(nil),                 // 14: temporal.api.cloud.identity.v1.UserGroup
-	(*UserGroupMemberId)(nil),         // 15: temporal.api.cloud.identity.v1.UserGroupMemberId
-	(*UserGroupMember)(nil),           // 16: temporal.api.cloud.identity.v1.UserGroupMember
-	(*ServiceAccount)(nil),            // 17: temporal.api.cloud.identity.v1.ServiceAccount
-	(*ServiceAccountSpec)(nil),        // 18: temporal.api.cloud.identity.v1.ServiceAccountSpec
-	(*ApiKey)(nil),                    // 19: temporal.api.cloud.identity.v1.ApiKey
-	(*ApiKeySpec)(nil),                // 20: temporal.api.cloud.identity.v1.ApiKeySpec
-	(*CustomRoleSpec)(nil),            // 21: temporal.api.cloud.identity.v1.CustomRoleSpec
-	(*CustomRole)(nil),                // 22: temporal.api.cloud.identity.v1.CustomRole
-	nil,                               // 23: temporal.api.cloud.identity.v1.Access.NamespaceAccessesEntry
-	(*CustomRoleSpec_Resources)(nil),  // 24: temporal.api.cloud.identity.v1.CustomRoleSpec.Resources
-	(*CustomRoleSpec_Permission)(nil), // 25: temporal.api.cloud.identity.v1.CustomRoleSpec.Permission
-	(*timestamppb.Timestamp)(nil),     // 26: google.protobuf.Timestamp
-	(v1.ResourceState)(0),             // 27: temporal.api.cloud.resource.v1.ResourceState
+	(OwnerType)(0),                            // 0: temporal.api.cloud.identity.v1.OwnerType
+	(AccountAccess_Role)(0),                   // 1: temporal.api.cloud.identity.v1.AccountAccess.Role
+	(NamespaceAccess_Permission)(0),           // 2: temporal.api.cloud.identity.v1.NamespaceAccess.Permission
+	(*AccountAccess)(nil),                     // 3: temporal.api.cloud.identity.v1.AccountAccess
+	(*NamespaceAccess)(nil),                   // 4: temporal.api.cloud.identity.v1.NamespaceAccess
+	(*Access)(nil),                            // 5: temporal.api.cloud.identity.v1.Access
+	(*NamespaceScopedAccess)(nil),             // 6: temporal.api.cloud.identity.v1.NamespaceScopedAccess
+	(*UserSpec)(nil),                          // 7: temporal.api.cloud.identity.v1.UserSpec
+	(*Invitation)(nil),                        // 8: temporal.api.cloud.identity.v1.Invitation
+	(*User)(nil),                              // 9: temporal.api.cloud.identity.v1.User
+	(*GoogleGroupSpec)(nil),                   // 10: temporal.api.cloud.identity.v1.GoogleGroupSpec
+	(*SCIMGroupSpec)(nil),                     // 11: temporal.api.cloud.identity.v1.SCIMGroupSpec
+	(*CloudGroupSpec)(nil),                    // 12: temporal.api.cloud.identity.v1.CloudGroupSpec
+	(*UserGroupSpec)(nil),                     // 13: temporal.api.cloud.identity.v1.UserGroupSpec
+	(*UserGroup)(nil),                         // 14: temporal.api.cloud.identity.v1.UserGroup
+	(*UserGroupMemberId)(nil),                 // 15: temporal.api.cloud.identity.v1.UserGroupMemberId
+	(*UserGroupMember)(nil),                   // 16: temporal.api.cloud.identity.v1.UserGroupMember
+	(*ServiceAccount)(nil),                    // 17: temporal.api.cloud.identity.v1.ServiceAccount
+	(*ServiceAccountSpec)(nil),                // 18: temporal.api.cloud.identity.v1.ServiceAccountSpec
+	(*ApiKey)(nil),                            // 19: temporal.api.cloud.identity.v1.ApiKey
+	(*ApiKeySpec)(nil),                        // 20: temporal.api.cloud.identity.v1.ApiKeySpec
+	(*CustomRoleSpec)(nil),                    // 21: temporal.api.cloud.identity.v1.CustomRoleSpec
+	(*CustomRole)(nil),                        // 22: temporal.api.cloud.identity.v1.CustomRole
+	(*UserNamespaceAssignment)(nil),           // 23: temporal.api.cloud.identity.v1.UserNamespaceAssignment
+	(*ServiceAccountNamespaceAssignment)(nil), // 24: temporal.api.cloud.identity.v1.ServiceAccountNamespaceAssignment
+	(*UserGroupNamespaceAssignment)(nil),      // 25: temporal.api.cloud.identity.v1.UserGroupNamespaceAssignment
+	nil,                                       // 26: temporal.api.cloud.identity.v1.Access.NamespaceAccessesEntry
+	(*CustomRoleSpec_Resources)(nil),          // 27: temporal.api.cloud.identity.v1.CustomRoleSpec.Resources
+	(*CustomRoleSpec_Permission)(nil),         // 28: temporal.api.cloud.identity.v1.CustomRoleSpec.Permission
+	(*timestamppb.Timestamp)(nil),             // 29: google.protobuf.Timestamp
+	(v1.ResourceState)(0),                     // 30: temporal.api.cloud.resource.v1.ResourceState
 }
 var file_temporal_api_cloud_identity_v1_message_proto_depIdxs = []int32{
 	1,  // 0: temporal.api.cloud.identity.v1.AccountAccess.role:type_name -> temporal.api.cloud.identity.v1.AccountAccess.Role
 	2,  // 1: temporal.api.cloud.identity.v1.NamespaceAccess.permission:type_name -> temporal.api.cloud.identity.v1.NamespaceAccess.Permission
 	3,  // 2: temporal.api.cloud.identity.v1.Access.account_access:type_name -> temporal.api.cloud.identity.v1.AccountAccess
-	23, // 3: temporal.api.cloud.identity.v1.Access.namespace_accesses:type_name -> temporal.api.cloud.identity.v1.Access.NamespaceAccessesEntry
+	26, // 3: temporal.api.cloud.identity.v1.Access.namespace_accesses:type_name -> temporal.api.cloud.identity.v1.Access.NamespaceAccessesEntry
 	4,  // 4: temporal.api.cloud.identity.v1.NamespaceScopedAccess.access:type_name -> temporal.api.cloud.identity.v1.NamespaceAccess
 	5,  // 5: temporal.api.cloud.identity.v1.UserSpec.access:type_name -> temporal.api.cloud.identity.v1.Access
-	26, // 6: temporal.api.cloud.identity.v1.Invitation.created_time:type_name -> google.protobuf.Timestamp
-	26, // 7: temporal.api.cloud.identity.v1.Invitation.expired_time:type_name -> google.protobuf.Timestamp
+	29, // 6: temporal.api.cloud.identity.v1.Invitation.created_time:type_name -> google.protobuf.Timestamp
+	29, // 7: temporal.api.cloud.identity.v1.Invitation.expired_time:type_name -> google.protobuf.Timestamp
 	7,  // 8: temporal.api.cloud.identity.v1.User.spec:type_name -> temporal.api.cloud.identity.v1.UserSpec
-	27, // 9: temporal.api.cloud.identity.v1.User.state:type_name -> temporal.api.cloud.resource.v1.ResourceState
+	30, // 9: temporal.api.cloud.identity.v1.User.state:type_name -> temporal.api.cloud.resource.v1.ResourceState
 	8,  // 10: temporal.api.cloud.identity.v1.User.invitation:type_name -> temporal.api.cloud.identity.v1.Invitation
-	26, // 11: temporal.api.cloud.identity.v1.User.created_time:type_name -> google.protobuf.Timestamp
-	26, // 12: temporal.api.cloud.identity.v1.User.last_modified_time:type_name -> google.protobuf.Timestamp
+	29, // 11: temporal.api.cloud.identity.v1.User.created_time:type_name -> google.protobuf.Timestamp
+	29, // 12: temporal.api.cloud.identity.v1.User.last_modified_time:type_name -> google.protobuf.Timestamp
 	5,  // 13: temporal.api.cloud.identity.v1.UserGroupSpec.access:type_name -> temporal.api.cloud.identity.v1.Access
 	10, // 14: temporal.api.cloud.identity.v1.UserGroupSpec.google_group:type_name -> temporal.api.cloud.identity.v1.GoogleGroupSpec
 	11, // 15: temporal.api.cloud.identity.v1.UserGroupSpec.scim_group:type_name -> temporal.api.cloud.identity.v1.SCIMGroupSpec
 	12, // 16: temporal.api.cloud.identity.v1.UserGroupSpec.cloud_group:type_name -> temporal.api.cloud.identity.v1.CloudGroupSpec
 	13, // 17: temporal.api.cloud.identity.v1.UserGroup.spec:type_name -> temporal.api.cloud.identity.v1.UserGroupSpec
-	27, // 18: temporal.api.cloud.identity.v1.UserGroup.state:type_name -> temporal.api.cloud.resource.v1.ResourceState
-	26, // 19: temporal.api.cloud.identity.v1.UserGroup.created_time:type_name -> google.protobuf.Timestamp
-	26, // 20: temporal.api.cloud.identity.v1.UserGroup.last_modified_time:type_name -> google.protobuf.Timestamp
+	30, // 18: temporal.api.cloud.identity.v1.UserGroup.state:type_name -> temporal.api.cloud.resource.v1.ResourceState
+	29, // 19: temporal.api.cloud.identity.v1.UserGroup.created_time:type_name -> google.protobuf.Timestamp
+	29, // 20: temporal.api.cloud.identity.v1.UserGroup.last_modified_time:type_name -> google.protobuf.Timestamp
 	15, // 21: temporal.api.cloud.identity.v1.UserGroupMember.member_id:type_name -> temporal.api.cloud.identity.v1.UserGroupMemberId
-	26, // 22: temporal.api.cloud.identity.v1.UserGroupMember.created_time:type_name -> google.protobuf.Timestamp
+	29, // 22: temporal.api.cloud.identity.v1.UserGroupMember.created_time:type_name -> google.protobuf.Timestamp
 	18, // 23: temporal.api.cloud.identity.v1.ServiceAccount.spec:type_name -> temporal.api.cloud.identity.v1.ServiceAccountSpec
-	27, // 24: temporal.api.cloud.identity.v1.ServiceAccount.state:type_name -> temporal.api.cloud.resource.v1.ResourceState
-	26, // 25: temporal.api.cloud.identity.v1.ServiceAccount.created_time:type_name -> google.protobuf.Timestamp
-	26, // 26: temporal.api.cloud.identity.v1.ServiceAccount.last_modified_time:type_name -> google.protobuf.Timestamp
+	30, // 24: temporal.api.cloud.identity.v1.ServiceAccount.state:type_name -> temporal.api.cloud.resource.v1.ResourceState
+	29, // 25: temporal.api.cloud.identity.v1.ServiceAccount.created_time:type_name -> google.protobuf.Timestamp
+	29, // 26: temporal.api.cloud.identity.v1.ServiceAccount.last_modified_time:type_name -> google.protobuf.Timestamp
 	5,  // 27: temporal.api.cloud.identity.v1.ServiceAccountSpec.access:type_name -> temporal.api.cloud.identity.v1.Access
 	6,  // 28: temporal.api.cloud.identity.v1.ServiceAccountSpec.namespace_scoped_access:type_name -> temporal.api.cloud.identity.v1.NamespaceScopedAccess
 	20, // 29: temporal.api.cloud.identity.v1.ApiKey.spec:type_name -> temporal.api.cloud.identity.v1.ApiKeySpec
-	27, // 30: temporal.api.cloud.identity.v1.ApiKey.state:type_name -> temporal.api.cloud.resource.v1.ResourceState
-	26, // 31: temporal.api.cloud.identity.v1.ApiKey.created_time:type_name -> google.protobuf.Timestamp
-	26, // 32: temporal.api.cloud.identity.v1.ApiKey.last_modified_time:type_name -> google.protobuf.Timestamp
+	30, // 30: temporal.api.cloud.identity.v1.ApiKey.state:type_name -> temporal.api.cloud.resource.v1.ResourceState
+	29, // 31: temporal.api.cloud.identity.v1.ApiKey.created_time:type_name -> google.protobuf.Timestamp
+	29, // 32: temporal.api.cloud.identity.v1.ApiKey.last_modified_time:type_name -> google.protobuf.Timestamp
 	0,  // 33: temporal.api.cloud.identity.v1.ApiKeySpec.owner_type:type_name -> temporal.api.cloud.identity.v1.OwnerType
-	26, // 34: temporal.api.cloud.identity.v1.ApiKeySpec.expiry_time:type_name -> google.protobuf.Timestamp
-	25, // 35: temporal.api.cloud.identity.v1.CustomRoleSpec.permissions:type_name -> temporal.api.cloud.identity.v1.CustomRoleSpec.Permission
+	29, // 34: temporal.api.cloud.identity.v1.ApiKeySpec.expiry_time:type_name -> google.protobuf.Timestamp
+	28, // 35: temporal.api.cloud.identity.v1.CustomRoleSpec.permissions:type_name -> temporal.api.cloud.identity.v1.CustomRoleSpec.Permission
 	21, // 36: temporal.api.cloud.identity.v1.CustomRole.spec:type_name -> temporal.api.cloud.identity.v1.CustomRoleSpec
-	27, // 37: temporal.api.cloud.identity.v1.CustomRole.state:type_name -> temporal.api.cloud.resource.v1.ResourceState
-	26, // 38: temporal.api.cloud.identity.v1.CustomRole.created_time:type_name -> google.protobuf.Timestamp
-	26, // 39: temporal.api.cloud.identity.v1.CustomRole.last_modified_time:type_name -> google.protobuf.Timestamp
-	4,  // 40: temporal.api.cloud.identity.v1.Access.NamespaceAccessesEntry.value:type_name -> temporal.api.cloud.identity.v1.NamespaceAccess
-	24, // 41: temporal.api.cloud.identity.v1.CustomRoleSpec.Permission.resources:type_name -> temporal.api.cloud.identity.v1.CustomRoleSpec.Resources
-	42, // [42:42] is the sub-list for method output_type
-	42, // [42:42] is the sub-list for method input_type
-	42, // [42:42] is the sub-list for extension type_name
-	42, // [42:42] is the sub-list for extension extendee
-	0,  // [0:42] is the sub-list for field type_name
+	30, // 37: temporal.api.cloud.identity.v1.CustomRole.state:type_name -> temporal.api.cloud.resource.v1.ResourceState
+	29, // 38: temporal.api.cloud.identity.v1.CustomRole.created_time:type_name -> google.protobuf.Timestamp
+	29, // 39: temporal.api.cloud.identity.v1.CustomRole.last_modified_time:type_name -> google.protobuf.Timestamp
+	4,  // 40: temporal.api.cloud.identity.v1.UserNamespaceAssignment.namespace_access:type_name -> temporal.api.cloud.identity.v1.NamespaceAccess
+	4,  // 41: temporal.api.cloud.identity.v1.ServiceAccountNamespaceAssignment.namespace_access:type_name -> temporal.api.cloud.identity.v1.NamespaceAccess
+	4,  // 42: temporal.api.cloud.identity.v1.UserGroupNamespaceAssignment.namespace_access:type_name -> temporal.api.cloud.identity.v1.NamespaceAccess
+	4,  // 43: temporal.api.cloud.identity.v1.Access.NamespaceAccessesEntry.value:type_name -> temporal.api.cloud.identity.v1.NamespaceAccess
+	27, // 44: temporal.api.cloud.identity.v1.CustomRoleSpec.Permission.resources:type_name -> temporal.api.cloud.identity.v1.CustomRoleSpec.Resources
+	45, // [45:45] is the sub-list for method output_type
+	45, // [45:45] is the sub-list for method input_type
+	45, // [45:45] is the sub-list for extension type_name
+	45, // [45:45] is the sub-list for extension extendee
+	0,  // [0:45] is the sub-list for field type_name
 }
 
 func init() { file_temporal_api_cloud_identity_v1_message_proto_init() }
@@ -2355,7 +2652,7 @@ func file_temporal_api_cloud_identity_v1_message_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_temporal_api_cloud_identity_v1_message_proto_rawDesc), len(file_temporal_api_cloud_identity_v1_message_proto_rawDesc)),
 			NumEnums:      3,
-			NumMessages:   23,
+			NumMessages:   26,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
