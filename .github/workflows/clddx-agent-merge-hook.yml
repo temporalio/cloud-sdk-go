@@ -1,0 +1,35 @@
+name: clddx-agent merge hook
+
+on:
+  pull_request:
+    types: [closed]
+
+permissions: {}
+
+jobs:
+  notify:
+    if: github.event.pull_request.merged == true &&
+        startsWith(github.event.pull_request.head.ref, 'releasecandidate/') &&
+        contains(toJson(github.event.pull_request.labels.*.name), '"agent:')
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          GH_TOKEN: ${{ secrets.CLDDX_AGENT_PAT }}
+          REPO: ${{ github.repository }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          MERGE_SHA: ${{ github.event.pull_request.merge_commit_sha }}
+          LABELS: ${{ toJson(github.event.pull_request.labels) }}
+        run: |
+          # Send the body as raw JSON (`--input -`), NOT `-f client_payload[...]`.
+          # `-f` sends every field as a string, which would make `labels` a JSON
+          # *string* rather than an array — the runner's label routing reads
+          # `.labels[].name`, so a string makes every release task silently miss.
+          jq -n \
+            --arg repo "$REPO" \
+            --arg pr_number "$PR_NUMBER" \
+            --arg merge_sha "$MERGE_SHA" \
+            --argjson labels "$LABELS" \
+            '{event_type:"pull-request-merged",
+              client_payload:{repo:$repo, pr_number:$pr_number,
+                              merge_sha:$merge_sha, labels:$labels}}' \
+          | gh api repos/temporalio/clddx-agent/dispatches --input -
