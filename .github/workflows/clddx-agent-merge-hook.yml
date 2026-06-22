@@ -9,8 +9,8 @@ permissions: {}
 jobs:
   notify:
     if: github.event.pull_request.merged == true &&
-        startsWith(github.event.pull_request.head.ref, 'releasecandidate/') &&
-        contains(toJson(github.event.pull_request.labels.*.name), '"agent:')
+        startsWith(github.event.pull_request.head.ref, 'clddx/') &&
+        contains(toJson(github.event.pull_request.labels.*.name), '"clddx:')
     runs-on: ubuntu-latest
     steps:
       - env:
