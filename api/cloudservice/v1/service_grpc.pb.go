@@ -95,6 +95,18 @@ const (
 	CloudService_GetUserNamespaceAssignments_FullMethodName           = "/temporal.api.cloud.cloudservice.v1.CloudService/GetUserNamespaceAssignments"
 	CloudService_GetServiceAccountNamespaceAssignments_FullMethodName = "/temporal.api.cloud.cloudservice.v1.CloudService/GetServiceAccountNamespaceAssignments"
 	CloudService_GetUserGroupNamespaceAssignments_FullMethodName      = "/temporal.api.cloud.cloudservice.v1.CloudService/GetUserGroupNamespaceAssignments"
+	CloudService_GetProjects_FullMethodName                           = "/temporal.api.cloud.cloudservice.v1.CloudService/GetProjects"
+	CloudService_GetProject_FullMethodName                            = "/temporal.api.cloud.cloudservice.v1.CloudService/GetProject"
+	CloudService_CreateProject_FullMethodName                         = "/temporal.api.cloud.cloudservice.v1.CloudService/CreateProject"
+	CloudService_UpdateProject_FullMethodName                         = "/temporal.api.cloud.cloudservice.v1.CloudService/UpdateProject"
+	CloudService_DeleteProject_FullMethodName                         = "/temporal.api.cloud.cloudservice.v1.CloudService/DeleteProject"
+	CloudService_SetUserProjectAccess_FullMethodName                  = "/temporal.api.cloud.cloudservice.v1.CloudService/SetUserProjectAccess"
+	CloudService_SetUserGroupProjectAccess_FullMethodName             = "/temporal.api.cloud.cloudservice.v1.CloudService/SetUserGroupProjectAccess"
+	CloudService_SetServiceAccountProjectAccess_FullMethodName        = "/temporal.api.cloud.cloudservice.v1.CloudService/SetServiceAccountProjectAccess"
+	CloudService_GetUserProjectAssignments_FullMethodName             = "/temporal.api.cloud.cloudservice.v1.CloudService/GetUserProjectAssignments"
+	CloudService_GetServiceAccountProjectAssignments_FullMethodName   = "/temporal.api.cloud.cloudservice.v1.CloudService/GetServiceAccountProjectAssignments"
+	CloudService_GetUserGroupProjectAssignments_FullMethodName        = "/temporal.api.cloud.cloudservice.v1.CloudService/GetUserGroupProjectAssignments"
+	CloudService_GetProjectScopedServiceAccounts_FullMethodName       = "/temporal.api.cloud.cloudservice.v1.CloudService/GetProjectScopedServiceAccounts"
 )
 
 // CloudServiceClient is the client API for CloudService service.
@@ -262,6 +274,30 @@ type CloudServiceClient interface {
 	GetServiceAccountNamespaceAssignments(ctx context.Context, in *GetServiceAccountNamespaceAssignmentsRequest, opts ...grpc.CallOption) (*GetServiceAccountNamespaceAssignmentsResponse, error)
 	// Get user groups with access to a namespace
 	GetUserGroupNamespaceAssignments(ctx context.Context, in *GetUserGroupNamespaceAssignmentsRequest, opts ...grpc.CallOption) (*GetUserGroupNamespaceAssignmentsResponse, error)
+	// Get all projects
+	GetProjects(ctx context.Context, in *GetProjectsRequest, opts ...grpc.CallOption) (*GetProjectsResponse, error)
+	// Get a project
+	GetProject(ctx context.Context, in *GetProjectRequest, opts ...grpc.CallOption) (*GetProjectResponse, error)
+	// Create a new project
+	CreateProject(ctx context.Context, in *CreateProjectRequest, opts ...grpc.CallOption) (*CreateProjectResponse, error)
+	// Update a project
+	UpdateProject(ctx context.Context, in *UpdateProjectRequest, opts ...grpc.CallOption) (*UpdateProjectResponse, error)
+	// Delete a project
+	DeleteProject(ctx context.Context, in *DeleteProjectRequest, opts ...grpc.CallOption) (*DeleteProjectResponse, error)
+	// Set a user's access to a project
+	SetUserProjectAccess(ctx context.Context, in *SetUserProjectAccessRequest, opts ...grpc.CallOption) (*SetUserProjectAccessResponse, error)
+	// Set a user group's access to a project
+	SetUserGroupProjectAccess(ctx context.Context, in *SetUserGroupProjectAccessRequest, opts ...grpc.CallOption) (*SetUserGroupProjectAccessResponse, error)
+	// Set a service account's access to a project
+	SetServiceAccountProjectAccess(ctx context.Context, in *SetServiceAccountProjectAccessRequest, opts ...grpc.CallOption) (*SetServiceAccountProjectAccessResponse, error)
+	// Get users with access to a project
+	GetUserProjectAssignments(ctx context.Context, in *GetUserProjectAssignmentsRequest, opts ...grpc.CallOption) (*GetUserProjectAssignmentsResponse, error)
+	// Get service accounts with access to a project
+	GetServiceAccountProjectAssignments(ctx context.Context, in *GetServiceAccountProjectAssignmentsRequest, opts ...grpc.CallOption) (*GetServiceAccountProjectAssignmentsResponse, error)
+	// Get user groups with access to a project
+	GetUserGroupProjectAssignments(ctx context.Context, in *GetUserGroupProjectAssignmentsRequest, opts ...grpc.CallOption) (*GetUserGroupProjectAssignmentsResponse, error)
+	// Get service accounts scoped to a project
+	GetProjectScopedServiceAccounts(ctx context.Context, in *GetProjectScopedServiceAccountsRequest, opts ...grpc.CallOption) (*GetProjectScopedServiceAccountsResponse, error)
 }
 
 type cloudServiceClient struct {
@@ -1034,6 +1070,126 @@ func (c *cloudServiceClient) GetUserGroupNamespaceAssignments(ctx context.Contex
 	return out, nil
 }
 
+func (c *cloudServiceClient) GetProjects(ctx context.Context, in *GetProjectsRequest, opts ...grpc.CallOption) (*GetProjectsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetProjectsResponse)
+	err := c.cc.Invoke(ctx, CloudService_GetProjects_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cloudServiceClient) GetProject(ctx context.Context, in *GetProjectRequest, opts ...grpc.CallOption) (*GetProjectResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetProjectResponse)
+	err := c.cc.Invoke(ctx, CloudService_GetProject_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cloudServiceClient) CreateProject(ctx context.Context, in *CreateProjectRequest, opts ...grpc.CallOption) (*CreateProjectResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateProjectResponse)
+	err := c.cc.Invoke(ctx, CloudService_CreateProject_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cloudServiceClient) UpdateProject(ctx context.Context, in *UpdateProjectRequest, opts ...grpc.CallOption) (*UpdateProjectResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateProjectResponse)
+	err := c.cc.Invoke(ctx, CloudService_UpdateProject_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cloudServiceClient) DeleteProject(ctx context.Context, in *DeleteProjectRequest, opts ...grpc.CallOption) (*DeleteProjectResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteProjectResponse)
+	err := c.cc.Invoke(ctx, CloudService_DeleteProject_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cloudServiceClient) SetUserProjectAccess(ctx context.Context, in *SetUserProjectAccessRequest, opts ...grpc.CallOption) (*SetUserProjectAccessResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetUserProjectAccessResponse)
+	err := c.cc.Invoke(ctx, CloudService_SetUserProjectAccess_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cloudServiceClient) SetUserGroupProjectAccess(ctx context.Context, in *SetUserGroupProjectAccessRequest, opts ...grpc.CallOption) (*SetUserGroupProjectAccessResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetUserGroupProjectAccessResponse)
+	err := c.cc.Invoke(ctx, CloudService_SetUserGroupProjectAccess_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cloudServiceClient) SetServiceAccountProjectAccess(ctx context.Context, in *SetServiceAccountProjectAccessRequest, opts ...grpc.CallOption) (*SetServiceAccountProjectAccessResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetServiceAccountProjectAccessResponse)
+	err := c.cc.Invoke(ctx, CloudService_SetServiceAccountProjectAccess_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cloudServiceClient) GetUserProjectAssignments(ctx context.Context, in *GetUserProjectAssignmentsRequest, opts ...grpc.CallOption) (*GetUserProjectAssignmentsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUserProjectAssignmentsResponse)
+	err := c.cc.Invoke(ctx, CloudService_GetUserProjectAssignments_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cloudServiceClient) GetServiceAccountProjectAssignments(ctx context.Context, in *GetServiceAccountProjectAssignmentsRequest, opts ...grpc.CallOption) (*GetServiceAccountProjectAssignmentsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetServiceAccountProjectAssignmentsResponse)
+	err := c.cc.Invoke(ctx, CloudService_GetServiceAccountProjectAssignments_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cloudServiceClient) GetUserGroupProjectAssignments(ctx context.Context, in *GetUserGroupProjectAssignmentsRequest, opts ...grpc.CallOption) (*GetUserGroupProjectAssignmentsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUserGroupProjectAssignmentsResponse)
+	err := c.cc.Invoke(ctx, CloudService_GetUserGroupProjectAssignments_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cloudServiceClient) GetProjectScopedServiceAccounts(ctx context.Context, in *GetProjectScopedServiceAccountsRequest, opts ...grpc.CallOption) (*GetProjectScopedServiceAccountsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetProjectScopedServiceAccountsResponse)
+	err := c.cc.Invoke(ctx, CloudService_GetProjectScopedServiceAccounts_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CloudServiceServer is the server API for CloudService service.
 // All implementations must embed UnimplementedCloudServiceServer
 // for forward compatibility.
@@ -1199,6 +1355,30 @@ type CloudServiceServer interface {
 	GetServiceAccountNamespaceAssignments(context.Context, *GetServiceAccountNamespaceAssignmentsRequest) (*GetServiceAccountNamespaceAssignmentsResponse, error)
 	// Get user groups with access to a namespace
 	GetUserGroupNamespaceAssignments(context.Context, *GetUserGroupNamespaceAssignmentsRequest) (*GetUserGroupNamespaceAssignmentsResponse, error)
+	// Get all projects
+	GetProjects(context.Context, *GetProjectsRequest) (*GetProjectsResponse, error)
+	// Get a project
+	GetProject(context.Context, *GetProjectRequest) (*GetProjectResponse, error)
+	// Create a new project
+	CreateProject(context.Context, *CreateProjectRequest) (*CreateProjectResponse, error)
+	// Update a project
+	UpdateProject(context.Context, *UpdateProjectRequest) (*UpdateProjectResponse, error)
+	// Delete a project
+	DeleteProject(context.Context, *DeleteProjectRequest) (*DeleteProjectResponse, error)
+	// Set a user's access to a project
+	SetUserProjectAccess(context.Context, *SetUserProjectAccessRequest) (*SetUserProjectAccessResponse, error)
+	// Set a user group's access to a project
+	SetUserGroupProjectAccess(context.Context, *SetUserGroupProjectAccessRequest) (*SetUserGroupProjectAccessResponse, error)
+	// Set a service account's access to a project
+	SetServiceAccountProjectAccess(context.Context, *SetServiceAccountProjectAccessRequest) (*SetServiceAccountProjectAccessResponse, error)
+	// Get users with access to a project
+	GetUserProjectAssignments(context.Context, *GetUserProjectAssignmentsRequest) (*GetUserProjectAssignmentsResponse, error)
+	// Get service accounts with access to a project
+	GetServiceAccountProjectAssignments(context.Context, *GetServiceAccountProjectAssignmentsRequest) (*GetServiceAccountProjectAssignmentsResponse, error)
+	// Get user groups with access to a project
+	GetUserGroupProjectAssignments(context.Context, *GetUserGroupProjectAssignmentsRequest) (*GetUserGroupProjectAssignmentsResponse, error)
+	// Get service accounts scoped to a project
+	GetProjectScopedServiceAccounts(context.Context, *GetProjectScopedServiceAccountsRequest) (*GetProjectScopedServiceAccountsResponse, error)
 	mustEmbedUnimplementedCloudServiceServer()
 }
 
@@ -1436,6 +1616,42 @@ func (UnimplementedCloudServiceServer) GetServiceAccountNamespaceAssignments(con
 }
 func (UnimplementedCloudServiceServer) GetUserGroupNamespaceAssignments(context.Context, *GetUserGroupNamespaceAssignmentsRequest) (*GetUserGroupNamespaceAssignmentsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserGroupNamespaceAssignments not implemented")
+}
+func (UnimplementedCloudServiceServer) GetProjects(context.Context, *GetProjectsRequest) (*GetProjectsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetProjects not implemented")
+}
+func (UnimplementedCloudServiceServer) GetProject(context.Context, *GetProjectRequest) (*GetProjectResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetProject not implemented")
+}
+func (UnimplementedCloudServiceServer) CreateProject(context.Context, *CreateProjectRequest) (*CreateProjectResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateProject not implemented")
+}
+func (UnimplementedCloudServiceServer) UpdateProject(context.Context, *UpdateProjectRequest) (*UpdateProjectResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateProject not implemented")
+}
+func (UnimplementedCloudServiceServer) DeleteProject(context.Context, *DeleteProjectRequest) (*DeleteProjectResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteProject not implemented")
+}
+func (UnimplementedCloudServiceServer) SetUserProjectAccess(context.Context, *SetUserProjectAccessRequest) (*SetUserProjectAccessResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetUserProjectAccess not implemented")
+}
+func (UnimplementedCloudServiceServer) SetUserGroupProjectAccess(context.Context, *SetUserGroupProjectAccessRequest) (*SetUserGroupProjectAccessResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetUserGroupProjectAccess not implemented")
+}
+func (UnimplementedCloudServiceServer) SetServiceAccountProjectAccess(context.Context, *SetServiceAccountProjectAccessRequest) (*SetServiceAccountProjectAccessResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetServiceAccountProjectAccess not implemented")
+}
+func (UnimplementedCloudServiceServer) GetUserProjectAssignments(context.Context, *GetUserProjectAssignmentsRequest) (*GetUserProjectAssignmentsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserProjectAssignments not implemented")
+}
+func (UnimplementedCloudServiceServer) GetServiceAccountProjectAssignments(context.Context, *GetServiceAccountProjectAssignmentsRequest) (*GetServiceAccountProjectAssignmentsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetServiceAccountProjectAssignments not implemented")
+}
+func (UnimplementedCloudServiceServer) GetUserGroupProjectAssignments(context.Context, *GetUserGroupProjectAssignmentsRequest) (*GetUserGroupProjectAssignmentsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserGroupProjectAssignments not implemented")
+}
+func (UnimplementedCloudServiceServer) GetProjectScopedServiceAccounts(context.Context, *GetProjectScopedServiceAccountsRequest) (*GetProjectScopedServiceAccountsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetProjectScopedServiceAccounts not implemented")
 }
 func (UnimplementedCloudServiceServer) mustEmbedUnimplementedCloudServiceServer() {}
 func (UnimplementedCloudServiceServer) testEmbeddedByValue()                      {}
@@ -2826,6 +3042,222 @@ func _CloudService_GetUserGroupNamespaceAssignments_Handler(srv interface{}, ctx
 	return interceptor(ctx, in, info, handler)
 }
 
+func _CloudService_GetProjects_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetProjectsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CloudServiceServer).GetProjects(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CloudService_GetProjects_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CloudServiceServer).GetProjects(ctx, req.(*GetProjectsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CloudService_GetProject_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetProjectRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CloudServiceServer).GetProject(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CloudService_GetProject_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CloudServiceServer).GetProject(ctx, req.(*GetProjectRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CloudService_CreateProject_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateProjectRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CloudServiceServer).CreateProject(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CloudService_CreateProject_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CloudServiceServer).CreateProject(ctx, req.(*CreateProjectRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CloudService_UpdateProject_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateProjectRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CloudServiceServer).UpdateProject(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CloudService_UpdateProject_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CloudServiceServer).UpdateProject(ctx, req.(*UpdateProjectRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CloudService_DeleteProject_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteProjectRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CloudServiceServer).DeleteProject(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CloudService_DeleteProject_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CloudServiceServer).DeleteProject(ctx, req.(*DeleteProjectRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CloudService_SetUserProjectAccess_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetUserProjectAccessRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CloudServiceServer).SetUserProjectAccess(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CloudService_SetUserProjectAccess_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CloudServiceServer).SetUserProjectAccess(ctx, req.(*SetUserProjectAccessRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CloudService_SetUserGroupProjectAccess_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetUserGroupProjectAccessRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CloudServiceServer).SetUserGroupProjectAccess(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CloudService_SetUserGroupProjectAccess_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CloudServiceServer).SetUserGroupProjectAccess(ctx, req.(*SetUserGroupProjectAccessRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CloudService_SetServiceAccountProjectAccess_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetServiceAccountProjectAccessRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CloudServiceServer).SetServiceAccountProjectAccess(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CloudService_SetServiceAccountProjectAccess_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CloudServiceServer).SetServiceAccountProjectAccess(ctx, req.(*SetServiceAccountProjectAccessRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CloudService_GetUserProjectAssignments_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserProjectAssignmentsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CloudServiceServer).GetUserProjectAssignments(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CloudService_GetUserProjectAssignments_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CloudServiceServer).GetUserProjectAssignments(ctx, req.(*GetUserProjectAssignmentsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CloudService_GetServiceAccountProjectAssignments_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetServiceAccountProjectAssignmentsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CloudServiceServer).GetServiceAccountProjectAssignments(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CloudService_GetServiceAccountProjectAssignments_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CloudServiceServer).GetServiceAccountProjectAssignments(ctx, req.(*GetServiceAccountProjectAssignmentsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CloudService_GetUserGroupProjectAssignments_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserGroupProjectAssignmentsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CloudServiceServer).GetUserGroupProjectAssignments(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CloudService_GetUserGroupProjectAssignments_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CloudServiceServer).GetUserGroupProjectAssignments(ctx, req.(*GetUserGroupProjectAssignmentsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CloudService_GetProjectScopedServiceAccounts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetProjectScopedServiceAccountsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CloudServiceServer).GetProjectScopedServiceAccounts(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CloudService_GetProjectScopedServiceAccounts_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CloudServiceServer).GetProjectScopedServiceAccounts(ctx, req.(*GetProjectScopedServiceAccountsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // CloudService_ServiceDesc is the grpc.ServiceDesc for CloudService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -3136,6 +3568,54 @@ var CloudService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetUserGroupNamespaceAssignments",
 			Handler:    _CloudService_GetUserGroupNamespaceAssignments_Handler,
+		},
+		{
+			MethodName: "GetProjects",
+			Handler:    _CloudService_GetProjects_Handler,
+		},
+		{
+			MethodName: "GetProject",
+			Handler:    _CloudService_GetProject_Handler,
+		},
+		{
+			MethodName: "CreateProject",
+			Handler:    _CloudService_CreateProject_Handler,
+		},
+		{
+			MethodName: "UpdateProject",
+			Handler:    _CloudService_UpdateProject_Handler,
+		},
+		{
+			MethodName: "DeleteProject",
+			Handler:    _CloudService_DeleteProject_Handler,
+		},
+		{
+			MethodName: "SetUserProjectAccess",
+			Handler:    _CloudService_SetUserProjectAccess_Handler,
+		},
+		{
+			MethodName: "SetUserGroupProjectAccess",
+			Handler:    _CloudService_SetUserGroupProjectAccess_Handler,
+		},
+		{
+			MethodName: "SetServiceAccountProjectAccess",
+			Handler:    _CloudService_SetServiceAccountProjectAccess_Handler,
+		},
+		{
+			MethodName: "GetUserProjectAssignments",
+			Handler:    _CloudService_GetUserProjectAssignments_Handler,
+		},
+		{
+			MethodName: "GetServiceAccountProjectAssignments",
+			Handler:    _CloudService_GetServiceAccountProjectAssignments_Handler,
+		},
+		{
+			MethodName: "GetUserGroupProjectAssignments",
+			Handler:    _CloudService_GetUserGroupProjectAssignments_Handler,
+		},
+		{
+			MethodName: "GetProjectScopedServiceAccounts",
+			Handler:    _CloudService_GetProjectScopedServiceAccounts_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
