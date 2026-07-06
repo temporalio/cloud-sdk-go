@@ -7,7 +7,6 @@
 package cloudservice
 
 import (
-	v110 "go.temporal.io/api/cloud/project/v1"
 	v16 "go.temporal.io/cloud-sdk/api/account/v1"
 	v18 "go.temporal.io/cloud-sdk/api/auditlog/v1"
 	v19 "go.temporal.io/cloud-sdk/api/billing/v1"
@@ -16,6 +15,7 @@ import (
 	v12 "go.temporal.io/cloud-sdk/api/namespace/v1"
 	v14 "go.temporal.io/cloud-sdk/api/nexus/v1"
 	v11 "go.temporal.io/cloud-sdk/api/operation/v1"
+	v110 "go.temporal.io/cloud-sdk/api/project/v1"
 	v13 "go.temporal.io/cloud-sdk/api/region/v1"
 	v15 "go.temporal.io/cloud-sdk/api/usage/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
