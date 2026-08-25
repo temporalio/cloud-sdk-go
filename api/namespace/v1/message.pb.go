@@ -1947,7 +1947,6 @@ type NamespaceCapacityInfo struct {
 	// The namespace identifier.
 	Namespace string `protobuf:"bytes,1,opt,name=namespace,proto3" json:"namespace,omitempty"`
 	// Whether the namespace's APS limit was set by Temporal Support.
-	// When true, adjusting the namespace's capacity will reset this limit.
 	HasLegacyLimits bool `protobuf:"varint,2,opt,name=has_legacy_limits,json=hasLegacyLimits,proto3" json:"has_legacy_limits,omitempty"`
 	// The current capacity of the namespace.
 	// Includes the current mode (on-demand or provisioned) and latest request status.
