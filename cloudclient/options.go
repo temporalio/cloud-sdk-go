@@ -23,7 +23,7 @@ const (
 	temporalCloudAPIVersionHeader = "temporal-cloud-api-version"
 
 	sdkVersion        = "0.16.0"
-	defaultAPIVersion = "v0.19.1"
+	defaultAPIVersion = "v0.20.0"
 )
 
 func DefaultAPIVersion() string {
