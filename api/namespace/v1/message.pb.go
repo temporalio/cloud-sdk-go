@@ -1112,9 +1112,10 @@ type NamespaceSpec struct {
 	// If unspecified, fairness features will be disabled.
 	// temporal:versioning:min_version=v0.14.0
 	Fairness *FairnessSpec `protobuf:"bytes,14,opt,name=fairness,proto3" json:"fairness,omitempty"`
-	// The description of the namespace purpose - optional.
+	// The description is a human-readable description of the namespace purpose.
 	// Must be at most 255 printable ASCII characters plus whitespace.
-	// temporal:versioning:min_version=development
+	// Optional, default is empty.
+	// temporal:versioning:min_version=v0.21.0
 	Description   string `protobuf:"bytes,16,opt,name=description,proto3" json:"description,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
