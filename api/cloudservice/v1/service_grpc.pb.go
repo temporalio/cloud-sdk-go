@@ -99,6 +99,7 @@ const (
 	CloudService_GetProject_FullMethodName                            = "/temporal.api.cloud.cloudservice.v1.CloudService/GetProject"
 	CloudService_CreateProject_FullMethodName                         = "/temporal.api.cloud.cloudservice.v1.CloudService/CreateProject"
 	CloudService_UpdateProject_FullMethodName                         = "/temporal.api.cloud.cloudservice.v1.CloudService/UpdateProject"
+	CloudService_MoveNamespaceToProject_FullMethodName                = "/temporal.api.cloud.cloudservice.v1.CloudService/MoveNamespaceToProject"
 	CloudService_DeleteProject_FullMethodName                         = "/temporal.api.cloud.cloudservice.v1.CloudService/DeleteProject"
 	CloudService_SetUserProjectAccess_FullMethodName                  = "/temporal.api.cloud.cloudservice.v1.CloudService/SetUserProjectAccess"
 	CloudService_SetUserGroupProjectAccess_FullMethodName             = "/temporal.api.cloud.cloudservice.v1.CloudService/SetUserGroupProjectAccess"
@@ -282,6 +283,8 @@ type CloudServiceClient interface {
 	CreateProject(ctx context.Context, in *CreateProjectRequest, opts ...grpc.CallOption) (*CreateProjectResponse, error)
 	// Update a project
 	UpdateProject(ctx context.Context, in *UpdateProjectRequest, opts ...grpc.CallOption) (*UpdateProjectResponse, error)
+	// Move a namespace to a different project within the same account
+	MoveNamespaceToProject(ctx context.Context, in *MoveNamespaceToProjectRequest, opts ...grpc.CallOption) (*MoveNamespaceToProjectResponse, error)
 	// Delete a project
 	DeleteProject(ctx context.Context, in *DeleteProjectRequest, opts ...grpc.CallOption) (*DeleteProjectResponse, error)
 	// Set a user's access to a project
@@ -1110,6 +1113,16 @@ func (c *cloudServiceClient) UpdateProject(ctx context.Context, in *UpdateProjec
 	return out, nil
 }
 
+func (c *cloudServiceClient) MoveNamespaceToProject(ctx context.Context, in *MoveNamespaceToProjectRequest, opts ...grpc.CallOption) (*MoveNamespaceToProjectResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(MoveNamespaceToProjectResponse)
+	err := c.cc.Invoke(ctx, CloudService_MoveNamespaceToProject_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *cloudServiceClient) DeleteProject(ctx context.Context, in *DeleteProjectRequest, opts ...grpc.CallOption) (*DeleteProjectResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(DeleteProjectResponse)
@@ -1363,6 +1376,8 @@ type CloudServiceServer interface {
 	CreateProject(context.Context, *CreateProjectRequest) (*CreateProjectResponse, error)
 	// Update a project
 	UpdateProject(context.Context, *UpdateProjectRequest) (*UpdateProjectResponse, error)
+	// Move a namespace to a different project within the same account
+	MoveNamespaceToProject(context.Context, *MoveNamespaceToProjectRequest) (*MoveNamespaceToProjectResponse, error)
 	// Delete a project
 	DeleteProject(context.Context, *DeleteProjectRequest) (*DeleteProjectResponse, error)
 	// Set a user's access to a project
@@ -1628,6 +1643,9 @@ func (UnimplementedCloudServiceServer) CreateProject(context.Context, *CreatePro
 }
 func (UnimplementedCloudServiceServer) UpdateProject(context.Context, *UpdateProjectRequest) (*UpdateProjectResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateProject not implemented")
+}
+func (UnimplementedCloudServiceServer) MoveNamespaceToProject(context.Context, *MoveNamespaceToProjectRequest) (*MoveNamespaceToProjectResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MoveNamespaceToProject not implemented")
 }
 func (UnimplementedCloudServiceServer) DeleteProject(context.Context, *DeleteProjectRequest) (*DeleteProjectResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteProject not implemented")
@@ -3114,6 +3132,24 @@ func _CloudService_UpdateProject_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _CloudService_MoveNamespaceToProject_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MoveNamespaceToProjectRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CloudServiceServer).MoveNamespaceToProject(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CloudService_MoveNamespaceToProject_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CloudServiceServer).MoveNamespaceToProject(ctx, req.(*MoveNamespaceToProjectRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _CloudService_DeleteProject_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteProjectRequest)
 	if err := dec(in); err != nil {
@@ -3584,6 +3620,10 @@ var CloudService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateProject",
 			Handler:    _CloudService_UpdateProject_Handler,
+		},
+		{
+			MethodName: "MoveNamespaceToProject",
+			Handler:    _CloudService_MoveNamespaceToProject_Handler,
 		},
 		{
 			MethodName: "DeleteProject",
