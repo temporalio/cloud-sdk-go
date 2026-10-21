@@ -48,6 +48,7 @@ const (
 	CloudService_CreateNexusEndpoint_FullMethodName                   = "/temporal.api.cloud.cloudservice.v1.CloudService/CreateNexusEndpoint"
 	CloudService_UpdateNexusEndpoint_FullMethodName                   = "/temporal.api.cloud.cloudservice.v1.CloudService/UpdateNexusEndpoint"
 	CloudService_DeleteNexusEndpoint_FullMethodName                   = "/temporal.api.cloud.cloudservice.v1.CloudService/DeleteNexusEndpoint"
+	CloudService_MoveNexusEndpointToProject_FullMethodName            = "/temporal.api.cloud.cloudservice.v1.CloudService/MoveNexusEndpointToProject"
 	CloudService_GetUserGroups_FullMethodName                         = "/temporal.api.cloud.cloudservice.v1.CloudService/GetUserGroups"
 	CloudService_GetUserGroup_FullMethodName                          = "/temporal.api.cloud.cloudservice.v1.CloudService/GetUserGroup"
 	CloudService_CreateUserGroup_FullMethodName                       = "/temporal.api.cloud.cloudservice.v1.CloudService/CreateUserGroup"
@@ -179,6 +180,8 @@ type CloudServiceClient interface {
 	UpdateNexusEndpoint(ctx context.Context, in *UpdateNexusEndpointRequest, opts ...grpc.CallOption) (*UpdateNexusEndpointResponse, error)
 	// Delete a nexus endpoint
 	DeleteNexusEndpoint(ctx context.Context, in *DeleteNexusEndpointRequest, opts ...grpc.CallOption) (*DeleteNexusEndpointResponse, error)
+	// Move a nexus endpoint to a different project within the same account
+	MoveNexusEndpointToProject(ctx context.Context, in *MoveNexusEndpointToProjectRequest, opts ...grpc.CallOption) (*MoveNexusEndpointToProjectResponse, error)
 	// Get all user groups
 	GetUserGroups(ctx context.Context, in *GetUserGroupsRequest, opts ...grpc.CallOption) (*GetUserGroupsResponse, error)
 	// Get a user group
@@ -597,6 +600,16 @@ func (c *cloudServiceClient) DeleteNexusEndpoint(ctx context.Context, in *Delete
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(DeleteNexusEndpointResponse)
 	err := c.cc.Invoke(ctx, CloudService_DeleteNexusEndpoint_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cloudServiceClient) MoveNexusEndpointToProject(ctx context.Context, in *MoveNexusEndpointToProjectRequest, opts ...grpc.CallOption) (*MoveNexusEndpointToProjectResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(MoveNexusEndpointToProjectResponse)
+	err := c.cc.Invoke(ctx, CloudService_MoveNexusEndpointToProject_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1272,6 +1285,8 @@ type CloudServiceServer interface {
 	UpdateNexusEndpoint(context.Context, *UpdateNexusEndpointRequest) (*UpdateNexusEndpointResponse, error)
 	// Delete a nexus endpoint
 	DeleteNexusEndpoint(context.Context, *DeleteNexusEndpointRequest) (*DeleteNexusEndpointResponse, error)
+	// Move a nexus endpoint to a different project within the same account
+	MoveNexusEndpointToProject(context.Context, *MoveNexusEndpointToProjectRequest) (*MoveNexusEndpointToProjectResponse, error)
 	// Get all user groups
 	GetUserGroups(context.Context, *GetUserGroupsRequest) (*GetUserGroupsResponse, error)
 	// Get a user group
@@ -1490,6 +1505,9 @@ func (UnimplementedCloudServiceServer) UpdateNexusEndpoint(context.Context, *Upd
 }
 func (UnimplementedCloudServiceServer) DeleteNexusEndpoint(context.Context, *DeleteNexusEndpointRequest) (*DeleteNexusEndpointResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteNexusEndpoint not implemented")
+}
+func (UnimplementedCloudServiceServer) MoveNexusEndpointToProject(context.Context, *MoveNexusEndpointToProjectRequest) (*MoveNexusEndpointToProjectResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MoveNexusEndpointToProject not implemented")
 }
 func (UnimplementedCloudServiceServer) GetUserGroups(context.Context, *GetUserGroupsRequest) (*GetUserGroupsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserGroups not implemented")
@@ -2210,6 +2228,24 @@ func _CloudService_DeleteNexusEndpoint_Handler(srv interface{}, ctx context.Cont
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(CloudServiceServer).DeleteNexusEndpoint(ctx, req.(*DeleteNexusEndpointRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CloudService_MoveNexusEndpointToProject_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MoveNexusEndpointToProjectRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CloudServiceServer).MoveNexusEndpointToProject(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CloudService_MoveNexusEndpointToProject_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CloudServiceServer).MoveNexusEndpointToProject(ctx, req.(*MoveNexusEndpointToProjectRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -3416,6 +3452,10 @@ var CloudService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteNexusEndpoint",
 			Handler:    _CloudService_DeleteNexusEndpoint_Handler,
+		},
+		{
+			MethodName: "MoveNexusEndpointToProject",
+			Handler:    _CloudService_MoveNexusEndpointToProject_Handler,
 		},
 		{
 			MethodName: "GetUserGroups",
