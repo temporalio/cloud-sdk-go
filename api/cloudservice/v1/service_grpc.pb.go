@@ -73,6 +73,11 @@ const (
 	CloudService_UpdateNamespaceExportSink_FullMethodName             = "/temporal.api.cloud.cloudservice.v1.CloudService/UpdateNamespaceExportSink"
 	CloudService_DeleteNamespaceExportSink_FullMethodName             = "/temporal.api.cloud.cloudservice.v1.CloudService/DeleteNamespaceExportSink"
 	CloudService_ValidateNamespaceExportSink_FullMethodName           = "/temporal.api.cloud.cloudservice.v1.CloudService/ValidateNamespaceExportSink"
+	CloudService_CreateCallerRateLimit_FullMethodName                 = "/temporal.api.cloud.cloudservice.v1.CloudService/CreateCallerRateLimit"
+	CloudService_GetCallerRateLimit_FullMethodName                    = "/temporal.api.cloud.cloudservice.v1.CloudService/GetCallerRateLimit"
+	CloudService_GetCallerRateLimits_FullMethodName                   = "/temporal.api.cloud.cloudservice.v1.CloudService/GetCallerRateLimits"
+	CloudService_UpdateCallerRateLimit_FullMethodName                 = "/temporal.api.cloud.cloudservice.v1.CloudService/UpdateCallerRateLimit"
+	CloudService_DeleteCallerRateLimit_FullMethodName                 = "/temporal.api.cloud.cloudservice.v1.CloudService/DeleteCallerRateLimit"
 	CloudService_UpdateNamespaceTags_FullMethodName                   = "/temporal.api.cloud.cloudservice.v1.CloudService/UpdateNamespaceTags"
 	CloudService_CreateConnectivityRule_FullMethodName                = "/temporal.api.cloud.cloudservice.v1.CloudService/CreateConnectivityRule"
 	CloudService_GetConnectivityRule_FullMethodName                   = "/temporal.api.cloud.cloudservice.v1.CloudService/GetConnectivityRule"
@@ -231,6 +236,16 @@ type CloudServiceClient interface {
 	// Validates an export sink configuration by delivering an empty test file to the specified sink.
 	// This operation verifies that the sink is correctly configured, accessible, and ready for data export.
 	ValidateNamespaceExportSink(ctx context.Context, in *ValidateNamespaceExportSinkRequest, opts ...grpc.CallOption) (*ValidateNamespaceExportSinkResponse, error)
+	// Create a caller rate limit
+	CreateCallerRateLimit(ctx context.Context, in *CreateCallerRateLimitRequest, opts ...grpc.CallOption) (*CreateCallerRateLimitResponse, error)
+	// Get a caller rate limit
+	GetCallerRateLimit(ctx context.Context, in *GetCallerRateLimitRequest, opts ...grpc.CallOption) (*GetCallerRateLimitResponse, error)
+	// Get caller rate limits
+	GetCallerRateLimits(ctx context.Context, in *GetCallerRateLimitsRequest, opts ...grpc.CallOption) (*GetCallerRateLimitsResponse, error)
+	// Update a caller rate limit
+	UpdateCallerRateLimit(ctx context.Context, in *UpdateCallerRateLimitRequest, opts ...grpc.CallOption) (*UpdateCallerRateLimitResponse, error)
+	// Delete a caller rate limit
+	DeleteCallerRateLimit(ctx context.Context, in *DeleteCallerRateLimitRequest, opts ...grpc.CallOption) (*DeleteCallerRateLimitResponse, error)
 	// Update the tags for a namespace
 	UpdateNamespaceTags(ctx context.Context, in *UpdateNamespaceTagsRequest, opts ...grpc.CallOption) (*UpdateNamespaceTagsResponse, error)
 	// Creates a connectivity rule
@@ -856,6 +871,56 @@ func (c *cloudServiceClient) ValidateNamespaceExportSink(ctx context.Context, in
 	return out, nil
 }
 
+func (c *cloudServiceClient) CreateCallerRateLimit(ctx context.Context, in *CreateCallerRateLimitRequest, opts ...grpc.CallOption) (*CreateCallerRateLimitResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateCallerRateLimitResponse)
+	err := c.cc.Invoke(ctx, CloudService_CreateCallerRateLimit_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cloudServiceClient) GetCallerRateLimit(ctx context.Context, in *GetCallerRateLimitRequest, opts ...grpc.CallOption) (*GetCallerRateLimitResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetCallerRateLimitResponse)
+	err := c.cc.Invoke(ctx, CloudService_GetCallerRateLimit_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cloudServiceClient) GetCallerRateLimits(ctx context.Context, in *GetCallerRateLimitsRequest, opts ...grpc.CallOption) (*GetCallerRateLimitsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetCallerRateLimitsResponse)
+	err := c.cc.Invoke(ctx, CloudService_GetCallerRateLimits_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cloudServiceClient) UpdateCallerRateLimit(ctx context.Context, in *UpdateCallerRateLimitRequest, opts ...grpc.CallOption) (*UpdateCallerRateLimitResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateCallerRateLimitResponse)
+	err := c.cc.Invoke(ctx, CloudService_UpdateCallerRateLimit_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cloudServiceClient) DeleteCallerRateLimit(ctx context.Context, in *DeleteCallerRateLimitRequest, opts ...grpc.CallOption) (*DeleteCallerRateLimitResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteCallerRateLimitResponse)
+	err := c.cc.Invoke(ctx, CloudService_DeleteCallerRateLimit_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *cloudServiceClient) UpdateNamespaceTags(ctx context.Context, in *UpdateNamespaceTagsRequest, opts ...grpc.CallOption) (*UpdateNamespaceTagsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(UpdateNamespaceTagsResponse)
@@ -1336,6 +1401,16 @@ type CloudServiceServer interface {
 	// Validates an export sink configuration by delivering an empty test file to the specified sink.
 	// This operation verifies that the sink is correctly configured, accessible, and ready for data export.
 	ValidateNamespaceExportSink(context.Context, *ValidateNamespaceExportSinkRequest) (*ValidateNamespaceExportSinkResponse, error)
+	// Create a caller rate limit
+	CreateCallerRateLimit(context.Context, *CreateCallerRateLimitRequest) (*CreateCallerRateLimitResponse, error)
+	// Get a caller rate limit
+	GetCallerRateLimit(context.Context, *GetCallerRateLimitRequest) (*GetCallerRateLimitResponse, error)
+	// Get caller rate limits
+	GetCallerRateLimits(context.Context, *GetCallerRateLimitsRequest) (*GetCallerRateLimitsResponse, error)
+	// Update a caller rate limit
+	UpdateCallerRateLimit(context.Context, *UpdateCallerRateLimitRequest) (*UpdateCallerRateLimitResponse, error)
+	// Delete a caller rate limit
+	DeleteCallerRateLimit(context.Context, *DeleteCallerRateLimitRequest) (*DeleteCallerRateLimitResponse, error)
 	// Update the tags for a namespace
 	UpdateNamespaceTags(context.Context, *UpdateNamespaceTagsRequest) (*UpdateNamespaceTagsResponse, error)
 	// Creates a connectivity rule
@@ -1580,6 +1655,21 @@ func (UnimplementedCloudServiceServer) DeleteNamespaceExportSink(context.Context
 }
 func (UnimplementedCloudServiceServer) ValidateNamespaceExportSink(context.Context, *ValidateNamespaceExportSinkRequest) (*ValidateNamespaceExportSinkResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ValidateNamespaceExportSink not implemented")
+}
+func (UnimplementedCloudServiceServer) CreateCallerRateLimit(context.Context, *CreateCallerRateLimitRequest) (*CreateCallerRateLimitResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateCallerRateLimit not implemented")
+}
+func (UnimplementedCloudServiceServer) GetCallerRateLimit(context.Context, *GetCallerRateLimitRequest) (*GetCallerRateLimitResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetCallerRateLimit not implemented")
+}
+func (UnimplementedCloudServiceServer) GetCallerRateLimits(context.Context, *GetCallerRateLimitsRequest) (*GetCallerRateLimitsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetCallerRateLimits not implemented")
+}
+func (UnimplementedCloudServiceServer) UpdateCallerRateLimit(context.Context, *UpdateCallerRateLimitRequest) (*UpdateCallerRateLimitResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateCallerRateLimit not implemented")
+}
+func (UnimplementedCloudServiceServer) DeleteCallerRateLimit(context.Context, *DeleteCallerRateLimitRequest) (*DeleteCallerRateLimitResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteCallerRateLimit not implemented")
 }
 func (UnimplementedCloudServiceServer) UpdateNamespaceTags(context.Context, *UpdateNamespaceTagsRequest) (*UpdateNamespaceTagsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateNamespaceTags not implemented")
@@ -2682,6 +2772,96 @@ func _CloudService_ValidateNamespaceExportSink_Handler(srv interface{}, ctx cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _CloudService_CreateCallerRateLimit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateCallerRateLimitRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CloudServiceServer).CreateCallerRateLimit(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CloudService_CreateCallerRateLimit_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CloudServiceServer).CreateCallerRateLimit(ctx, req.(*CreateCallerRateLimitRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CloudService_GetCallerRateLimit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCallerRateLimitRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CloudServiceServer).GetCallerRateLimit(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CloudService_GetCallerRateLimit_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CloudServiceServer).GetCallerRateLimit(ctx, req.(*GetCallerRateLimitRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CloudService_GetCallerRateLimits_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCallerRateLimitsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CloudServiceServer).GetCallerRateLimits(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CloudService_GetCallerRateLimits_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CloudServiceServer).GetCallerRateLimits(ctx, req.(*GetCallerRateLimitsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CloudService_UpdateCallerRateLimit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateCallerRateLimitRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CloudServiceServer).UpdateCallerRateLimit(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CloudService_UpdateCallerRateLimit_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CloudServiceServer).UpdateCallerRateLimit(ctx, req.(*UpdateCallerRateLimitRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CloudService_DeleteCallerRateLimit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteCallerRateLimitRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CloudServiceServer).DeleteCallerRateLimit(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CloudService_DeleteCallerRateLimit_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CloudServiceServer).DeleteCallerRateLimit(ctx, req.(*DeleteCallerRateLimitRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _CloudService_UpdateNamespaceTags_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateNamespaceTagsRequest)
 	if err := dec(in); err != nil {
@@ -3552,6 +3732,26 @@ var CloudService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ValidateNamespaceExportSink",
 			Handler:    _CloudService_ValidateNamespaceExportSink_Handler,
+		},
+		{
+			MethodName: "CreateCallerRateLimit",
+			Handler:    _CloudService_CreateCallerRateLimit_Handler,
+		},
+		{
+			MethodName: "GetCallerRateLimit",
+			Handler:    _CloudService_GetCallerRateLimit_Handler,
+		},
+		{
+			MethodName: "GetCallerRateLimits",
+			Handler:    _CloudService_GetCallerRateLimits_Handler,
+		},
+		{
+			MethodName: "UpdateCallerRateLimit",
+			Handler:    _CloudService_UpdateCallerRateLimit_Handler,
+		},
+		{
+			MethodName: "DeleteCallerRateLimit",
+			Handler:    _CloudService_DeleteCallerRateLimit_Handler,
 		},
 		{
 			MethodName: "UpdateNamespaceTags",
